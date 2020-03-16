@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ems="10"
-        android:hint="Имя"
+        android:hint="@string/name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ems="10"
-        android:hint="Пароль"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <Button
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="sign_in"
-        android:text="Войти" />
+        android:text="@string/sign_in" />
 
     <Button
         android:id="@+id/sign_up"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="sign_up"
-        android:text="Регистрация" />
+        android:text="@string/sign_up" />
 
     <Button
         android:id="@+id/guest"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="guest_button"
-        android:text="Гость" />
+        android:text="@string/guest" />
 
     <Button
         android:id="@+id/settings"
@@ -54,6 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="settings_button"
-        android:text="Настройки" />
+        android:text="@string/settings" />
 
 </LinearLayout>

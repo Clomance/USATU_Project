@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Адрес сервера"
+            android:hint="@string/server_address_hint"
             android:inputType="numberDecimal"
             android:text="@string/_192_168_0_100" />
 
@@ -41,16 +41,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Порт сервера"
+            android:hint="@string/server_port_hint"
             android:inputType="numberDecimal"
-            android:text="8080" />
+            android:text="@string/_8080" />
 
         <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Сохранить" />
+            android:onClick="save"
+            android:text="@string/save" />
 
 
     </LinearLayout>

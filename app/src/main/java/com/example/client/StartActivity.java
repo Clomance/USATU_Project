@@ -24,7 +24,7 @@ public class StartActivity extends AppCompatActivity{
     Button sign_in_button; // Кнока входа
     Button sign_up_button; // Кнопка регистрации
     Button guest_button; // Кнопка входа в качестве гостя
-    Button settings_button; // Кнопка настроек
+    //Button settings_button; // Кнопка настроек
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,37 +33,37 @@ public class StartActivity extends AppCompatActivity{
 
         AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
         AppBase.currentAppActivity = AppActivity.Start;                         // активности
-        try{
-            AppBase.serverIp = InetAddress.getByName("192.168.0.100");
-        }
-        catch (Exception ignored){
 
-        }
+        try{                                                            //
+            AppBase.serverIp = InetAddress.getByName("192.168.0.100");  // Установка начального (default)
+        }                                                               // адреса сервера
+        catch (Exception ignored){}                                     //
 
         loginView = findViewById(R.id.login);           //
-        passwordView = findViewById(R.id.password);     //
-        sign_in_button = findViewById(R.id.sign_in);    // Поключение кнопок к интерфейсу
+        passwordView = findViewById(R.id.password);     // Связываение кнопок
+        sign_in_button = findViewById(R.id.sign_in);    // с интерфейсом
         sign_up_button = findViewById(R.id.sign_up);    //
         guest_button = findViewById(R.id.guest);        //
 
         //Проверка разрешений
-        // API >= 23
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-            guest_button.setEnabled(false);
-            sign_in_button.setEnabled(false);
-            sign_up_button.setEnabled(false);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
+            // Разрешения есть
+            AppBase.permissions = true; // Флаг разрешений
+        }
+        else{ // Разрешений нет
+            sign_in_button.setEnabled(false);   //
+            sign_up_button.setEnabled(false);   // Отключений кнопок входа
+            guest_button.setEnabled(false);     //
 
-            // Разрешений нет - запрос о предоставлении
-            if (Build.VERSION.SDK_INT >= 23) {
+            // Запрос о предоставлении (для  API >= 23)
+            //if (Build.VERSION.SDK_INT >= 23) {
                 String[] permissions = new String[]{Manifest.permission.INTERNET};
                 ActivityCompat.requestPermissions(this, permissions, AppBase.REQUEST_INTERNET_ID);
-            }
-        }
-        else{
-            AppBase.permissions = true;
+            //}
+
         }
     }
-    @Override
+    @Override // Действия при закрытии активности
     public void onDestroy() {
         super.onDestroy();
     }
@@ -71,24 +71,27 @@ public class StartActivity extends AppCompatActivity{
     @Override // Действия при ответе на запрос разрешений
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == AppBase.REQUEST_INTERNET_ID){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                    grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                AppBase.permissions = true;
-                guest_button.setEnabled(true);
-                sign_in_button.setEnabled(true);
-                sign_up_button.setEnabled(true);
+
+        if (requestCode == AppBase.REQUEST_INTERNET_ID){ // Нужные разрешения
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED ){ // Разрешения приняты
+
+                AppBase.permissions = true; // Флаг разрешений
+
+                guest_button.setEnabled(true);      //
+                sign_in_button.setEnabled(true);    // Включение кнопок входа
+                sign_up_button.setEnabled(true);    //
             }
         }
-        startMainActivity(); // Запуск одной из страниц и закрытие стартовой
     }
 
     // Кнопка входа
     public void sign_in(View view){
-        String login = loginView.getText().toString().trim();
-        String password = passwordView.getText().toString().trim();
+        String login = loginView.getText().toString().trim(); // Получение логина
+        String password = passwordView.getText().toString().trim(); // Получение пароля
+
         Toast.makeText(this,"Сервера нет)))",Toast.LENGTH_LONG).show();
-        if (login.isEmpty() || password.isEmpty()){
+
+        if (login.isEmpty() || password.isEmpty()){ // Проверка пароля и логина на пустоту
             //Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
         }
         else{
@@ -98,10 +101,12 @@ public class StartActivity extends AppCompatActivity{
 
     // Кнопка регистрации
     public void sign_up(View view){
-        String login = loginView.getText().toString().trim();
-        String password = passwordView.getText().toString().trim();
+        String login = loginView.getText().toString().trim(); // Получение логина
+        String password = passwordView.getText().toString().trim(); // Получение пароля
+
         Toast.makeText(this,"Сервера нет)))",Toast.LENGTH_LONG).show();
-        if (login.isEmpty() || password.isEmpty()){
+
+        if (login.isEmpty() || password.isEmpty()){ // Проверка пароля и логина на пустоту
 
             //Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
         }

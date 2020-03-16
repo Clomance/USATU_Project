@@ -1,9 +1,18 @@
 <resources>
-    <string name="menu_settings">Настройки</string>
-
     <string name="app_name">Client v. 0.0.4</string>
     <string name="menu_title">Информация об устройстве</string>
     <string name="menu_part_title">О приложении</string>
     <string name="_192_168_0_100">192.168.0.100</string>
+    <string name="name">Имя</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="guest">Гость</string>
+    <string name="settings">Настройки</string>
+    <string name="server_address_hint">Адрес сервера</string>
+    <string name="server_port_hint">Порт сервера</string>
+    <string name="_8080">8080</string>
+    <string name="save">Сохранить</string>
+    <string name="calculator">Калькулятор</string>
 
 </resources>

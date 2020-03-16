@@ -16,31 +16,32 @@ import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 
 public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    EditText addressView;
-    EditText portView;
+    EditText addressView; // Поле для ввода адреса сервера
+    EditText portView; // Поле для ввода порта сервера
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.settings_activity); // Подключение нужного интерфеса
 
         if (AppBase.currentAppActivity == AppActivity.Start){
-            DrawerLayout drawer = findViewById(R.id.settings_drawer_layout);
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            DrawerLayout drawer = findViewById(R.id.settings_drawer_layout);        // Отключение навигационной панели
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);         // (отключение возвожности выдвинуть её)
         }
         else{
-            NavigationView navigationView = findViewById(R.id.settings_nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
+            NavigationView navigationView = findViewById(R.id.settings_nav_view);   // Подключение навигационной
+            navigationView.setNavigationItemSelectedListener(this);                 // панели
         }
 
-        AppBase.currentAppActivity = AppActivity.Settings;
-        AppBase.currentActivity = new WeakReference<Activity>(this);
+        AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
+        AppBase.currentAppActivity = AppActivity.Settings;                      // активности
 
-        addressView = findViewById(R.id.address);
-        portView = findViewById(R.id.port);
 
-        addressView.setText(AppBase.serverIp.getHostAddress());
-        portView.setText(String.valueOf(AppBase.serverPort));
+        addressView = findViewById(R.id.address);   // Связывание
+        portView = findViewById(R.id.port);         // с интерфейсом
+
+        addressView.setText(AppBase.serverIp.getHostAddress()); // Установка текущих
+        portView.setText(String.valueOf(AppBase.serverPort));   // значений
     }
 
     @Override
@@ -57,12 +58,14 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
+    // Действие кнопки сохранения
     public void save(View view){
-        String address = addressView.getText().toString();
-        String port = portView.getText().toString();
+        String address = addressView.getText().toString();  // Получение текста
+        String port = portView.getText().toString();        // из полей
+
         try{
-            AppBase.serverIp = InetAddress.getByName(address);
-            AppBase.serverPort = Integer.parseInt(port);
+            AppBase.serverIp = InetAddress.getByName(address);  // Конвертирование в нужный формат
+            AppBase.serverPort = Integer.parseInt(port);        // и сохранение
         }
         catch (Exception e){
             Toast.makeText(this,"Не верные данные",Toast.LENGTH_LONG).show();

@@ -23,7 +23,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calculate_activity);
+        setContentView(R.layout.calculate_activity); // Подключение нужного интерфеса
 
         AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
         AppBase.currentAppActivity = AppActivity.Calculate;                      // активности
@@ -41,11 +41,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
-    // TTTTTTT И     И   М     М     У     У   РРРРР
-    //    T    И   И И   М М М М      У  У     Р    Р
-    //    T    И  И  И   М  М  М       У       РРРРР
-    //    T    И И   И   М     М      У        Р
-    //    T    И     И   М     М     У         Р
+    // T T T T  И     И   М     М     У     У   РРРРР
+    //    T     И   И И   М М М М      У  У     Р    Р
+    //    T     И  И  И   М  М  М       У       РРРРР
+    //    T     И И   И   М     М      У        Р
+    //    T     И     И   М     М     У         Р
 
     // Функция при клике (можно не только кнопку поставить)
     public void dataPick(View view){

@@ -16,13 +16,13 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.info_activity);
+        setContentView(R.layout.info_activity); // Подключение нужного интерфеса
 
-        AppBase.currentActivity = new WeakReference<Activity>(this);
-        AppBase.currentAppActivity = AppActivity.Info;
+        AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
+        AppBase.currentAppActivity = AppActivity.Info;                          // активности
 
-        NavigationView navigationView = findViewById(R.id.info_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = findViewById(R.id.info_nav_view);   // Подключение навигационной
+        navigationView.setNavigationItemSelectedListener(this);             // панели
     }
 
     @Override
