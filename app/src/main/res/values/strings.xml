@@ -1,0 +1,9 @@
+<resources>
+    <string name="menu_settings">Настройки</string>
+
+    <string name="app_name">Client v. 0.0.3</string>
+    <string name="menu_title">Информация об устройстве</string>
+    <string name="menu_part_title">О приложении</string>
+    <string name="_192_168_0_100">192.168.0.100</string>
+
+</resources>
