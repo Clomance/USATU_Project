@@ -18,8 +18,8 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_activity); // Подключение нужного интерфеса
 
-        AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
-        AppBase.currentAppActivity = AppActivity.Info;                          // активности
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Info;                                  // активности
 
         NavigationView navigationView = findViewById(R.id.info_nav_view);   // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);             // панели

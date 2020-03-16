@@ -1,10 +1,9 @@
 package com.example.client;
 
 import android.Manifest;
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -24,15 +23,14 @@ public class StartActivity extends AppCompatActivity{
     Button sign_in_button; // Кнока входа
     Button sign_up_button; // Кнопка регистрации
     Button guest_button; // Кнопка входа в качестве гостя
-    //Button settings_button; // Кнопка настроек
+    Button settings_button; // Кнопка настроек
+
+    ServerTasks serverTasks = new ServerTasks();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity); // Подключение нужного интерфеса
-
-        AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
-        AppBase.currentAppActivity = AppActivity.Start;                         // активности
 
         try{                                                            //
             AppBase.serverIp = InetAddress.getByName("192.168.0.100");  // Установка начального (default)
@@ -40,10 +38,11 @@ public class StartActivity extends AppCompatActivity{
         catch (Exception ignored){}                                     //
 
         loginView = findViewById(R.id.login);           //
-        passwordView = findViewById(R.id.password);     // Связываение кнопок
-        sign_in_button = findViewById(R.id.sign_in);    // с интерфейсом
-        sign_up_button = findViewById(R.id.sign_up);    //
-        guest_button = findViewById(R.id.guest);        //
+        passwordView = findViewById(R.id.password);     // Связываение
+        sign_in_button = findViewById(R.id.sign_in);    // кнопок
+        sign_up_button = findViewById(R.id.sign_up);    // с
+        guest_button = findViewById(R.id.guest);        // интерфейсом
+        settings_button = findViewById(R.id.settings);  //
 
         //Проверка разрешений
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
@@ -51,9 +50,7 @@ public class StartActivity extends AppCompatActivity{
             AppBase.permissions = true; // Флаг разрешений
         }
         else{ // Разрешений нет
-            sign_in_button.setEnabled(false);   //
-            sign_up_button.setEnabled(false);   // Отключений кнопок входа
-            guest_button.setEnabled(false);     //
+            setButtonsEnabled(false); // Отключение кнопок
 
             // Запрос о предоставлении (для  API >= 23)
             //if (Build.VERSION.SDK_INT >= 23) {
@@ -63,9 +60,21 @@ public class StartActivity extends AppCompatActivity{
 
         }
     }
+    @Override
+    public void onStart(){
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Start;                                        // активности
+        super.onStart();
+    }
     @Override // Действия при закрытии активности
     public void onDestroy() {
+        serverTasks.stop();
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 
     @Override // Действия при ответе на запрос разрешений
@@ -77,59 +86,69 @@ public class StartActivity extends AppCompatActivity{
 
                 AppBase.permissions = true; // Флаг разрешений
 
-                guest_button.setEnabled(true);      //
-                sign_in_button.setEnabled(true);    // Включение кнопок входа
-                sign_up_button.setEnabled(true);    //
+                setButtonsEnabled(true); // Включение кнопок
             }
         }
     }
 
     // Кнопка входа
     public void sign_in(View view){
+        setButtonsEnabled(false); // Отключение кнопок
+
         String login = loginView.getText().toString().trim(); // Получение логина
         String password = passwordView.getText().toString().trim(); // Получение пароля
 
-        Toast.makeText(this,"Сервера нет)))",Toast.LENGTH_LONG).show();
-
         if (login.isEmpty() || password.isEmpty()){ // Проверка пароля и логина на пустоту
-            //Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
+            setButtonsEnabled(true); // Включение кнопок
+            Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
         }
         else{
-            //startMainActivity();
+            AppBase.serverTasks.start(Task.Sign_in, login, password);
         }
     }
 
     // Кнопка регистрации
     public void sign_up(View view){
+        setButtonsEnabled(false); // Отключение кнопок
+
         String login = loginView.getText().toString().trim(); // Получение логина
         String password = passwordView.getText().toString().trim(); // Получение пароля
 
-        Toast.makeText(this,"Сервера нет)))",Toast.LENGTH_LONG).show();
-
         if (login.isEmpty() || password.isEmpty()){ // Проверка пароля и логина на пустоту
-
-            //Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
+            setButtonsEnabled(true); // Включение кнопок
+            Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
         }
         else{
-            //startMainActivity();
+            AppBase.serverTasks.start(Task.Sign_up, login, password);
         }
     }
 
     // Кнопка перехода к настройкам
     public void settings_button(View view){
-        Intent reg = new Intent(this, SettingsActivity.class);
-        this.startActivity(reg);
+        setButtonsEnabled(false); // Отключение кнопок
+
+        this.startActivity(new Intent(this, SettingsActivity.class)); // Запуск новой активности (настроек)
+
+        setButtonsEnabled(true); // Включение кнопок
     }
 
     // Кнопка входа в качестве гостя
     public void guest_button(View view){
+        setButtonsEnabled(false); // Отключение кнопок
         startMainActivity();
     }
 
     // Запуск одной из страниц и закрытие стартовой
-    private void startMainActivity(){
-        Intent reg = new Intent(this, CalculateActivity.class);
-        this.startActivity(reg);
+    void startMainActivity(){
+        this.startActivity(new Intent(this, CalculateActivity.class));
         this.finish();
+    }
+
+    // Включение/выключение кнопок
+    void setButtonsEnabled(boolean enabled){
+        sign_in_button.setEnabled(enabled);   //
+        sign_up_button.setEnabled(enabled);   // Отключение
+        guest_button.setEnabled(enabled);     // кнопок
+        settings_button.setEnabled(enabled);  //
     }
 }

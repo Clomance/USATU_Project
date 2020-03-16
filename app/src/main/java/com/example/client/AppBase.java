@@ -3,6 +3,8 @@ package com.example.client;
 import android.app.Activity;
 import android.content.Intent;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 
@@ -20,15 +22,19 @@ class AppBase {
     //Текущие
     static InetAddress serverIp; // Адрес для подключения
     static int serverPort = 8080; // Порт для подключения
+    static int[] tokens = null; // Токены для быстрой авторизации
+    static ServerTasks serverTasks = new ServerTasks(); // см. класс ServerTasks
+
     //Приложение
     static boolean permissions = false; // Флаг разрешений: true - есть, false - нет
-    static WeakReference<Activity> currentActivity; // Текущая активность (страничка)
-    static AppActivity currentAppActivity; // Текущая активность
+
+    static WeakReference<AppCompatActivity> currentActivity;    // Текущая активность (страничка)
+    static AppActivity currentPage;                             // Текущая активность (номер странички)
 
     // Функция для навигации - сменяет страницы
     static void navigation(int id){
         switch (id){
-            case R.id.nav_calc:
+            case R.id.nav_calculator:
                 AppBase.changeActivity(CalculateActivity.class);
                 break;
 
@@ -44,6 +50,7 @@ class AppBase {
                 break;
         }
     }
+
     // Смена страницы (открытие новой и закрытие предыдущей)
     private static void changeActivity(Class c){
         Activity activity = AppBase.currentActivity.get();

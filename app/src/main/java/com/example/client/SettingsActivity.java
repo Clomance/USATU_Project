@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.navigation.NavigationView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity); // Подключение нужного интерфеса
 
-        if (AppBase.currentAppActivity == AppActivity.Start){
+        if (AppBase.currentPage == AppActivity.Start){
             DrawerLayout drawer = findViewById(R.id.settings_drawer_layout);        // Отключение навигационной панели
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);         // (отключение возвожности выдвинуть её)
         }
@@ -33,8 +34,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             navigationView.setNavigationItemSelectedListener(this);                 // панели
         }
 
-        AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
-        AppBase.currentAppActivity = AppActivity.Settings;                      // активности
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Settings;                              // активности
 
 
         addressView = findViewById(R.id.address);   // Связывание
@@ -60,15 +61,21 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
     // Действие кнопки сохранения
     public void save(View view){
+        Button save_button = (Button) view; // Связыавание с кнопкой
+        save_button.setEnabled(false); // Отключение кнопки
+
         String address = addressView.getText().toString();  // Получение текста
         String port = portView.getText().toString();        // из полей
 
         try{
             AppBase.serverIp = InetAddress.getByName(address);  // Конвертирование в нужный формат
             AppBase.serverPort = Integer.parseInt(port);        // и сохранение
+            Toast.makeText(this,"Сохранено",Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
             Toast.makeText(this,"Не верные данные",Toast.LENGTH_LONG).show();
         }
+
+        save_button.setEnabled(true); // Включение кнопки
     }
 }

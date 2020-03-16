@@ -25,8 +25,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculate_activity); // Подключение нужного интерфеса
 
-        AppBase.currentActivity = new WeakReference<Activity>(this);    // Установка текущей
-        AppBase.currentAppActivity = AppActivity.Calculate;                      // активности
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Calculate;                             // активности
 
         NavigationView navigationView = findViewById(R.id.calculate_nav_view);  // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);                 // панели
@@ -41,9 +41,9 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
-    // T T T T  И     И   М     М     У     У   РРРРР
+    // T T T T  И     И   М     М     У     У   Р Р Р
     //    T     И   И И   М М М М      У  У     Р    Р
-    //    T     И  И  И   М  М  М       У       РРРРР
+    //    T     И  И  И   М  М  М       У       Р Р Р
     //    T     И И   И   М     М      У        Р
     //    T     И     И   М     М     У         Р
 
