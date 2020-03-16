@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    package="com.example.server_client"> <!-- Репозиторий проекта, нужные библиотеки выше -->
+    package="com.example.client"> <!-- Репозиторий проекта, нужные библиотеки выше -->
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Разрешение на использование интернета (очевидно) -->
 
@@ -18,7 +18,7 @@
 
         <!-- Основная активность и настройки для её запуска (начало)-->
         <activity
-            android:name="com.example.server_client.StartActivity"
+            android:name="com.example.client.StartActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
 
@@ -31,9 +31,9 @@
         <!-- Основная активность (конец) -->
 
         <!-- Дополнительные активности -->
-        <activity android:name=".InfoActivity" />
-        <activity android:name=".CalculateActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name="com.example.client.InfoActivity" />
+        <activity android:name="com.example.client.CalculateActivity" />
+        <activity android:name="com.example.client.SettingsActivity" />
 
     </application>
 
