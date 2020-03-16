@@ -22,11 +22,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Calculate;                                    // активности
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculate_activity); // Подключение нужного интерфеса
-
-        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
-        AppBase.currentPage = AppActivity.Calculate;                             // активности
 
         NavigationView navigationView = findViewById(R.id.calculate_nav_view);  // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);                 // панели
@@ -34,10 +34,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     @Override // Действия при выборе на панели навигации
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        AppBase.navigation(id);
-        DrawerLayout drawer = findViewById(R.id.calculate_drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        int id = item.getItemId();  // Переход к выбранной
+        AppBase.navigation(id);     // активности
+
+        DrawerLayout drawer = findViewById(R.id.calculate_drawer_layout);   // Закрытие боковой
+        drawer.closeDrawer(GravityCompat.START);                            // панели
+
         return true;
     }
 

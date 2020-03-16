@@ -46,11 +46,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     }
 
     @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         AppBase.navigation(id);
