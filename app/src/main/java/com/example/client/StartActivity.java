@@ -25,8 +25,6 @@ public class StartActivity extends AppCompatActivity{
     Button guest_button; // Кнопка входа в качестве гостя
     Button settings_button; // Кнопка настроек
 
-    ServerTasks serverTasks = new ServerTasks();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +43,7 @@ public class StartActivity extends AppCompatActivity{
         settings_button = findViewById(R.id.settings);  //
 
         //Проверка разрешений
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
-            // Разрешения есть
-            AppBase.permissions = true; // Флаг разрешений
-        }
-        else{ // Разрешений нет
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_DENIED) { // Разрешений нет
             setButtonsEnabled(false); // Отключение кнопок
 
             // Запрос о предоставлении (для  API >= 23)
@@ -60,12 +54,14 @@ public class StartActivity extends AppCompatActivity{
 
         }
     }
-    @Override
+
+    @Override // Действия при старте активности
     public void onStart(){
         AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
         AppBase.currentPage = AppActivity.Start;                                        // активности
         super.onStart();
     }
+
     @Override // Действия при закрытии активности
     public void onDestroy() {
         AppBase.stopServerTasks();
@@ -78,8 +74,6 @@ public class StartActivity extends AppCompatActivity{
 
         if (requestCode == AppBase.REQUEST_INTERNET_ID){ // Нужные разрешения
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED ){ // Разрешения приняты
-
-                AppBase.permissions = true; // Флаг разрешений
 
                 setButtonsEnabled(true); // Включение кнопок
             }

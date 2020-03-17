@@ -26,7 +26,7 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);             // панели
     }
 
-    @Override
+    @Override // Действия при выборе на панели навигации
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         AppBase.navigation(id);

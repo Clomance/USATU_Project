@@ -39,7 +39,7 @@ class ServerTasks{
 
     private static class ServerTask extends AsyncTask<Object,Void,Boolean>{
 
-        @Override
+        @Override // Действия в дополнительном потоке
         protected Boolean doInBackground(Object... objects) {
             try{
                 Socket socket = new Socket(AppBase.serverIp, AppBase.serverPort); // Подключение к серверу
@@ -83,7 +83,7 @@ class ServerTasks{
             return true;
         }
 
-        @Override
+        @Override // Действия после выполения задачи (в текущем потоке)
         protected void onPostExecute(Boolean state) {
             super.onPostExecute(state);
             switch (task) {

@@ -23,6 +23,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Settings;                                     // активности
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity); // Подключение нужного интерфеса
 
@@ -35,10 +38,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             navigationView.setNavigationItemSelectedListener(this);                 // панели
         }
 
-        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
-        AppBase.currentPage = AppActivity.Settings;                              // активности
-
-
         addressView = findViewById(R.id.address);   // Связывание
         portView = findViewById(R.id.port);         // с интерфейсом
 
@@ -46,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         portView.setText(String.valueOf(AppBase.serverPort));   // значений
     }
 
-    @Override
+    @Override // Действия при выборе на панели навигации
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         AppBase.navigation(id);

@@ -29,7 +29,6 @@ class AppBase {
     static String password;
 
     //Приложение
-    static boolean permissions = false; // Флаг разрешений: true - есть, false - нет
 
     static WeakReference<AppCompatActivity> currentActivity;    // Текущая активность (страничка)
     static AppActivity currentPage;                             // Текущая активность (номер странички)
