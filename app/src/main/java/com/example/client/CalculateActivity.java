@@ -27,7 +27,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         AppBase.currentPage = AppActivity.Calculate;                                    // активности
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calculate_activity); // Подключение нужного интерфеса
+        setContentView(R.layout.calculate_main); // Подключение нужного интерфеса
 
         NavigationView navigationView = findViewById(R.id.calculate_nav_view);  // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);                 // панели
