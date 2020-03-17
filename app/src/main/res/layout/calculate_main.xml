@@ -14,6 +14,7 @@
             android:layout_width="49dp"
             android:layout_height="140dp"
             android:layout_weight="3"
+            android:onClick="dataPick"
             android:text="Введите числа"
             android:textSize="36sp" />
 
