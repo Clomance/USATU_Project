@@ -19,7 +19,6 @@ class AppBase {
     //Постоянные
     final static int REQUEST_INTERNET_ID = 0;
 
-
     //Текущие
     static InetAddress serverIp; // Адрес для подключения
     static int serverPort = 8080; // Порт для подключения
@@ -29,7 +28,6 @@ class AppBase {
     static String password;
 
     //Приложение
-
     static WeakReference<AppCompatActivity> currentActivity;    // Текущая активность (страничка)
     static AppActivity currentPage;                             // Текущая активность (номер странички)
 
