@@ -1,13 +1,14 @@
 package com.example.client;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.navigation.NavigationView;
-import android.view.MenuItem;
 
 import java.lang.ref.WeakReference;
 

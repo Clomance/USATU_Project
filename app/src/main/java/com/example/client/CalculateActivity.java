@@ -1,18 +1,19 @@
 package com.example.client;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.navigation.NavigationView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
@@ -30,6 +31,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         NavigationView navigationView = findViewById(R.id.calculate_nav_view);  // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);                 // панели
+    }
+
+    @Override
+    public void onDestroy(){
+        AppBase.stopServerTasks();
+        super.onDestroy();
     }
 
     @Override // Действия при выборе на панели навигации

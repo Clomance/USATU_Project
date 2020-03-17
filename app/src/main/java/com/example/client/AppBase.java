@@ -19,11 +19,14 @@ class AppBase {
     //Постоянные
     final static int REQUEST_INTERNET_ID = 0;
 
+
     //Текущие
     static InetAddress serverIp; // Адрес для подключения
     static int serverPort = 8080; // Порт для подключения
-    static int[] tokens = null; // Токены для быстрой авторизации
     static ServerTasks serverTasks = new ServerTasks(); // см. класс ServerTasks
+
+    static String login;
+    static String password;
 
     //Приложение
     static boolean permissions = false; // Флаг разрешений: true - есть, false - нет
@@ -34,15 +37,15 @@ class AppBase {
     // Функция для навигации - сменяет страницы
     static void navigation(int id){
         switch (id){
-            case R.id.nav_calculator:
+            case R.id.nav_calculator: // Калькулятор
                 AppBase.changeActivity(CalculateActivity.class);
                 break;
 
-            case R.id.nav_settings:
+            case R.id.nav_settings: // Настройки
                 AppBase.changeActivity(SettingsActivity.class);
                 break;
 
-            case R.id.nav_info:
+            case R.id.nav_info: // Информация
                 AppBase.changeActivity(InfoActivity.class);
                 break;
 
@@ -58,6 +61,12 @@ class AppBase {
             Intent reg = new Intent(AppBase.currentActivity.get(), c);
             activity.startActivity(reg);
             activity.finish();
+        }
+    }
+
+    static void stopServerTasks(){
+        if (serverTasks.running()){
+            serverTasks.stop();
         }
     }
 }

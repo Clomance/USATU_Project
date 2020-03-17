@@ -1,17 +1,17 @@
 package com.example.client;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
@@ -68,13 +68,8 @@ public class StartActivity extends AppCompatActivity{
     }
     @Override // Действия при закрытии активности
     public void onDestroy() {
-        serverTasks.stop();
+        AppBase.stopServerTasks();
         super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
     }
 
     @Override // Действия при ответе на запрос разрешений
@@ -95,15 +90,15 @@ public class StartActivity extends AppCompatActivity{
     public void sign_in(View view){
         setButtonsEnabled(false); // Отключение кнопок
 
-        String login = loginView.getText().toString().trim(); // Получение логина
-        String password = passwordView.getText().toString().trim(); // Получение пароля
+        AppBase.login = loginView.getText().toString().trim(); // Получение логина
+        AppBase.password = passwordView.getText().toString().trim(); // Получение пароля
 
-        if (login.isEmpty() || password.isEmpty()){ // Проверка пароля и логина на пустоту
+        if (AppBase.login.isEmpty() || AppBase.password.isEmpty()){ // Проверка пароля и логина на пустоту
             setButtonsEnabled(true); // Включение кнопок
             Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
         }
         else{
-            AppBase.serverTasks.start(Task.Sign_in, login, password);
+            AppBase.serverTasks.start(Task.Sign_in);
         }
     }
 
@@ -111,15 +106,15 @@ public class StartActivity extends AppCompatActivity{
     public void sign_up(View view){
         setButtonsEnabled(false); // Отключение кнопок
 
-        String login = loginView.getText().toString().trim(); // Получение логина
-        String password = passwordView.getText().toString().trim(); // Получение пароля
+        AppBase.login = loginView.getText().toString().trim(); // Получение логина
+        AppBase.password = passwordView.getText().toString().trim(); // Получение пароля
 
-        if (login.isEmpty() || password.isEmpty()){ // Проверка пароля и логина на пустоту
+        if (AppBase.login.isEmpty() || AppBase.password.isEmpty()){ // Проверка пароля и логина на пустоту
             setButtonsEnabled(true); // Включение кнопок
             Toast.makeText(this,"Заполните все поля",Toast.LENGTH_LONG).show();
         }
         else{
-            AppBase.serverTasks.start(Task.Sign_up, login, password);
+            AppBase.serverTasks.start(Task.Sign_up);
         }
     }
 

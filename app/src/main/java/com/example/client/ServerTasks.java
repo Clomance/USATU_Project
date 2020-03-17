@@ -3,30 +3,36 @@ package com.example.client;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 enum Task{
     Sign_in,
     Sign_up,
+    Calculate,
 }
 
 // Класс для связи и обмена данными с сервером
-public class ServerTasks{
-    private static Task task;
-    private static ServerTask serverTask;
+class ServerTasks{
+    private static Task task; // Задача для выполнения
+    private static ServerTask serverTask; // Поток с выполняемой задачей
+    private static int[] tokens = new int[2]; // Токены для быстрой авторизации
 
-    public void start(Task server_task, Object... objects){
+    // Запуск выполнения задачи
+    void start(Task server_task, Object... objects){
         task = server_task;
         serverTask = new ServerTask();
         serverTask.execute(objects);
     }
 
-    public void stop(){
+    // Остановка задачи
+    void stop(){
         serverTask.cancel(true);
     }
 
+    // Статус задачи: выполняется - true
     boolean running(){
         return serverTask.getStatus() != AsyncTask.Status.FINISHED;
     }
@@ -39,33 +45,35 @@ public class ServerTasks{
                 Socket socket = new Socket(AppBase.serverIp, AppBase.serverPort); // Подключение к серверу
                 socket.setSoTimeout(1000); // Время ожидания ответа от сервера
 
-                OutputStream output = socket.getOutputStream(); // Получение каналов
-                InputStream input = socket.getInputStream();    // связи
+                ClientServerChannel channel = new ClientServerChannel(socket); // См. класс ниже
 
                 switch (task){
                     case Sign_in:
-                        String login_in = (String) objects[0];
-                        String password_in = (String) objects[1];
+                        channel.writeByte( 0);              //
+                        channel.writeString(AppBase.login);     // Отправка
+                        channel.writeString(AppBase.password);  // данных
+                        channel.flush();                        //
 
-                        output.write(new byte[0]);
+                        if (channel.readBoolean()){ // Успешный вход
+                            for (int i = 0; i < tokens.length; i++){
+                                tokens[i] = channel.readInt();
+                            }
 
-                        output.flush();
-
-                        byte[] bytes_in = new byte[1];
-                        input.read(bytes_in,0,1);
+                        }
+                        else{ // Неверный логин или пароль
+                            return false;
+                        }
 
                         break;
 
                     case Sign_up:
-                        String login_up = (String) objects[0];
-                        String password_up = (String) objects[1];
 
-                        output.write(new byte[1]);
-
-                        output.flush();
-
-                        byte[] bytes_up = new byte[1];
-                        input.read(bytes_up,0,1);
+                        break;
+                    case Calculate:
+                        for (int token: tokens){
+                            channel.writeInt(token);
+                        }
+                        channel.flush();
                         break;
                 }
             }
@@ -90,7 +98,60 @@ public class ServerTasks{
                         Toast.makeText(startActivity, "Ошибка", Toast.LENGTH_LONG).show();
                     }
                     break;
+                case Calculate:
+                    CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
+                    if (state){
+
+                    }
+                    else{
+                        Toast.makeText(calculateActivity, "Ошибка", Toast.LENGTH_LONG).show();
+                    }
+                    break;
             }
+        }
+    }
+
+    // Класс, отвечающий за передачу данных между сервером и клиентом
+    static class ClientServerChannel{
+        DataOutputStream output;
+        DataInputStream input;
+
+        ClientServerChannel(Socket socket) throws IOException{
+            output = new DataOutputStream(socket.getOutputStream());    // Получение каналов
+            input = new DataInputStream(socket.getInputStream());       // связи
+        }
+
+        void writeByte(int b) throws IOException{
+            output.writeByte(b);
+        }
+
+        void writeAll(byte[] bytes) throws IOException{
+            output.write(bytes);
+        }
+
+        void writeInt(int Int) throws IOException{
+            output.writeInt(Int);
+        }
+
+        void writeString(String str) throws IOException{
+            output.writeByte(str.length());
+            output.writeBytes(str);
+        }
+
+        void flush() throws IOException{
+            output.flush();
+        }
+
+        void readExact(byte[] bytes) throws IOException{
+            input.readFully(bytes);
+        }
+
+        Boolean readBoolean() throws IOException{
+            return input.readBoolean();
+        }
+
+        int readInt() throws IOException{
+            return input.readInt();
         }
     }
 }
