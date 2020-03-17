@@ -67,7 +67,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     //    T     И И   И   М     М      У        Р
     //    T     И     И   М     М     У         Р
 
-    // Функция при клике (можно не только кнопку поставить)
+    // Вывод диалогового окна с календарём (для связывания с интерфесом)
     public void dataPick(View view){
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.selectedView = (TextView) view;
@@ -80,7 +80,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
+            final Calendar c = Calendar.getInstance(); // Получение текущей даты
             int year = c.get(Calendar.YEAR);        // Установка
             int month = c.get(Calendar.MONTH);      // текущей
             int day = c.get(Calendar.DAY_OF_MONTH); // даты
@@ -88,47 +88,48 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
         }
 
-        @Override
+        @Override // Действия при установке даты
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            // Установка даты
-            String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);
-            selectedView.setText(text);
 
-            Calendar c = Calendar.getInstance();
-            c.set(year, month, dayOfMonth);
-            if (selectedView.getId() == R.id.data1){
-                data1 = c;
-            }
-            else{
-                data2 = c;
-            }
+            String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
+            selectedView.setText(text);                                             // в нужное поле
 
-            Log.wtf("wtf","if");
-            if (data1 != null && data2 != null){
-                if (data1.before(data2)){
-                    long data1_millis = data1.getTimeInMillis();
-                    long data2_millis = data2.getTimeInMillis();
-                    long result = data2_millis - data1_millis;
-                    int days = (int) result / (24 * 60 * 60 * 1000);
-                    text = days + " дней";
-                    data_result.get().setText(text);
-                }
-                else{
-                    data_result.get().setText("Ошибка");
-                }
-            }
-            else{
-                data_result.get().setText("Результат");
-            }
+            Calendar c = Calendar.getInstance();        //
+            c.set(year, month, dayOfMonth);             //
+            if (selectedView.getId() == R.id.data1){    // Сохранение
+                data1 = c;                              // введённой
+            }                                           // даты
+            else{                                       //
+                data2 = c;                              //
+            }                                           //
+
+            if (data1 != null && data2 != null){                        //
+                if (data1.before(data2)){                               //
+                    long data1_millis = data1.getTimeInMillis();        //
+                    long data2_millis = data2.getTimeInMillis();        //
+                    long result = data2_millis - data1_millis;          //
+                    int days = (int) result / (24 * 60 * 60 * 1000);    // Подсчёт
+                    text = days + " дней";                              // дней
+                    data_result.get().setText(text);                    // между
+                }                                                       // введёнными
+                else{                                                   // датами
+                    data_result.get().setText("Ошибка");                //
+                }                                                       //
+            }                                                           //
+            else{                                                       //
+                data_result.get().setText("Результат");                 //
+            }                                                           //
         }
     }
 
+    // Вывод диалогового списка (для связывания с интерфесом)
     public void listPick(View view){
         ListPickerFragment newFragment = new ListPickerFragment();
         newFragment.selectedView = (TextView) view;
         newFragment.show(getSupportFragmentManager(), "listPicker");
     }
 
+    // Класс для диалогового списка
     public static class ListPickerFragment extends DialogFragment{
         TextView selectedView;
         @NonNull
