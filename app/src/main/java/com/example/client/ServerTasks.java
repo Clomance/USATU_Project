@@ -16,8 +16,8 @@ enum Task{
 
 // Класс для связи и обмена данными с сервером
 class ServerTasks{
-    private static Task task; // Задача для выполнения
-    private static ServerTask serverTask; // Поток с выполняемой задачей
+    private static Task task = Task.Sign_in; // Задача для выполнения
+    private static ServerTask serverTask = new ServerTask(); // Поток с выполняемой задачей
     private static int[] tokens = new int[2]; // Токены для быстрой авторизации
 
     // Запуск выполнения задачи
