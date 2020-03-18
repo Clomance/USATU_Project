@@ -11,7 +11,7 @@ import java.net.Socket;
 enum Task{
     Sign_in,
     Sign_up,
-    Calculate,
+    Calculate
 }
 
 // Класс для связи и обмена данными с сервером
@@ -47,34 +47,46 @@ class ServerTasks{
 
                 ClientServerChannel channel = new ClientServerChannel(socket); // См. класс ниже
 
-                switch (task){
-                    case Sign_in:
-                        channel.writeByte( 0);              //
-                        channel.writeString(AppBase.login);     // Отправка
-                        channel.writeString(AppBase.password);  // данных
-                        channel.flush();                        //
+                if (task == Task.Calculate){
+                    channel.writeByte( 2); // Отправка номера задачи
 
-                        if (channel.readBoolean()){ // Успешный вход
-                            for (int i = 0; i < tokens.length; i++){
-                                tokens[i] = channel.readInt();
-                            }
+                    for (int token: tokens){        //
+                        channel.writeInt(token);    // Отправка токенов
+                    }                               //
+                    // Данные TODO
+                    channel.flush();
 
-                        }
-                        else{ // Неверный логин или пароль
-                            return false;
-                        }
+                    // Получение ответа
+                    if (channel.readBoolean()){
+                        // Получение результата TODO
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    if (task == Task.Sign_in){
+                        channel.writeByte( 0); // Отправка номера задачи
+                    }
+                    else{
+                        channel.writeByte( 1); // Отправка номера задачи
+                    }
 
-                        break;
+                    channel.writeString(AppBase.login);     // Отправка
+                    channel.writeString(AppBase.password);  // данных
+                    channel.flush();                        //
 
-                    case Sign_up:
-
-                        break;
-                    case Calculate:
-                        for (int token: tokens){
-                            channel.writeInt(token);
-                        }
-                        channel.flush();
-                        break;
+                    // Получение ответа
+                    if (channel.readBoolean()){
+                        // Успех
+                        for (int i = 0; i < tokens.length; i++){    //
+                            tokens[i] = channel.readInt();          // Получение токенов
+                        }                                           //
+                    }
+                    else{
+                        // Ошибка
+                        return false;
+                    }
                 }
             }
             catch (Exception e){
@@ -101,7 +113,7 @@ class ServerTasks{
                 case Calculate:
                     CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
                     if (state){
-
+                        // Вывод результата TODO
                     }
                     else{
                         Toast.makeText(calculateActivity, "Ошибка", Toast.LENGTH_LONG).show();
@@ -127,6 +139,20 @@ class ServerTasks{
 
         void writeAll(byte[] bytes) throws IOException{
             output.write(bytes);
+        }
+
+        void writeTask(Task task) throws IOException{
+            switch (task){
+                case Sign_in:
+                    output.writeByte(0);
+                    break;
+                case Sign_up:
+                    output.writeByte(1);
+                    break;
+                case Calculate:
+                    output.writeByte(2);
+                    break;
+            }
         }
 
         void writeInt(int Int) throws IOException{
