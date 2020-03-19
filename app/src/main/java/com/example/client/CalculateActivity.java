@@ -1,4 +1,5 @@
 package com.example.client;
+import static com.example.client.AppBase.Date;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,14 +20,15 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Objects;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     static Double deposit = null;
 
-    static AppBase.Date data1;
-    static AppBase.Date data2;
+    static Date data1 = null;
+    static Date data2 = null;
 
     static Double result = null;
 
@@ -88,10 +90,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, data1.year, data1.month, data1.day);
                 }
                 else{
-                    final Calendar c = Calendar.getInstance(); // Получение текущей даты
-                    int year = c.get(Calendar.YEAR);        // Установка
-                    int month = c.get(Calendar.MONTH);      // текущей
-                    int day = c.get(Calendar.DAY_OF_MONTH); // даты
+                    final Calendar c = Calendar.getInstance();  // Получение текущей даты
+                    int year = c.get(Calendar.YEAR);            // Установка
+                    int month = c.get(Calendar.MONTH);          // текущей
+                    int day = c.get(Calendar.DAY_OF_MONTH);     // даты
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
                 }
             }
@@ -100,10 +102,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, data2.year, data2.month, data2.day);
                 }
                 else{
-                    final Calendar c = Calendar.getInstance(); // Получение текущей даты
-                    int year = c.get(Calendar.YEAR);        // Установка
-                    int month = c.get(Calendar.MONTH);      // текущей
-                    int day = c.get(Calendar.DAY_OF_MONTH); // даты
+                    final Calendar c = Calendar.getInstance();  // Получение текущей даты
+                    int year = c.get(Calendar.YEAR);            // Установка
+                    int month = c.get(Calendar.MONTH);          // текущей
+                    int day = c.get(Calendar.DAY_OF_MONTH);     // даты
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
                 }
             }
@@ -117,18 +119,22 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
 
             if (selectedView.getId() == R.id.data1){                // Сохранение
-                data1 = new AppBase.Date(year, month, dayOfMonth);  // введённой
+                data1 = new Date(year, month, dayOfMonth);  // введённой
             }                                                       // даты
             else{                                                   //
-                data2 = new AppBase.Date(year, month, dayOfMonth);  //
+                data2 = new Date(year, month, dayOfMonth);  //
             }                                                       //
 
             if (data1 != null && data2 != null){                        //
-                if (data1.toCalendar().before(data2.toCalendar())){                               //
-                    long data1_millis = data1.toCalendar().getTimeInMillis();        //
-                    long data2_millis = data2.toCalendar().getTimeInMillis();        //
+                Calendar data1c = data1.toCalendar();
+                Calendar data2c = data2.toCalendar();
+
+                if (data1.toCalendar().before(data2.toCalendar())){
+                    //
+                    long data1_millis = data1c.getTimeInMillis();        //
+                    long data2_millis = data2c.getTimeInMillis();        //
                     long result = data2_millis - data1_millis;          //
-                    int days = (int) result / (24 * 60 * 60 * 1000);    // Подсчёт
+                    long days = result / (24 * 60 * 60 * 1000);         // Подсчёт
                     text = days + " дней";                              // дней
                     data_result.get().setText(text);                    // между
                 }                                                       // введёнными
