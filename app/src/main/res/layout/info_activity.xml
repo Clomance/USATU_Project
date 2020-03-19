@@ -18,7 +18,7 @@
         tools:context=".InfoActivity">
 
         <TextView
-            android:id="@+id/settings"
+            android:id="@+id/settings_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="История запросов"
@@ -28,7 +28,7 @@
             android:id="@+id/history"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/settings"
+            android:layout_below="@id/settings_head"
             android:focusableInTouchMode="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:visibility="visible"

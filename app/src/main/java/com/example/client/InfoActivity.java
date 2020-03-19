@@ -1,11 +1,10 @@
 package com.example.client;
 
-import com.example.client.AppBase.Request;
-
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +17,7 @@ import java.lang.ref.WeakReference;
 
 public class InfoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ListView history;
+    TextView head;
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
@@ -29,12 +29,21 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.info_nav_view);   // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);             // панели
 
-        history = findViewById(R.id.history);
-        if (AppBase.history != null){
-            for (Request request: AppBase.history){
-                ListAdapter adapter = history.getAdapter();
-                //adapter.
+        int len = AppBase.history.size();
+        if (len == 0){
+            head = findViewById(R.id.settings_head);
+            head.append("\nПусто");
+        }
+        else{
+            String[] array = new String[len];
+
+            for (int i = 0; i < len; i++){
+                array[i] = AppBase.history.get(i).toString();
             }
+            ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_view_item, array);
+
+            history = findViewById(R.id.history);
+            history.setAdapter(adapter);
         }
     }
 

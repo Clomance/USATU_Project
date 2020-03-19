@@ -20,7 +20,6 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -117,22 +116,20 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
             selectedView.setText(text);                                             // в нужное поле
 
-
             if (selectedView.getId() == R.id.data1){                // Сохранение
-                data1 = new Date(year, month, dayOfMonth);  // введённой
+                data1 = new Date(year, month, dayOfMonth);          // введённой
             }                                                       // даты
             else{                                                   //
-                data2 = new Date(year, month, dayOfMonth);  //
+                data2 = new Date(year, month, dayOfMonth);          //
             }                                                       //
 
-            if (data1 != null && data2 != null){                        //
+            if (data1 != null && data2 != null){
                 Calendar data1c = data1.toCalendar();
                 Calendar data2c = data2.toCalendar();
 
-                if (data1.toCalendar().before(data2.toCalendar())){
-                    //
-                    long data1_millis = data1c.getTimeInMillis();        //
-                    long data2_millis = data2c.getTimeInMillis();        //
+                if (data2c.before(data1c)){                             //
+                    long data1_millis = data1c.getTimeInMillis();       //
+                    long data2_millis = data2c.getTimeInMillis();       //
                     long result = data2_millis - data1_millis;          //
                     long days = result / (24 * 60 * 60 * 1000);         // Подсчёт
                     text = days + " дней";                              // дней

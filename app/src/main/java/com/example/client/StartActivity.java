@@ -40,7 +40,7 @@ public class StartActivity extends AppCompatActivity{
         sign_in_button = findViewById(R.id.sign_in);    // кнопок
         sign_up_button = findViewById(R.id.sign_up);    // с
         guest_button = findViewById(R.id.guest);        // интерфейсом
-        settings_button = findViewById(R.id.settings);  //
+        settings_button = findViewById(R.id.settings_head);  //
 
         //Проверка разрешений
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_DENIED) { // Разрешений нет
