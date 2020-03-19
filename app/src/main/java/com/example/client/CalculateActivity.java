@@ -83,12 +83,30 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance(); // Получение текущей даты
-            int year = c.get(Calendar.YEAR);        // Установка
-            int month = c.get(Calendar.MONTH);      // текущей
-            int day = c.get(Calendar.DAY_OF_MONTH); // даты
-
-            return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
+            if (selectedView.getId() == R.id.data1){
+                if (data1 != null){
+                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, data1.year, data1.month, data1.day);
+                }
+                else{
+                    final Calendar c = Calendar.getInstance(); // Получение текущей даты
+                    int year = c.get(Calendar.YEAR);        // Установка
+                    int month = c.get(Calendar.MONTH);      // текущей
+                    int day = c.get(Calendar.DAY_OF_MONTH); // даты
+                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
+                }
+            }
+            else{
+                if (data2 != null){
+                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, data2.year, data2.month, data2.day);
+                }
+                else{
+                    final Calendar c = Calendar.getInstance(); // Получение текущей даты
+                    int year = c.get(Calendar.YEAR);        // Установка
+                    int month = c.get(Calendar.MONTH);      // текущей
+                    int day = c.get(Calendar.DAY_OF_MONTH); // даты
+                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
+                }
+            }
         }
 
         @Override // Действия при установке даты
