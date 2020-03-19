@@ -3,10 +3,13 @@ package com.example.client;
 import android.app.Activity;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
+import java.util.Calendar;
+import java.util.Vector;
 
 enum AppActivity{
     Start,
@@ -14,6 +17,7 @@ enum AppActivity{
     Calculate,
     Info
 }
+
 
 class AppBase {
     //Постоянные
@@ -26,6 +30,8 @@ class AppBase {
 
     static String login;
     static String password;
+
+    static Vector<Request> history = new Vector<>();
 
     //Приложение
     static WeakReference<AppCompatActivity> currentActivity;    // Текущая активность (страничка)
@@ -64,6 +70,50 @@ class AppBase {
     static void stopServerTasks(){
         if (serverTasks.running()){
             serverTasks.stop();
+        }
+    }
+
+    // Запрос
+    static class Request {
+        double deposit;
+        double percents;
+        Date[] period;
+        // Доп. поля TODO
+        double result;
+
+        Request(double deposit, double percents, Date[] period){
+            this.deposit = deposit;
+            this.percents = percents;
+            this.period = period;
+        }
+
+        Request(double deposit, double percents, Date[] period, double result){
+            this.deposit = deposit;
+            this.percents = percents;
+            this.period = period;
+            this.result = result;
+        }
+
+        @NonNull
+        public String toString(){
+            return "Вклад: " + deposit + "\n" + "Проценты: " + percents;
+        }
+    }
+
+    static class Date{
+        int year;
+        int month;
+        int day;
+
+        Date(int year, int month, int day){
+            this.year = year;
+            this.month = month;
+            this.day = day;
+        }
+        Calendar toCalendar(){
+            Calendar date = Calendar.getInstance();
+            date.set(year, month, day);
+            return date;
         }
     }
 }

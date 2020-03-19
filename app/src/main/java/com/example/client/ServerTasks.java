@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Vector;
 
 enum Task{
     Sign_in,
@@ -52,13 +53,14 @@ class ServerTasks{
 
                     for (int token: tokens){        //
                         channel.writeInt(token);    // Отправка токенов
-                    }                               //
-                    // Данные TODO
+                    }
+                    channel.writeRequest(); // Отправка данных для ресчёта
+
                     channel.flush();
 
                     // Получение ответа
                     if (channel.readBoolean()){
-                        // Получение результата TODO
+                        CalculateActivity.result = channel.readDouble();
                     }
                     else{
                         return false;
@@ -82,6 +84,8 @@ class ServerTasks{
                         for (int i = 0; i < tokens.length; i++){    //
                             tokens[i] = channel.readInt();          // Получение токенов
                         }                                           //
+
+                        channel.readHistory();
                     }
                     else{
                         // Ошибка
@@ -137,24 +141,6 @@ class ServerTasks{
             output.writeByte(b);
         }
 
-        void writeAll(byte[] bytes) throws IOException{
-            output.write(bytes);
-        }
-
-        void writeTask(Task task) throws IOException{
-            switch (task){
-                case Sign_in:
-                    output.writeByte(0);
-                    break;
-                case Sign_up:
-                    output.writeByte(1);
-                    break;
-                case Calculate:
-                    output.writeByte(2);
-                    break;
-            }
-        }
-
         void writeInt(int Int) throws IOException{
             output.writeInt(Int);
         }
@@ -164,12 +150,13 @@ class ServerTasks{
             output.writeBytes(str);
         }
 
-        void flush() throws IOException{
-            output.flush();
+        void writeRequest() throws IOException{
+            output.writeDouble(CalculateActivity.deposit);
+            // TODO
         }
 
-        void readExact(byte[] bytes) throws IOException{
-            input.readFully(bytes);
+        void flush() throws IOException{
+            output.flush();
         }
 
         Boolean readBoolean() throws IOException{
@@ -178,6 +165,39 @@ class ServerTasks{
 
         int readInt() throws IOException{
             return input.readInt();
+        }
+
+        double readDouble() throws IOException{
+            return input.readDouble();
+        }
+
+        AppBase.Date readDate() throws IOException{
+            int year = input.readInt();
+            int month = input.readInt();
+            int day = input.readInt();
+            return new AppBase.Date(year, month, day);
+        }
+
+        AppBase.Request readRequest() throws  IOException{
+            double deposit = input.readDouble();
+            double percents = input.readDouble();
+            AppBase.Date[] period = new AppBase.Date[2];
+
+            period[0] = readDate();
+            period[1] = readDate();
+
+            double result = readDouble();
+
+            return  new AppBase.Request(deposit, percents, period, result);
+
+        }
+
+        void readHistory() throws IOException{
+            int len = readInt();
+            AppBase.history = new Vector<>();
+            for (int i = 0; i < len; i++){
+                AppBase.history.add(readRequest());
+            }
         }
     }
 }

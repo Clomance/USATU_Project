@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -24,8 +23,12 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    static Calendar data1;
-    static Calendar data2;
+    static Double deposit = null;
+
+    static AppBase.Date data1;
+    static AppBase.Date data2;
+
+    static Double result = null;
 
     static WeakReference<TextView> data_result;
 
@@ -94,19 +97,18 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
             selectedView.setText(text);                                             // в нужное поле
 
-            Calendar c = Calendar.getInstance();        //
-            c.set(year, month, dayOfMonth);             //
-            if (selectedView.getId() == R.id.data1){    // Сохранение
-                data1 = c;                              // введённой
-            }                                           // даты
-            else{                                       //
-                data2 = c;                              //
-            }                                           //
+
+            if (selectedView.getId() == R.id.data1){                // Сохранение
+                data1 = new AppBase.Date(year, month, dayOfMonth);  // введённой
+            }                                                       // даты
+            else{                                                   //
+                data2 = new AppBase.Date(year, month, dayOfMonth);  //
+            }                                                       //
 
             if (data1 != null && data2 != null){                        //
-                if (data1.before(data2)){                               //
-                    long data1_millis = data1.getTimeInMillis();        //
-                    long data2_millis = data2.getTimeInMillis();        //
+                if (data1.toCalendar().before(data2.toCalendar())){                               //
+                    long data1_millis = data1.toCalendar().getTimeInMillis();        //
+                    long data2_millis = data2.toCalendar().getTimeInMillis();        //
                     long result = data2_millis - data1_millis;          //
                     int days = (int) result / (24 * 60 * 60 * 1000);    // Подсчёт
                     text = days + " дней";                              // дней
