@@ -15,11 +15,20 @@ enum Task{
     Calculate
 }
 
+enum TaskResult{
+    Ok,
+    ConnectionError,
+    WrongLoginPassword,
+    LoginAlreadyExists,
+    WrongToken,
+}
+
 // Класс для связи и обмена данными с сервером
 class ServerTasks{
     private static Task task = Task.Sign_in; // Задача для выполнения
     private static ServerTask serverTask = new ServerTask(); // Поток с выполняемой задачей
     private static int[] tokens = new int[2]; // Токены для быстрой авторизации
+
 
     // Запуск выполнения задачи
     void start(Task server_task, Object... objects){
@@ -38,91 +47,127 @@ class ServerTasks{
         return serverTask.getStatus() != AsyncTask.Status.FINISHED;
     }
 
-    private static class ServerTask extends AsyncTask<Object,Void,Boolean>{
+    private static class ServerTask extends AsyncTask<Object, Void, TaskResult>{
 
         @Override // Действия в дополнительном потоке
-        protected Boolean doInBackground(Object... objects) {
+        protected TaskResult doInBackground(Object... objects) {
             try{
                 Socket socket = new Socket(AppBase.serverIp, AppBase.serverPort); // Подключение к серверу
                 socket.setSoTimeout(1000); // Время ожидания ответа от сервера
 
                 ClientServerChannel channel = new ClientServerChannel(socket); // См. класс ниже
 
-                if (task == Task.Calculate){
-                    channel.writeByte( 2); // Отправка номера задачи
-
-                    for (int token: tokens){        //
-                        channel.writeInt(token);    // Отправка токенов
-                    }
-                    channel.writeRequest(); // Отправка данных для ресчёта
-
-                    channel.flush();
-
-                    // Получение ответа
-                    if (channel.readBoolean()){
-                        CalculateActivity.result = channel.readDouble();
-                    }
-                    else{
-                        return false;
-                    }
-                }
-                else{
-                    if (task == Task.Sign_in){
+                switch (task){
+                    case Sign_in:
                         channel.writeByte( 0); // Отправка номера задачи
-                    }
-                    else{
+
+                        channel.writeString(AppBase.login);     // Отправка
+                        channel.writeString(AppBase.password);  // данных
+                        channel.flush();                        //
+
+                        // Получение ответа
+                        if (channel.readBoolean()){
+                            // Успех
+                            for (int i = 0; i < tokens.length; i++){    //
+                                tokens[i] = channel.readInt();          // Получение токенов
+                            }                                           //
+
+                            channel.readHistory(); // Получение истории
+                        }
+                        else{
+                            // Ошибка
+                            return TaskResult.WrongLoginPassword;
+                        }
+                        break;
+
+                    case Sign_up:
+
                         channel.writeByte( 1); // Отправка номера задачи
-                    }
 
-                    channel.writeString(AppBase.login);     // Отправка
-                    channel.writeString(AppBase.password);  // данных
-                    channel.flush();                        //
+                        channel.writeString(AppBase.login);     // Отправка
+                        channel.writeString(AppBase.password);  // данных
+                        channel.flush();                        //
 
-                    // Получение ответа
-                    if (channel.readBoolean()){
-                        // Успех
-                        for (int i = 0; i < tokens.length; i++){    //
-                            tokens[i] = channel.readInt();          // Получение токенов
-                        }                                           //
+                        // Получение ответа
+                        if (channel.readBoolean()){
+                            // Успех
+                            for (int i = 0; i < tokens.length; i++){    //
+                                tokens[i] = channel.readInt();          // Получение токенов
+                            }                                           //
+                        }
+                        else{
+                            // Ошибка
+                            return TaskResult.LoginAlreadyExists;
+                        }
+                        break;
 
-                        channel.readHistory();
-                    }
-                    else{
-                        // Ошибка
-                        return false;
-                    }
+                    case Calculate:
+                        channel.writeByte( 2); // Отправка номера задачи
+
+                        for (int token: tokens){        //
+                            channel.writeInt(token);    // Отправка токенов
+                        }
+
+                        channel.writeRequest(); // Отправка данных для ресчёта
+
+                        channel.flush();
+
+                        // Получение ответа
+                        if (channel.readBoolean()){
+                            CalculateActivity.result = channel.readDouble(); // Получение результата
+                        }
+                        else{
+                            return TaskResult.WrongToken;
+                        }
+                        break;
                 }
             }
-            catch (Exception e){
-                return false;
+            catch (IOException e){
+                return TaskResult.ConnectionError;
             }
-            return true;
+            return TaskResult.Ok;
         }
 
         @Override // Действия после выполения задачи (в текущем потоке)
-        protected void onPostExecute(Boolean state) {
-            super.onPostExecute(state);
+        protected void onPostExecute(TaskResult result) {
+            super.onPostExecute(result);
             switch (task) {
                 case Sign_in:
                 case Sign_up:
                     StartActivity startActivity = (StartActivity) AppBase.currentActivity.get();
-                    if (state) {
-                        startActivity.startMainActivity();
+                    switch (result){
+                        case Ok:
+                            startActivity.setButtonsEnabled(true);
+                            break;
+                        case ConnectionError:
+                            Toast.makeText(startActivity, "Проблемы с соединением", Toast.LENGTH_LONG).show();
+                            break;
+                        case WrongLoginPassword:
+                            Toast.makeText(startActivity, "Неправильный логин или пароль", Toast.LENGTH_LONG).show();
+                            break;
+                        case LoginAlreadyExists:
+                            Toast.makeText(startActivity, "Такой логин уже существует", Toast.LENGTH_LONG).show();
+                            break;
+                        default:
+                            break;
                     }
-                    else {
-                        startActivity.setButtonsEnabled(true);
-                        Toast.makeText(startActivity, "Ошибка", Toast.LENGTH_LONG).show();
-                    }
+
                     break;
                 case Calculate:
                     CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
-                    if (state){
-                        // Вывод результата TODO
+                    switch (result) {
+                        case Ok:
+                            // Результат получен TODO
+                            break;
+                        case ConnectionError:
+                            Toast.makeText(calculateActivity, "Проблемы с соединением", Toast.LENGTH_LONG).show();
+                            break;
+                        case WrongToken:
+                            Toast.makeText(calculateActivity, "Неверный токен - перезаупустите приложение", Toast.LENGTH_LONG).show();
+                            break;
+                        default:
+                            break;
                     }
-                    else{
-                        Toast.makeText(calculateActivity, "Ошибка", Toast.LENGTH_LONG).show();
-                    }
-                    break;
             }
         }
     }
