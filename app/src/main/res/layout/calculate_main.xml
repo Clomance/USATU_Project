@@ -96,31 +96,34 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button22"
+                android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="7"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/button8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="8"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/button9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="9"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/button13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -135,31 +138,34 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button24"
+                android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="4"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button25"
+                android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="5"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button26"
+                android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="6"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button27"
+                android:id="@+id/button12"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -174,31 +180,34 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button23"
+                android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button20"
+                android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="2"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button19"
+                android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="3"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button18"
+                android:id="@+id/button11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -219,20 +228,22 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button0"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="0"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="."
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onNumberClick"/>
 
             <Button
                 android:id="@+id/empty2"

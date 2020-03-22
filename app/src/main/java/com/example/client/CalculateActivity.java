@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.datepicker.YearGridAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
@@ -33,6 +35,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     static WeakReference<TextView> data_result;
 
+    TextView Strochka;
+
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
@@ -46,6 +50,9 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         TextView data_resultView = findViewById(R.id.data_result);
         data_result = new WeakReference<>(data_resultView);
+
+        Strochka = findViewById(R.id.textView2);
+
     }
 
     @Override
@@ -197,6 +204,28 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 }
             });
             return builder.create();
+        }
+    }
+
+    public void NumberClickButtons(View clickbut){
+        int id = clickbut.getId();
+        switch (id) {
+            case R.id.button0:
+            case R.id.button1:
+            case R.id.button2:
+            case R.id.button3:
+            case R.id.button4:
+            case R.id.button5:
+            case R.id.button6:
+            case R.id.button7:
+            case R.id.button8:
+            case R.id.button9:
+            case R.id.button10:
+                Button Vvod = (Button)clickbut;
+                String Stroka = Vvod.getText().toString();
+                Strochka.append(Stroka);
+                break;
+            default:break;
         }
     }
 }
