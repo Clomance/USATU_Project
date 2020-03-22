@@ -1,6 +1,7 @@
 package com.example.client;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.DataInputStream;
@@ -136,7 +137,7 @@ class ServerTasks{
                     StartActivity startActivity = (StartActivity) AppBase.currentActivity.get();
                     switch (result){
                         case Ok:
-                            startActivity.setButtonsEnabled(true);
+                            startActivity.startMainActivity();
                             break;
                         case ConnectionError:
                             Toast.makeText(startActivity, "Проблемы с соединением", Toast.LENGTH_LONG).show();

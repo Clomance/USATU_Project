@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Тип капитализации"
+            android:text="Капитализации"
             android:onClick="listPickCapitalization"/>
 
         <Switch
@@ -225,7 +225,8 @@
                 android:id="@+id/empty1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:clickable="false" />
 
             <Button
                 android:id="@+id/button0"
@@ -249,7 +250,8 @@
                 android:id="@+id/empty2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:clickable="false" />
         </TableRow>
     </TableLayout>
 
