@@ -171,4 +171,32 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             return builder.create();
         }
     }
+
+    // Список капитилизаций
+    // Вывод диалогового списка (для связывания с интерфесом)
+    public void listPickCapitalization(View view){
+        ListPickerFragment2 newFragment = new ListPickerFragment2();
+        newFragment.selectedView = (TextView) view;
+        newFragment.show(getSupportFragmentManager(), "listPicker");
+    }
+
+    // Класс для диалогового списка
+    public static class ListPickerFragment2 extends DialogFragment{
+        TextView selectedView;
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+
+            final String[] list = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"};
+
+            builder.setTitle("Капитализация").setItems(list, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Выбор из списка
+                    selectedView.setText("Капитализация\n" + list[which]);
+                }
+            });
+            return builder.create();
+        }
+    }
 }

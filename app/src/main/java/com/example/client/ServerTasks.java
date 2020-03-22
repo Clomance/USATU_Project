@@ -151,7 +151,7 @@ class ServerTasks{
                         default:
                             break;
                     }
-
+                    startActivity.setButtonsEnabled(true);
                     break;
                 case Calculate:
                     CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
