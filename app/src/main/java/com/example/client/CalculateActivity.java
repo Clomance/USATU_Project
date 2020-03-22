@@ -127,7 +127,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 Calendar data1c = data1.toCalendar();
                 Calendar data2c = data2.toCalendar();
 
-                if (data2c.before(data1c)){                             //
+                if (data1c.before(data2c)){                             //
                     long data1_millis = data1c.getTimeInMillis();       //
                     long data2_millis = data2c.getTimeInMillis();       //
                     long result = data2_millis - data1_millis;          //

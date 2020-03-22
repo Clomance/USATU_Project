@@ -29,7 +29,6 @@ class ServerTasks{
     private static ServerTask serverTask = new ServerTask(); // Поток с выполняемой задачей
     private static int[] tokens = new int[2]; // Токены для быстрой авторизации
 
-
     // Запуск выполнения задачи
     void start(Task server_task, Object... objects){
         task = server_task;
