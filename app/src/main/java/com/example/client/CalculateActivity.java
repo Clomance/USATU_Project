@@ -231,6 +231,16 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             case R.id.button10:
                 String buttonText =  clickedButton.getText().toString();
 
+                String enterText = enterTextView.getText().toString();
+                if (enterText == null){
+                    if (enterPercents){
+                        enterTextView.setText("Процентная ставка: ");
+                    }
+                    else{
+                        enterTextView.setText("Размер вклада: ");
+                    }
+                }
+
                 enterTextView.append(buttonText);
                 break;
 
@@ -240,25 +250,29 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.delete_button: // Кнопка удаления одного символа
                 String text = enterTextView.getText().toString();
-                text = text.substring(0,text.length() - 1);
+                text = text.substring(0, text.length() - 1);
                 enterTextView.setText(text);
                 break;
 
             case R.id.compute_button: // Кнопка расчёта
                 if (capitalization == null){
-                    Toast.makeText(this, "Выбирите тип капитализации", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Выбирите тип капитализации", Toast.LENGTH_LONG).show();
                     break;
                 }
-                if (period[0] == null || period[1] == null){
 
+                if (period[0] == null || period[1] == null){
+                    Toast.makeText(this, "Введите период", Toast.LENGTH_LONG).show();
+                    break;
                 }
+
                 String deposit_str = depositView.getText().toString();
+                String percents_str = percentsView.getText().toString();
                 try {
                     CalculateActivity.deposit = Double.parseDouble(deposit_str);
-                    //CalculateActivity.percents = ;
+                    CalculateActivity.percents = Double.parseDouble(percents_str);
                 }
                 catch (Exception e){
-
+                    Toast.makeText(this, "Ошибка деп/проц", Toast.LENGTH_LONG).show();
                 }
                 break;
 
