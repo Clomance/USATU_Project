@@ -207,6 +207,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    // Действия при нажатии кнопок
     public void onButtonsClick(View button){
         int id = button.getId();
         switch (id) {
@@ -225,6 +226,22 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 String buttonText =  clickedButton.getText().toString();
 
                 mainTextView.append(buttonText);
+                break;
+
+            case R.id.clear_button: // Кнопка отчиски всего поля
+                mainTextView.setText("");
+                break;
+
+            case R.id.delete_button: // Кнопка удаления одного символа
+                String text = mainTextView.getText().toString();
+                text = text.substring(0,text.length() - 1);
+                mainTextView.setText(text);
+                break;
+
+            case R.id.compute_button: // Кнопка расчёта
+                //CalculateActivity.deposit = ;
+                //CalculateActivity.percents = ;
+
                 break;
             default:
                 break;

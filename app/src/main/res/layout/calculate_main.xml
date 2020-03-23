@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="7"
                 android:textSize="18sp" />
 
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="8"
                 android:textSize="18sp" />
 
@@ -123,16 +123,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="9"
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/button13"
+                android:id="@+id/clear_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="С"
                 android:textSize="18sp" />
 
@@ -148,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="4"
                 android:textSize="18sp" />
 
@@ -157,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="5"
                 android:textSize="18sp" />
 
@@ -166,16 +166,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="6"
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/delete_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="@string/arrow"
                 android:textSize="18sp" />
 
@@ -191,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="1"
                 android:textSize="18sp" />
 
@@ -200,7 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="2"
                 android:textSize="18sp" />
 
@@ -209,16 +209,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="3"
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/compute_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="="
                 android:textSize="18sp" />
 
@@ -242,7 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="0"
                 android:textSize="18sp" />
 
@@ -251,7 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="NumberClickButtons"
+                android:onClick="onButtonsClick"
                 android:text="."
                 android:textSize="18sp" />
 
