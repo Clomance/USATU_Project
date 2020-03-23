@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -244,7 +245,13 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.compute_button: // Кнопка расчёта
+                if (capitalization == null){
+                    Toast.makeText(this, "Выбирите тип капитализации", Toast.LENGTH_LONG);
+                    break;
+                }
+                if (period[0] == null || period[1] == null){
 
+                }
                 String deposit_str = depositView.getText().toString();
                 try {
                     CalculateActivity.deposit = Double.parseDouble(deposit_str);
