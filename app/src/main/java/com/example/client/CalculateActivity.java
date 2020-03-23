@@ -35,7 +35,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     static WeakReference<TextView> data_result;
 
-    TextView mainTextView;
+    TextView depositView;
+    TextView percentsView;
+    TextView enterTextView; // Поле ввода (выбираемое)
+    boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,9 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         TextView data_resultView = findViewById(R.id.data_result);
         data_result = new WeakReference<>(data_resultView);
 
-        mainTextView = findViewById(R.id.textView2);
-
+        depositView = findViewById(R.id.enterDeposit);
+        percentsView = findViewById(R.id.enterPercents);
+        enterTextView = depositView;
     }
 
     @Override
@@ -210,8 +214,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     // Действия при нажатии кнопок
     public void onButtonsClick(View button){
         int id = button.getId();
+        Button clickedButton = (Button) button;
+
         switch (id) {
-            case R.id.button0:
+            case R.id.button0: // Ввод цифр и точки
             case R.id.button1:
             case R.id.button2:
             case R.id.button3:
@@ -222,26 +228,43 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             case R.id.button8:
             case R.id.button9:
             case R.id.button10:
-                Button clickedButton = (Button) button;
                 String buttonText =  clickedButton.getText().toString();
 
-                mainTextView.append(buttonText);
+                enterTextView.append(buttonText);
                 break;
 
             case R.id.clear_button: // Кнопка отчиски всего поля
-                mainTextView.setText("");
+                enterTextView.setText("");
                 break;
 
             case R.id.delete_button: // Кнопка удаления одного символа
-                String text = mainTextView.getText().toString();
+                String text = enterTextView.getText().toString();
                 text = text.substring(0,text.length() - 1);
-                mainTextView.setText(text);
+                enterTextView.setText(text);
                 break;
 
-            case R.id.compute_button: // Кнопка расчёта/продолжения
-                //CalculateActivity.deposit = ;
-                //CalculateActivity.percents = ;
+            case R.id.compute_button: // Кнопка расчёта
 
+                String deposit_str = depositView.getText().toString();
+                try {
+                    CalculateActivity.deposit = Double.parseDouble(deposit_str);
+                    //CalculateActivity.percents = ;
+                }
+                catch (Exception e){
+
+                }
+                break;
+
+            case R.id.percents_button: // Кнопка переключения ввода
+                if (enterPercents){
+                    enterTextView = depositView;
+                    clickedButton.setText("Проценты");
+                }
+                else{
+                    enterTextView = percentsView;
+                    clickedButton.setText("Вклад");
+                }
+                enterPercents = !enterPercents;
                 break;
             default:
                 break;
