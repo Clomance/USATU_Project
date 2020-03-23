@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -11,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:orientation="vertical">
 
         <TextView
@@ -34,7 +33,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.5"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <TextView
@@ -61,219 +60,213 @@
             android:text="Пополн/\nизъятие" />
     </LinearLayout>
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
-        <TableRow
+        <TextView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Список\nвалют"
+            android:onClick="listPick">
 
-            <TextView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="Список\nвалют"
-                android:onClick="listPick">
+        </TextView>
 
-            </TextView>
-
-            <TextView
-                android:id="@+id/data1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="Введите\nначало\nвклада"
-                android:onClick="dataPick" />
-
-            <TextView
-                android:id="@+id/data2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="Введите\nконец\nвклада"
-                android:onClick="dataPick" />
-
-            <TextView
-                android:id="@+id/data_result"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="Количество\nдней" />
-
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/data1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Введите\nначало\nвклада"
+            android:onClick="dataPick" />
 
-            <Button
-                android:id="@+id/button7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="7"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="8"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="9"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/clear_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="С"
-                android:textSize="18sp" />
-
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/data2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Введите\nконец\nвклада"
+            android:onClick="dataPick" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="4"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="5"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="6"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/delete_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="@string/arrow"
-                android:textSize="18sp" />
-
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/data_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Количество\nдней" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="1"
-                android:textSize="18sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="2"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="3"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/compute_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="="
-                android:textSize="18sp" />
-
-        </TableRow>
-
-        <TableRow
+        <Button
+            android:id="@+id/button7"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="7"
+            android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/button0"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="0"
-                android:textSize="18sp" />
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="8"
+            android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="onButtonsClick"
-                android:text="."
-                android:textSize="18sp" />
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="9"
+            android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/percents_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="С"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-                android:layout_weight="2"
-                android:clickable="true"
-                android:onClick="onButtonsClick"
-                android:text="Проценты" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
-        </TableRow>
-    </TableLayout>
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="4"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="5"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="6"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="@string/arrow"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="1"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="2"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="3"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/compute_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onButtonsClick"
+            android:text="="
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:onClick="onButtonsClick"
+            android:text="0"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:onClick="onButtonsClick"
+            android:text="."
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/percents_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="2"
+            android:clickable="true"
+            android:onClick="onButtonsClick"
+            android:text="Проценты" />
+    </LinearLayout>
 
 </LinearLayout>
 
