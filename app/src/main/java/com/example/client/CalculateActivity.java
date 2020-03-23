@@ -238,7 +238,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 mainTextView.setText(text);
                 break;
 
-            case R.id.compute_button: // Кнопка расчёта
+            case R.id.compute_button: // Кнопка расчёта/продолжения
                 //CalculateActivity.deposit = ;
                 //CalculateActivity.percents = ;
 
