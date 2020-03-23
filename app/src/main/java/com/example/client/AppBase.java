@@ -102,10 +102,10 @@ class AppBase {
 
     static class Date{
         int year;
-        int month;
-        int day;
+        byte month;
+        byte day;
 
-        Date(int year, int month, int day){
+        Date(int year, byte month, byte day){
             this.year = year;
             this.month = month;
             this.day = day;

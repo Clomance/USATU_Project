@@ -15,5 +15,6 @@
     <string name="save">Сохранить</string>
     <string name="calculator">Калькулятор</string>
     <string name="arrow"><![CDATA[<]]></string>
+    <string name="Capitalization">Капитализация</string>
 
 </resources>

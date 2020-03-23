@@ -195,9 +195,21 @@ class ServerTasks{
             output.writeBytes(str);
         }
 
+        void writePeriod() throws IOException{
+            output.writeInt(CalculateActivity.period[0].year);
+            output.writeByte(CalculateActivity.period[0].month);
+            output.writeByte(CalculateActivity.period[0].day);
+
+            output.writeInt(CalculateActivity.period[1].year);
+            output.writeByte(CalculateActivity.period[1].month);
+            output.writeByte(CalculateActivity.period[1].day);
+        }
+
         void writeRequest() throws IOException{
             output.writeDouble(CalculateActivity.deposit);
-            // TODO
+            output.writeDouble(CalculateActivity.percents);
+            writePeriod();
+            output.writeByte(CalculateActivity.capitalization);
         }
 
         void flush() throws IOException{
@@ -218,8 +230,8 @@ class ServerTasks{
 
         AppBase.Date readDate() throws IOException{
             int year = input.readInt();
-            int month = input.readInt();
-            int day = input.readInt();
+            byte month = input.readByte();
+            byte day = input.readByte();
             return new AppBase.Date(year, month, day);
         }
 

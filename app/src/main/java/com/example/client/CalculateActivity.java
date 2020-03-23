@@ -27,15 +27,15 @@ import java.util.Objects;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     static Double deposit = null;
-
-    static Date data1 = null;
-    static Date data2 = null;
+    static Double percents = null;
+    static Date[] period = new Date[2];
+    static Byte capitalization = null;
 
     static Double result = null;
 
     static WeakReference<TextView> data_result;
 
-    TextView Strochka;
+    TextView mainTextView;
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         TextView data_resultView = findViewById(R.id.data_result);
         data_result = new WeakReference<>(data_resultView);
 
-        Strochka = findViewById(R.id.textView2);
+        mainTextView = findViewById(R.id.textView2);
 
     }
 
@@ -92,8 +92,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             if (selectedView.getId() == R.id.data1){
-                if (data1 != null){
-                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, data1.year, data1.month, data1.day);
+                if (period[0] != null){
+                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, period[0].year, period[0].month, period[0].day);
                 }
                 else{
                     final Calendar c = Calendar.getInstance();  // Получение текущей даты
@@ -104,8 +104,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 }
             }
             else{
-                if (data2 != null){
-                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, data2.year, data2.month, data2.day);
+                if (period[1] != null){
+                    return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, period[1].year, period[1].month, period[1].day);
                 }
                 else{
                     final Calendar c = Calendar.getInstance();  // Получение текущей даты
@@ -123,16 +123,16 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
             selectedView.setText(text);                                             // в нужное поле
 
-            if (selectedView.getId() == R.id.data1){                // Сохранение
-                data1 = new Date(year, month, dayOfMonth);          // введённой
-            }                                                       // даты
-            else{                                                   //
-                data2 = new Date(year, month, dayOfMonth);          //
-            }                                                       //
+            if (selectedView.getId() == R.id.data1){                        // Сохранение
+                period[0] = new Date(year, (byte) month, (byte) dayOfMonth);    // введённой
+            }                                                               // даты
+            else{                                                           //
+                period[1] = new Date(year, (byte) month, (byte) dayOfMonth);    //
+            }                                                               //
 
-            if (data1 != null && data2 != null){
-                Calendar data1c = data1.toCalendar();
-                Calendar data2c = data2.toCalendar();
+            if (period[0] != null && period[1] != null){
+                Calendar data1c = period[0].toCalendar();
+                Calendar data2c = period[1].toCalendar();
 
                 if (data1c.before(data2c)){                             //
                     long data1_millis = data1c.getTimeInMillis();       //
@@ -207,8 +207,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
-    public void NumberClickButtons(View clickbut){
-        int id = clickbut.getId();
+    public void onButtonsClick(View button){
+        int id = button.getId();
         switch (id) {
             case R.id.button0:
             case R.id.button1:
@@ -221,11 +221,13 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             case R.id.button8:
             case R.id.button9:
             case R.id.button10:
-                Button Vvod = (Button)clickbut;
-                String Stroka = Vvod.getText().toString();
-                Strochka.append(Stroka);
+                Button clickedButton = (Button) button;
+                String buttonText =  clickedButton.getText().toString();
+
+                mainTextView.append(buttonText);
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 }

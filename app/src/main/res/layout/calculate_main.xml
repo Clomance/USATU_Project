@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:text="Введите числа"
+        android:hint="Введите размер вклада\nВведите размер процентной ставки"
         android:textSize="36sp" />
 
     <LinearLayout
@@ -27,8 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Капитализации"
-            android:onClick="listPickCapitalization"/>
+            android:gravity="center"
+            android:onClick="listPickCapitalization"
+            android:text="@string/Capitalization" />
 
         <Switch
             android:id="@+id/switch3"
@@ -60,7 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Список валют"
+                android:gravity="center"
+                android:hint="Список\nвалют"
                 android:onClick="listPick">
 
             </TextView>
@@ -70,23 +72,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="dataPick"
-                android:text="Введите дату" />
+                android:gravity="center"
+                android:hint="Введите\nначало\nвклада"
+                android:onClick="dataPick" />
 
             <TextView
                 android:id="@+id/data2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="dataPick"
-                android:text="Введите дату" />
+                android:gravity="center"
+                android:hint="Введите\nконец\nвклада"
+                android:onClick="dataPick" />
 
             <TextView
                 android:id="@+id/data_result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Результат" />
+                android:gravity="center"
+                android:hint="Количество\nдней" />
 
         </TableRow>
 
@@ -127,6 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="NumberClickButtons"
                 android:text="С"
                 android:textSize="18sp" />
 
@@ -169,6 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="NumberClickButtons"
                 android:text="@string/arrow"
                 android:textSize="18sp" />
 
@@ -211,6 +218,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="NumberClickButtons"
                 android:text="="
                 android:textSize="18sp" />
 
@@ -226,6 +234,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+
                 android:clickable="false" />
 
             <Button
