@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,11 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    static Integer currency = null;
+    final static String[] listCurrency = new String[]{"Рубль","Доллар","Евро"};
+    final static String[] shortList = new String[]{" руб.", " долл.", " евро"};
+    final static String[] listCapitalization = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"};
+
     static Double deposit = null;
     static Double percents = null;
     static Date[] period = new Date[2];
@@ -39,12 +45,14 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     TextView depositView;
     TextView percentsView;
     TextView enterTextView; // Поле ввода (выбираемое)
-    boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
+    static boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
 
-    String headEnterText; // Вставка перед значение в поле ввода
-    String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
+    static String headEnterText; // Вставка перед значением в поле ввода
+    static String endEnterText = ""; // Вставка после значения в поле ввода
+
+    static String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
     String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
-    String NumStr; // Ссылка на depositNumStr или percentsNumStr (для переключения междую ними)
+    static String NumStr; // Временное поле для depositNumStr или percentsNumStr
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         percentsView = findViewById(R.id.enterPercents);
 
         headEnterText = getString(R.string.headDeposit);
+
         enterTextView = depositView;
         NumStr = depositNumStr;
     }
@@ -91,7 +100,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     //    T     И И   И   М     М      У        Р
     //    T     И     И   М     М     У         Р
 
-    // Вывод диалогового окна с календарём (для связывания с интерфесом)
+    // Вывод диалогового окна с календарём
     public void dataPick(View view){
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.selectedView = (TextView) view;
@@ -136,12 +145,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
             selectedView.setText(text);                                             // в нужное поле
 
-            if (selectedView.getId() == R.id.data1){                        // Сохранение
+            if (selectedView.getId() == R.id.data1){                            // Сохранение
                 period[0] = new Date(year, (byte) month, (byte) dayOfMonth);    // введённой
-            }                                                               // даты
-            else{                                                           //
+            }                                                                   // даты
+            else{                                                               //
                 period[1] = new Date(year, (byte) month, (byte) dayOfMonth);    //
-            }                                                               //
+            }                                                                   //
 
             if (period[0] != null && period[1] != null){
                 Calendar data1c = period[0].toCalendar();
@@ -169,23 +178,41 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     public void listPickCurrency(View view){
         PickCurrency newFragment = new PickCurrency();
         newFragment.selectedView = (TextView) view;
+        newFragment.depositView = depositView;
         newFragment.show(getSupportFragmentManager(), "listPicker");
 
     }
     public static class PickCurrency extends DialogFragment{
+        TextView depositView;
         TextView selectedView;
 
         @NonNull@Override // Создание диалогового окна
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
-            final String[] list = new String[]{"Рубль","Доллар","Евро"};
-
-            builder.setTitle("Валюты").setItems(list, new DialogInterface.OnClickListener() {
+            builder.setTitle("Валюты").setItems(listCurrency, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Выбор из списка
-                    String text = "Валюта\n" + list[which];
-                    selectedView.setText(text);
+                    String text = "Валюта\n" + listCurrency[which]; // Вставка валюты
+                    selectedView.setText(text);             // в нажатое поле
+
+                    currency = which;
+                    if (enterPercents){
+                        if (!depositNumStr.isEmpty()){
+                            text = headEnterText + depositNumStr + shortList[currency];
+                            depositView.setText(text);
+                        }
+                    }
+                    else{
+                        if (NumStr.isEmpty()){
+                            endEnterText = shortList[currency];
+                        }
+                        else{
+                            endEnterText = shortList[currency];
+                            text = headEnterText + NumStr + endEnterText;
+                            depositView.setText(text);
+                        }
+                    }
                 }
             });
             return builder.create();
@@ -204,12 +231,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
-            final String[] list = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"};
-
-            builder.setTitle(R.string.Capitalization).setItems(list, new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.Capitalization).setItems(listCapitalization, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Выбор из списка
-                    String text = getString(R.string.Capitalization) + "\n" + list[which];
+                    capitalization = (byte) which;
+                    String text = getString(R.string.Capitalization) + "\n" + listCapitalization[which];
+
                     selectedView.setText(text);
                 }
             });
@@ -235,10 +262,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             case R.id.button8:
             case R.id.button9:
             case R.id.button10:
-                String buttonText =  clickedButton.getText().toString();
+                String buttonText =  clickedButton.getText().toString(); // Получение символа из кнопки
 
                 NumStr += buttonText;
-                String enterText = headEnterText + NumStr;
+                String enterText = headEnterText + NumStr + endEnterText; // Форматирование
 
                 enterTextView.setText(enterText);
 
@@ -262,7 +289,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     NumStr = NumStr.substring(0, len - 1); // Удаление одного символа
                 }
 
-                String text = headEnterText + NumStr; // Форматирование
+                String text = headEnterText + NumStr + endEnterText; // Форматирование
                 enterTextView.setText(text); // Вывод в поле
 
                 break;
@@ -292,18 +319,28 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.percents_button: // Кнопка переключения ввода
                 if (enterPercents){
+                    percentsNumStr = NumStr; // Сохранение ввода в проценты
+
                     enterTextView = depositView;    // Переключение ввода
                     NumStr = depositNumStr;         // во вклад
 
                     headEnterText = getString(R.string.headDeposit);
-
+                    if (currency == null){
+                        endEnterText = "";
+                    }
+                    else{
+                        endEnterText = shortList[currency];
+                    }
                     clickedButton.setText("Проценты");
                 }
                 else{
+                    depositNumStr = NumStr; // Сохранение ввода во вклад
+
                     enterTextView = percentsView;   // Перелючение ввода
                     NumStr = percentsNumStr;        // в проценты
 
                     headEnterText = getString(R.string.headPercents);
+                    endEnterText = " %";
                     clickedButton.setText("Вклад");
                 }
                 enterPercents = !enterPercents;

@@ -17,7 +17,6 @@ import java.lang.ref.WeakReference;
 
 public class InfoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ListView history;
-    TextView head;
     
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
 
         int len = AppBase.history.size();
         if (len == 0){
-            head = findViewById(R.id.settings_head);
+            TextView head = findViewById(R.id.settings_head);
             head.append("\nПусто");
         }
         else{
