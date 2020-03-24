@@ -16,8 +16,6 @@
     <string name="calculator">Калькулятор</string>
     <string name="arrow"><![CDATA[<]]></string>
     <string name="Capitalization">Капитализация</string>
-    <string name="no">Нет</string>
-    <string name="yes">Да</string>
     <string name="headDeposit">Размер вклада:\u0020</string>
     <string name="headPercents">Процентная ставка:\u0020</string>
 

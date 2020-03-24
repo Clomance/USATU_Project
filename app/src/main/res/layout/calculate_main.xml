@@ -55,9 +55,7 @@
             android:layout_weight="1"
             android:background="@android:drawable/spinner_background"
             android:gravity="center"
-            android:text="Доср.\nзакрытие"
-            android:textOff="@string/no"
-            android:textOn="@string/yes" />
+            android:text="Доср.\nзакрытие" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch4"
@@ -66,9 +64,7 @@
             android:layout_weight="1"
             android:background="@android:drawable/spinner_background"
             android:gravity="center"
-            android:text="Пополн/\nизъятие"
-            android:textOff="@string/no"
-            android:textOn="@string/yes" />
+            android:text="Пополн/\nизъятие" />
     </LinearLayout>
 
     <LinearLayout

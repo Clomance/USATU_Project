@@ -1,11 +1,12 @@
 package com.example.client;
 import static com.example.client.AppBase.Date;
+import static java.lang.String.*;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 
-
 import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
@@ -28,20 +28,21 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    static Integer currency = null;
-    final static String[] listCurrency = new String[]{"Рубль","Доллар","Евро"};
-    final static String[] shortList = new String[]{" руб.", " долл.", " евро"};
-    final static String[] listCapitalization = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"};
+    // Постоянные
+    final static String[] listCurrency = new String[]{"Рубль","Доллар","Евро"}; // Полные валюты для выбора
+    final static String[] shortList = new String[]{" руб.", " долл.", " евро"}; // Краткие валюты для ввода
+    final static String[] listCapitalization = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"}; // Вид капитализации
 
-    static Double deposit = null;
-    static Double percents = null;
-    static Date[] period = new Date[2];
-    static Byte capitalization = null;
+    // Для расчёта
+    static Double deposit = null; // Размер вклада
+    static Double percents = null; // Размер процентной ставки
+    static Date[] period = new Date[2]; // Период
+    static Byte capitalization = null; // Индекс капитализации
+    static Integer currency = null; // Индекс валюты
+    static Double result = null; // Расчётов
 
-    static Double result = null;
-
-    static WeakReference<TextView> data_result;
-
+    // Для вывода
+    TextView dataResultView; // Поле для результата расчёта периода
     TextView depositView;
     TextView percentsView;
     TextView enterTextView; // Поле ввода (выбираемое)
@@ -52,7 +53,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     static String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
     String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
-    static String NumStr; // Временное поле для depositNumStr или percentsNumStr
+    static String NumStr = ""; // Временное поле для depositNumStr или percentsNumStr
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +66,17 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.calculate_nav_view);  // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);                 // панели
 
-        TextView data_resultView = findViewById(R.id.data_result);
-        data_result = new WeakReference<>(data_resultView);
+        dataResultView = findViewById(R.id.data_result);
 
         depositView = findViewById(R.id.enterDeposit);
         percentsView = findViewById(R.id.enterPercents);
 
-        headEnterText = getString(R.string.headDeposit);
+        headEnterText = getString(R.string.headDeposit); // Загрузка строки из ресурсов
 
         enterTextView = depositView;
-        NumStr = depositNumStr;
     }
 
-    @Override
+    @Override // Закрытие страницы
     public void onDestroy(){
         AppBase.stopServerTasks();
         super.onDestroy();
@@ -104,17 +103,20 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     public void dataPick(View view){
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.selectedView = (TextView) view;
+        newFragment.resultView = dataResultView;
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
-
     // Класс для диалога с датой
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         TextView selectedView;
+        TextView resultView;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Установка даты в диалоговое окно
             if (selectedView.getId() == R.id.data1){
                 if (period[0] != null){
+                    // Установка даты, введённой в первое поле
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, period[0].year, period[0].month, period[0].day);
                 }
                 else{
@@ -127,6 +129,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             }
             else{
                 if (period[1] != null){
+                    // Установка даты, введённой во второе поле
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, period[1].year, period[1].month, period[1].day);
                 }
                 else{
@@ -142,19 +145,20 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         @Override // Действия при установке даты
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-            String text = String.format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
-            selectedView.setText(text);                                             // в нужное поле
+            @SuppressLint("DefaultLocale") // Атрибут, чтобы не ругался на формат
+            String text = format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
+            selectedView.setText(text);                                      // в нужное поле
 
-            if (selectedView.getId() == R.id.data1){                            // Сохранение
-                period[0] = new Date(year, (byte) month, (byte) dayOfMonth);    // введённой
-            }                                                                   // даты
-            else{                                                               //
+            if (selectedView.getId() == R.id.data1){                            //
+                period[0] = new Date(year, (byte) month, (byte) dayOfMonth);    // Сохранение
+            }                                                                   // введённой
+            else{                                                               // даты
                 period[1] = new Date(year, (byte) month, (byte) dayOfMonth);    //
             }                                                                   //
 
             if (period[0] != null && period[1] != null){
-                Calendar data1c = period[0].toCalendar();
-                Calendar data2c = period[1].toCalendar();
+                Calendar data1c = period[0].toCalendar();   // Перевод дат
+                Calendar data2c = period[1].toCalendar();   // в календарь
 
                 if (data1c.before(data2c)){                             //
                     long data1_millis = data1c.getTimeInMillis();       //
@@ -162,14 +166,14 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     long result = data2_millis - data1_millis;          //
                     long days = result / (24 * 60 * 60 * 1000);         // Подсчёт
                     text = days + " дней";                              // дней
-                    data_result.get().setText(text);                    // между
+                    resultView.setText(text);                           // между
                 }                                                       // введёнными
                 else{                                                   // датами
-                    data_result.get().setText("Ошибка");                //
+                    resultView.setText("Ошибка");                       //
                 }                                                       //
             }                                                           //
             else{                                                       //
-                data_result.get().setText("Результат");                 //
+                resultView.setText("Результат");                        //
             }                                                           //
         }
     }
@@ -182,6 +186,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         newFragment.show(getSupportFragmentManager(), "listPicker");
 
     }
+    // Класс диалогового списка для выбора вылюты
     public static class PickCurrency extends DialogFragment{
         TextView depositView;
         TextView selectedView;
@@ -192,11 +197,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
             builder.setTitle("Валюты").setItems(listCurrency, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // Выбор из списка
+                    // При выборе из списка
                     String text = "Валюта\n" + listCurrency[which]; // Вставка валюты
-                    selectedView.setText(text);             // в нажатое поле
+                    selectedView.setText(text);                     // в нажатое поле
 
                     currency = which;
+                    // Сложные манипуляции для корректного смены и отображения валюты в поле ввода
                     if (enterPercents){
                         if (!depositNumStr.isEmpty()){
                             text = headEnterText + depositNumStr + shortList[currency];
@@ -224,6 +230,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         newFragment.selectedView = (TextView) view;
         newFragment.show(getSupportFragmentManager(), "listPicker");
     }
+    // Класс диалогового списка для выбора типа капиталтзации
     public static class PickCapitalization extends DialogFragment{
         TextView selectedView;
 
@@ -248,7 +255,6 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     public void onButtonsClick(View button){
         int id = button.getId();
         Button clickedButton = (Button) button;
-        clickedButton.setClickable(false); // Отключение возможности нажимать на кнопку
 
         switch (id) {
             case R.id.button0: // Ввод цифр и точки
@@ -324,7 +330,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     enterTextView = depositView;    // Переключение ввода
                     NumStr = depositNumStr;         // во вклад
 
-                    headEnterText = getString(R.string.headDeposit);
+                    headEnterText = getString(R.string.headDeposit); // Получение строки из ресурсов
                     if (currency == null){
                         endEnterText = "";
                     }
@@ -339,7 +345,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     enterTextView = percentsView;   // Перелючение ввода
                     NumStr = percentsNumStr;        // в проценты
 
-                    headEnterText = getString(R.string.headPercents);
+                    headEnterText = getString(R.string.headPercents); // Получение строки из ресурсов
                     endEnterText = " %";
                     clickedButton.setText("Вклад");
                 }
@@ -348,6 +354,5 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             default:
                 break;
         }
-        clickedButton.setClickable(true);  // Включение возможности нажимать на кнопку
     }
 }
