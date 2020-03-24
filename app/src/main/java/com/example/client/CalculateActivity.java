@@ -41,6 +41,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     TextView enterTextView; // Поле ввода (выбираемое)
     boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
 
+    String headEnterText; // Вставка перед значение в поле ввода
+    String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
+    String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
+    String NumStr; // Ссылка на depositNumStr или percentsNumStr (для переключения междую ними)
+
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
@@ -57,7 +62,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         depositView = findViewById(R.id.enterDeposit);
         percentsView = findViewById(R.id.enterPercents);
+
+        headEnterText = getString(R.string.headDeposit);
         enterTextView = depositView;
+        NumStr = depositNumStr;
     }
 
     @Override
@@ -157,55 +165,52 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
-    // Вывод диалогового списка (для связывания с интерфесом)
-    public void listPick(View view){
-        ListPickerFragment newFragment = new ListPickerFragment();
+    // Вывод диалогового списка для выбора валюты
+    public void listPickCurrency(View view){
+        PickCurrency newFragment = new PickCurrency();
         newFragment.selectedView = (TextView) view;
         newFragment.show(getSupportFragmentManager(), "listPicker");
-    }
 
-    // Класс для диалогового списка
-    public static class ListPickerFragment extends DialogFragment{
+    }
+    public static class PickCurrency extends DialogFragment{
         TextView selectedView;
-        @NonNull
-        @Override
+
+        @NonNull@Override // Создание диалогового окна
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
-            final String[] list = new String[]{"один элемент","два элемент","три элемент"};
+            final String[] list = new String[]{"Рубль","Доллар","Евро"};
 
-            builder.setTitle("Заголовок").setItems(list, new DialogInterface.OnClickListener() {
+            builder.setTitle("Валюты").setItems(list, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Выбор из списка
-                    selectedView.setText(list[which]);
+                    String text = "Валюта\n" + list[which];
+                    selectedView.setText(text);
                 }
             });
             return builder.create();
         }
     }
-
-    // Список капитилизаций
-    // Вывод диалогового списка (для связывания с интерфесом)
+    // Вывод диалогового списка для выбора типа капитилизаций
     public void listPickCapitalization(View view){
-        ListPickerFragment2 newFragment = new ListPickerFragment2();
+        PickCapitalization newFragment = new PickCapitalization();
         newFragment.selectedView = (TextView) view;
         newFragment.show(getSupportFragmentManager(), "listPicker");
     }
-
-    // Класс для диалогового списка
-    public static class ListPickerFragment2 extends DialogFragment{
+    public static class PickCapitalization extends DialogFragment{
         TextView selectedView;
-        @NonNull
-        @Override
+
+        @NonNull@Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
             final String[] list = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"};
 
-            builder.setTitle("Капитализация").setItems(list, new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.Capitalization).setItems(list, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Выбор из списка
-                    selectedView.setText("Капитализация\n" + list[which]);
+                    String text = getString(R.string.Capitalization) + "\n" + list[which];
+                    selectedView.setText(text);
                 }
             });
             return builder.create();
@@ -216,6 +221,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     public void onButtonsClick(View button){
         int id = button.getId();
         Button clickedButton = (Button) button;
+        clickedButton.setClickable(false); // Отключение возможности нажимать на кнопку
 
         switch (id) {
             case R.id.button0: // Ввод цифр и точки
@@ -231,27 +237,34 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             case R.id.button10:
                 String buttonText =  clickedButton.getText().toString();
 
-                String enterText = enterTextView.getText().toString();
-                if (enterText == null){
-                    if (enterPercents){
-                        enterTextView.setText("Процентная ставка: ");
-                    }
-                    else{
-                        enterTextView.setText("Размер вклада: ");
-                    }
-                }
+                NumStr += buttonText;
+                String enterText = headEnterText + NumStr;
 
-                enterTextView.append(buttonText);
+                enterTextView.setText(enterText);
+
                 break;
 
             case R.id.clear_button: // Кнопка отчиски всего поля
+                NumStr = "";
                 enterTextView.setText("");
                 break;
 
             case R.id.delete_button: // Кнопка удаления одного символа
-                String text = enterTextView.getText().toString();
-                text = text.substring(0, text.length() - 1);
-                enterTextView.setText(text);
+
+                int len = NumStr.length();
+
+                if (len < 2){                   // Удаление всего содержимого поля,
+                    NumStr = "";                // если оно пустое
+                    enterTextView.setText("");  // или содержит один
+                    break;                      // символ числа
+                }                               // размера вклада
+                else{
+                    NumStr = NumStr.substring(0, len - 1); // Удаление одного символа
+                }
+
+                String text = headEnterText + NumStr; // Форматирование
+                enterTextView.setText(text); // Вывод в поле
+
                 break;
 
             case R.id.compute_button: // Кнопка расчёта
@@ -265,24 +278,32 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     break;
                 }
 
-                String deposit_str = depositView.getText().toString();
-                String percents_str = percentsView.getText().toString();
-                try {
-                    CalculateActivity.deposit = Double.parseDouble(deposit_str);
-                    CalculateActivity.percents = Double.parseDouble(percents_str);
-                }
-                catch (Exception e){
-                    Toast.makeText(this, "Ошибка деп/проц", Toast.LENGTH_LONG).show();
-                }
+//                String deposit_str = depositView.getText().toString();
+//                String percents_str = percentsView.getText().toString();
+//                try {
+//                    CalculateActivity.deposit = Double.parseDouble(deposit_str);
+//                    CalculateActivity.percents = Double.parseDouble(percents_str);
+//                }
+//                catch (Exception e){
+//                    Toast.makeText(this, "Ошибка деп/проц", Toast.LENGTH_LONG).show();
+//                }
+
                 break;
 
             case R.id.percents_button: // Кнопка переключения ввода
                 if (enterPercents){
-                    enterTextView = depositView;
+                    enterTextView = depositView;    // Переключение ввода
+                    NumStr = depositNumStr;         // во вклад
+
+                    headEnterText = getString(R.string.headDeposit);
+
                     clickedButton.setText("Проценты");
                 }
                 else{
-                    enterTextView = percentsView;
+                    enterTextView = percentsView;   // Перелючение ввода
+                    NumStr = percentsNumStr;        // в проценты
+
+                    headEnterText = getString(R.string.headPercents);
                     clickedButton.setText("Вклад");
                 }
                 enterPercents = !enterPercents;
@@ -290,5 +311,6 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             default:
                 break;
         }
+        clickedButton.setClickable(true);  // Включение возможности нажимать на кнопку
     }
 }

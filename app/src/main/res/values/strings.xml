@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Client v. 0.0.14</string>
+    <string name="app_name">Client v. 0.0.15</string>
     <string name="menu_title">Информация об устройстве</string>
     <string name="menu_part_title">О приложении</string>
     <string name="_192_168_0_100">192.168.0.100</string>
@@ -18,5 +18,7 @@
     <string name="Capitalization">Капитализация</string>
     <string name="no">Нет</string>
     <string name="yes">Да</string>
+    <string name="headDeposit">Размер вклада:\u0020</string>
+    <string name="headPercents">Процентная ставка:\u0020</string>
 
 </resources>
