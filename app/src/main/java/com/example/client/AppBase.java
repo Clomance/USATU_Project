@@ -28,8 +28,8 @@ class AppBase {
     static int serverPort = 8080; // Порт для подключения
     static ServerTasks serverTasks = new ServerTasks(); // см. класс ServerTasks
 
-    static String login;
-    static String password;
+    static String login = null;
+    static String password = null;
 
     static Vector<Request> history = new Vector<>();
 
@@ -78,25 +78,32 @@ class AppBase {
         double deposit;
         double percents;
         Date[] period;
+        byte capitalization;
         // Доп. поля TODO
         double result;
 
-        Request(double deposit, double percents, Date[] period){
+        Request(double deposit, double percents, Date[] period, byte capitalization){
             this.deposit = deposit;
             this.percents = percents;
             this.period = period;
+            this.capitalization = capitalization;
         }
 
-        Request(double deposit, double percents, Date[] period, double result){
+        Request(double deposit, double percents, Date[] period, byte capitalization, double result){
             this.deposit = deposit;
             this.percents = percents;
             this.period = period;
+            this.capitalization = capitalization;
             this.result = result;
         }
 
         @NonNull
         public String toString(){
-            return "Вклад: " + deposit + "\n" + "Проценты: " + percents;
+            return "Вклад: " + deposit
+                    + "\n" + "Проценты: " + percents
+                    + "\n" + "Период: " + period[0].toString() + " - " + period[1].toString()
+                    + "\n" + "Капитализация " + CalculateActivity.listCapitalization[capitalization]
+                    + "\n" + "Результат: " + result;
         }
     }
 
@@ -110,6 +117,12 @@ class AppBase {
             this.month = month;
             this.day = day;
         }
+
+        @NonNull
+        public String toString(){
+            return String.format("%d.%d.%d.", year, month, day);
+        }
+
         Calendar toCalendar(){
             Calendar date = Calendar.getInstance();
             date.set(year, month, day);

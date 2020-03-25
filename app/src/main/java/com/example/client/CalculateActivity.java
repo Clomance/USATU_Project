@@ -42,19 +42,21 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     static Double result = null; // Расчётов
 
     // Для вывода
-    TextView dataResultView; // Поле для результата расчёта периода
+    TextView dateResultView; // Поле для результата расчёта периода
     TextView depositView;
     TextView percentsView;
+    TextView resultView;
     TextView enterTextView; // Поле ввода (выбираемое)
     static boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
 
     static String headEnterText; // Вставка перед значением в поле ввода
-    static String endEnterText = ""; // Вставка после значения в поле ввода
+    static String endEnterText; // Вставка после значения в поле ввода
 
     static String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
-    String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
+    static String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
     static String NumStr = ""; // Временное поле для depositNumStr или percentsNumStr
 
+    @SuppressLint("DefaultLocale")
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
         AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
@@ -66,19 +68,90 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.calculate_nav_view);  // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);                 // панели
 
-        dataResultView = findViewById(R.id.data_result);
+        dateResultView = findViewById(R.id.data_result);
 
         depositView = findViewById(R.id.enterDeposit);
         percentsView = findViewById(R.id.enterPercents);
+        resultView = findViewById(R.id.resultView);
 
         headEnterText = getString(R.string.headDeposit); // Загрузка строки из ресурсов
 
         enterTextView = depositView;
+
+        // Вписывание в поля старых данных, если есть
+        if (currency == null) {
+            endEnterText = "";
+        }
+        else{
+            endEnterText = shortList[currency];
+            TextView currencyView = findViewById(R.id.listViewCurrency);
+            String text = "Валюта\n" + listCurrency[currency];
+            currencyView.setText(text);
+        }
+
+        if (!depositNumStr.isEmpty()){
+            NumStr = depositNumStr;
+            String text = headEnterText + depositNumStr + endEnterText;
+            depositView.setText(text);
+        }
+
+        if (!percentsNumStr.isEmpty()){
+            String text = getString(R.string.headPercents) + percentsNumStr + " %";
+            percentsView.setText(text);
+        }
+
+        if (capitalization != null){
+            TextView capitalizationView = findViewById(R.id.listViewCapitalization);
+            String text = getString(R.string.Capitalization) + "\n" + listCapitalization[capitalization];
+            capitalizationView.setText(text);
+        }
+
+        if (period[0] != null){
+            @SuppressLint("DefaultLocale")
+            String text = format("%d.%d.%d", period[0].day, period[0].month + 1, period[0].year);
+            TextView dateView1 =  findViewById(R.id.date1);
+            dateView1.setText(text);
+
+            if (period[1] != null){
+                text = format("%d.%d.%d", period[1].day, period[1].month + 1, period[1].year);
+                TextView dateView2 =  findViewById(R.id.date2);
+                dateView2.setText(text);
+
+                Calendar data1c = period[0].toCalendar();   // Перевод дат
+                Calendar data2c = period[1].toCalendar();   // в календарь
+
+                if (data1c.before(data2c)){                             //
+                    long data1_millis = data1c.getTimeInMillis();       //
+                    long data2_millis = data2c.getTimeInMillis();       //
+                    long result = data2_millis - data1_millis;          //
+                    long days = result / (24 * 60 * 60 * 1000);         // Подсчёт
+                    text = days + " дней";                              // дней
+                    dateResultView.setText(text);                           // между
+                }                                                       // введёнными
+                else{                                                   // датами
+                    dateResultView.setText("Ошибка");                       //
+                }                                                       //
+            }
+        }
+        else{
+            if (period[1] != null){
+                @SuppressLint("DefaultLocale")
+                String text = format("%d.%d.%d", period[1].day, period[1].month + 1, period[1].year);
+                TextView dateView2 =  findViewById(R.id.date2);
+                dateView2.setText(text);
+            }
+        }
     }
 
     @Override // Закрытие страницы
     public void onDestroy(){
         AppBase.stopServerTasks();
+        if (enterPercents){
+            percentsNumStr = NumStr;
+        }
+        else{
+            depositNumStr = NumStr;
+        }
         super.onDestroy();
     }
 
@@ -103,7 +176,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     public void dataPick(View view){
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.selectedView = (TextView) view;
-        newFragment.resultView = dataResultView;
+        newFragment.resultView = dateResultView;
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
     // Класс для диалога с датой
@@ -114,7 +187,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Установка даты в диалоговое окно
-            if (selectedView.getId() == R.id.data1){
+            if (selectedView.getId() == R.id.date1){
                 if (period[0] != null){
                     // Установка даты, введённой в первое поле
                     return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, period[0].year, period[0].month, period[0].day);
@@ -149,7 +222,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             String text = format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
             selectedView.setText(text);                                      // в нужное поле
 
-            if (selectedView.getId() == R.id.data1){                            //
+            if (selectedView.getId() == R.id.date1){                            //
                 period[0] = new Date(year, (byte) month, (byte) dayOfMonth);    // Сохранение
             }                                                                   // введённой
             else{                                                               // даты
@@ -173,7 +246,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 }                                                       //
             }                                                           //
             else{                                                       //
-                resultView.setText("Результат");                        //
+                resultView.setText("");                                 //
             }                                                           //
         }
     }
@@ -279,6 +352,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.clear_button: // Кнопка отчиски всего поля
                 NumStr = "";
+                resultView.setText("");
                 enterTextView.setText("");
                 break;
 
@@ -288,7 +362,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
                 if (len < 2){                   // Удаление всего содержимого поля,
                     NumStr = "";                // если оно пустое
-                    enterTextView.setText("");  // или содержит один
+                    resultView.setText("");     // или
+                    enterTextView.setText("");  // содержит один
                     break;                      // символ числа
                 }                               // размера вклада
                 else{
@@ -311,15 +386,23 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     break;
                 }
 
-//                String deposit_str = depositView.getText().toString();
-//                String percents_str = percentsView.getText().toString();
-//                try {
-//                    CalculateActivity.deposit = Double.parseDouble(deposit_str);
-//                    CalculateActivity.percents = Double.parseDouble(percents_str);
-//                }
-//                catch (Exception e){
-//                    Toast.makeText(this, "Ошибка деп/проц", Toast.LENGTH_LONG).show();
-//                }
+                if (enterPercents){
+                    percentsNumStr = NumStr;
+                }
+                else{
+                    depositNumStr = NumStr;
+                }
+
+                try {
+                    CalculateActivity.deposit = Double.parseDouble(depositNumStr);
+                    CalculateActivity.percents = Double.parseDouble(percentsNumStr);
+                }
+                catch (Exception e){
+                    Toast.makeText(this, "Ошибка деп/проц", Toast.LENGTH_LONG).show();
+                    break;
+                }
+
+                AppBase.serverTasks.start(Task.Calculate); // Запуск потока для отправки данных и получения расчёта
 
                 break;
 

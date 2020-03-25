@@ -29,21 +29,37 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.info_nav_view);   // Подключение навигационной
         navigationView.setNavigationItemSelectedListener(this);             // панели
 
+
+        // Создание списка истории
         int len = AppBase.history.size();
+        TextView history_status = findViewById(R.id.history_status);
         if (len == 0){
-            TextView head = findViewById(R.id.settings_head);
-            head.append("\nПусто");
+            history_status.setText("Пусто");
         }
         else{
+            String status = "Найдено: " + len;
+            history_status.setText(status);
             String[] array = new String[len];
 
             for (int i = 0; i < len; i++){
                 array[i] = AppBase.history.get(i).toString();
             }
-            ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_view_item, array);
 
+            ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_view_item, array);
             history = findViewById(R.id.history);
             history.setAdapter(adapter);
+        }
+
+        // Вписывание логина и пароля
+        TextView loginView = findViewById(R.id.loginView);
+        TextView passwordView = findViewById(R.id.passwordView);
+        if (AppBase.login == null){
+            loginView.setText("Вход не выполнен");
+            passwordView.setText("Вход не выполнен");
+        }
+        else{
+            loginView.setText(AppBase.login);
+            passwordView.setText(AppBase.password);
         }
     }
 

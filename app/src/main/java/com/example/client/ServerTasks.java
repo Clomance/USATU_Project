@@ -31,10 +31,10 @@ class ServerTasks{
     private static int[] tokens = new int[2]; // Токены для быстрой авторизации
 
     // Запуск выполнения задачи
-    void start(Task server_task, Object... objects){
+    void start(Task server_task){
         task = server_task;
         serverTask = new ServerTask();
-        serverTask.execute(objects);
+        serverTask.execute();
     }
 
     // Остановка задачи
@@ -47,10 +47,10 @@ class ServerTasks{
         return serverTask.getStatus() != AsyncTask.Status.FINISHED;
     }
 
-    private static class ServerTask extends AsyncTask<Object, Void, TaskResult>{
+    private static class ServerTask extends AsyncTask<Void, Void, TaskResult>{
 
         @Override // Действия в дополнительном потоке
-        protected TaskResult doInBackground(Object... objects) {
+        protected TaskResult doInBackground(Void... objects) {
             try{
                 Socket socket = new Socket(AppBase.serverIp, AppBase.serverPort); // Подключение к серверу
                 socket.setSoTimeout(1000); // Время ожидания ответа от сервера
@@ -115,6 +115,10 @@ class ServerTasks{
                         // Получение ответа
                         if (channel.readBoolean()){
                             CalculateActivity.result = channel.readDouble(); // Получение результата
+
+                            AppBase.history.add(new AppBase.Request(CalculateActivity.deposit,
+                                    CalculateActivity.percents, CalculateActivity.period,
+                                    CalculateActivity.capitalization, CalculateActivity.result)); // Добавиление в историю
                         }
                         else{
                             return TaskResult.WrongToken;
@@ -157,6 +161,8 @@ class ServerTasks{
                     CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
                     switch (result) {
                         case Ok:
+                            String text = "Результат: " + CalculateActivity.result;
+                            calculateActivity.resultView.setText(text);
                             // Результат получен TODO
                             break;
                         case ConnectionError:
@@ -243,9 +249,11 @@ class ServerTasks{
             period[0] = readDate();
             period[1] = readDate();
 
+            byte capitalization = input.readByte();
+
             double result = readDouble();
 
-            return  new AppBase.Request(deposit, percents, period, result);
+            return  new AppBase.Request(deposit, percents, period, capitalization, result);
 
         }
 

@@ -18,14 +18,12 @@
         tools:context=".InfoActivity">
 
         <TextView
-            android:id="@+id/settings_head"
-            android:layout_width="wrap_content"
+            android:id="@+id/lable"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:text="какие-то нужные настройки, например, тёмная тема"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:visibility="visible"
-            tools:visibility="visible" />
+            android:text="Адрес сервера"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/address"
@@ -35,6 +33,14 @@
             android:hint="@string/server_address_hint"
             android:inputType="numberDecimal"
             android:text="@string/_192_168_0_100" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Порт сервера"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/port"

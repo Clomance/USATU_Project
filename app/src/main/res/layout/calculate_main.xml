@@ -30,6 +30,14 @@
             android:layout_weight="1"
             android:hint="Размер процентной ставки"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/resultView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Результат"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +82,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/listView"
+            android:id="@+id/listViewCurrency"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -86,23 +94,23 @@
         </TextView>
 
         <TextView
-            android:id="@+id/data1"
+            android:id="@+id/date1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
             android:gravity="center"
-            android:hint="Введите\nначало\nвклада"
+            android:hint="Дата\nначала\nвклада"
             android:onClick="dataPick" />
 
         <TextView
-            android:id="@+id/data2"
+            android:id="@+id/date2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
             android:gravity="center"
-            android:hint="Введите\nконец\nвклада"
+            android:hint="Дата\nокончания\nвклада"
             android:onClick="dataPick" />
 
         <TextView
