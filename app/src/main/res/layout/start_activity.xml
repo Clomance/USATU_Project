@@ -13,7 +13,8 @@
         android:layout_gravity="center_horizontal"
         android:ems="10"
         android:hint="@string/name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:maxLength="30" />
 
     <EditText
         android:id="@+id/password"
@@ -22,7 +23,8 @@
         android:layout_gravity="center_horizontal"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:maxLength="30" />
 
     <Button
         android:id="@+id/sign_in"
