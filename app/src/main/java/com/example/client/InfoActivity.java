@@ -45,9 +45,9 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
                 array[i] = AppBase.history.get(i).toString();
             }
 
-            ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_view_item, array);
-            history = findViewById(R.id.history);
-            history.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.list_view_item, array); //
+            history = findViewById(R.id.history);                                                           // Загрузка истории в список
+            history.setAdapter(adapter);                                                                    //
         }
 
         // Вписывание логина и пароля

@@ -11,6 +11,8 @@ import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.Vector;
 
+// Флаг текущей страницы (нужна только при переходе из стартового окна в настройки)
+// украдена из старого проекта:)
 enum AppActivity{
     Start,
     Settings,
@@ -30,6 +32,8 @@ class AppBase {
 
     static String login = null;
     static String password = null;
+
+    static boolean authorized = false;
 
     static Vector<Request> history = new Vector<>();
 

@@ -57,7 +57,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     // Действие кнопки сохранения
     public void save(View view){
         Button save_button = (Button) view; // Связыавание с кнопкой
-        save_button.setEnabled(false); // Отключение кнопки
 
         String address = addressView.getText().toString();  // Получение текста
         String port = portView.getText().toString();        // из полей
@@ -70,7 +69,5 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         catch (Exception e){
             Toast.makeText(this,"Не верные данные",Toast.LENGTH_LONG).show();
         }
-
-        save_button.setEnabled(true); // Включение кнопки
     }
 }

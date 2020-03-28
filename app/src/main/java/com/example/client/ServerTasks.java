@@ -1,7 +1,6 @@
 package com.example.client;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.DataInputStream;
@@ -10,12 +9,14 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Vector;
 
+// Задачи для выполнения сервером
 enum Task{
     Sign_in,
     Sign_up,
     Calculate
 }
 
+// Результат задач
 enum TaskResult{
     Ok,
     ConnectionError,
@@ -132,7 +133,7 @@ class ServerTasks{
             return TaskResult.Ok;
         }
 
-        @Override // Действия после выполения задачи (в текущем потоке)
+        @Override // Действия после выполения задачи (в основном потоке)
         protected void onPostExecute(TaskResult result) {
             super.onPostExecute(result);
             switch (task) {

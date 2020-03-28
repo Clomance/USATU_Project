@@ -54,7 +54,7 @@
             android:background="@android:drawable/editbox_dropdown_light_frame"
             android:gravity="center"
             android:onClick="listPickCapitalization"
-            android:text="@string/Capitalization" />
+            android:text="@string/capitalization" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch3"

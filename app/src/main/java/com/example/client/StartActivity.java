@@ -133,7 +133,7 @@ public class StartActivity extends AppCompatActivity{
         this.finish();
     }
 
-    // Включение/выключение кнопок
+    // Включение/выключение кнопок, чтобы случайно запустить оправку данных ещё раз
     void setButtonsEnabled(boolean enabled){
         sign_in_button.setEnabled(enabled);   //
         sign_up_button.setEnabled(enabled);   // Отключение

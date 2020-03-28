@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Client 0.1.0</string>
+    <string name="app_name">Client 0.1.1</string>
     <string name="menu_title">Информация об устройстве</string>
     <string name="menu_part_title">О приложении</string>
     <string name="_192_168_0_100">192.168.0.100</string>
@@ -15,7 +15,7 @@
     <string name="save">Сохранить</string>
     <string name="calculator">Калькулятор</string>
     <string name="arrow"><![CDATA[<]]></string>
-    <string name="Capitalization">Капитализация</string>
+    <string name="capitalization">Капитализация</string>
     <string name="headDeposit">Размер вклада:\u0020</string>
     <string name="headPercents">Процентная ставка:\u0020</string>
 

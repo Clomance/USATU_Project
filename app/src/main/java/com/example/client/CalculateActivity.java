@@ -102,7 +102,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         if (capitalization != null){
             TextView capitalizationView = findViewById(R.id.listViewCapitalization);
-            String text = getString(R.string.Capitalization) + "\n" + listCapitalization[capitalization];
+            String text = getString(R.string.capitalization) + "\n" + listCapitalization[capitalization];
             capitalizationView.setText(text);
         }
 
@@ -311,11 +311,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
-            builder.setTitle(R.string.Capitalization).setItems(listCapitalization, new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.capitalization).setItems(listCapitalization, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Выбор из списка
                     capitalization = (byte) which;
-                    String text = getString(R.string.Capitalization) + "\n" + listCapitalization[which];
+                    String text = getString(R.string.capitalization) + "\n" + listCapitalization[which];
 
                     selectedView.setText(text);
                 }
@@ -328,6 +328,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     public void onButtonsClick(View button){
         int id = button.getId();
         Button clickedButton = (Button) button;
+        button.setClickable(false); // Включение/выключение кнопок (для кнопки расчёта, чтобы случайно запустить оправку данных ещё раз)
 
         switch (id) {
             case R.id.button0: // Ввод цифр и точки
@@ -376,6 +377,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.compute_button: // Кнопка расчёта
+                if (!AppBase.authorized){
+                    Toast.makeText(this, "Вы не авторизованы", Toast.LENGTH_LONG).show();
+                    break;
+                }
                 if (capitalization == null){
                     Toast.makeText(this, "Выбирите тип капитализации", Toast.LENGTH_LONG).show();
                     break;
@@ -386,19 +391,19 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     break;
                 }
 
-                if (enterPercents){
-                    percentsNumStr = NumStr;
-                }
-                else{
-                    depositNumStr = NumStr;
-                }
+                if (enterPercents){             //
+                    percentsNumStr = NumStr;    //
+                }                               // Сохранение введённых
+                else{                           // значений
+                    depositNumStr = NumStr;     //
+                }                               //
 
                 try {
-                    CalculateActivity.deposit = Double.parseDouble(depositNumStr);
-                    CalculateActivity.percents = Double.parseDouble(percentsNumStr);
+                    CalculateActivity.deposit = Double.parseDouble(depositNumStr); // Перевод в число
+                    CalculateActivity.percents = Double.parseDouble(percentsNumStr); // Перевод в число
                 }
                 catch (Exception e){
-                    Toast.makeText(this, "Ошибка деп/проц", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Ошибка - не число", Toast.LENGTH_LONG).show();
                     break;
                 }
 
@@ -437,5 +442,6 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             default:
                 break;
         }
+        button.setClickable(true); // включение кнопки
     }
 }
