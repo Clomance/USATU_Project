@@ -31,7 +31,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/server_address_hint"
-            android:inputType="numberDecimal"
             android:text="@string/_192_168_0_100" />
 
         <TextView
