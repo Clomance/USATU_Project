@@ -142,6 +142,7 @@ class ServerTasks{
                     StartActivity startActivity = (StartActivity) AppBase.currentActivity.get();
                     switch (result){
                         case Ok:
+                            AppBase.authorized = true;
                             startActivity.startMainActivity();
                             break;
                         case ConnectionError:
