@@ -58,6 +58,9 @@ public class StartActivity extends AppCompatActivity{
         guest_button = findViewById(R.id.guest);                // интерфейсом
         settings_button = findViewById(R.id.settings_head);     //
 
+        loginView.setText(AppBase.login);
+        passwordView.setText(AppBase.password);
+
         //Проверка разрешений
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_DENIED) { // Разрешений нет
             setButtonsEnabled(false); // Отключение кнопок
