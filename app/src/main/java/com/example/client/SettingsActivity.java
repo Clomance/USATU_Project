@@ -1,11 +1,9 @@
 package com.example.client;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,7 +17,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 
-import static com.example.client.AppBase.APP_SETTINGS_FILE;
 import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
 import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_PORT;
 
@@ -62,7 +59,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
     // Действие кнопки сохранения
     public void save(View view){
-        Button save_button = (Button) view; // Связыавание с кнопкой
 
         String address = addressView.getText().toString();  // Получение текста
         String port = portView.getText().toString();        // из полей

@@ -12,7 +12,6 @@ import java.util.Vector;
 
 import static com.example.client.AppBase.APP_SETTINGS_FILE_LOGIN;
 import static com.example.client.AppBase.APP_SETTINGS_FILE_PASSWORD;
-import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
 
 // Задачи для выполнения сервером
 enum Task{
@@ -174,7 +173,6 @@ class ServerTasks{
                         case Ok:
                             String text = "Результат: " + CalculateActivity.result;
                             calculateActivity.resultView.setText(text);
-                            // Результат получен TODO
                             break;
                         case ConnectionError:
                             Toast.makeText(calculateActivity, "Проблемы с соединением", Toast.LENGTH_LONG).show();

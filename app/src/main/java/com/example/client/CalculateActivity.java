@@ -1,6 +1,4 @@
 package com.example.client;
-import static com.example.client.AppBase.Date;
-import static java.lang.String.*;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -26,6 +24,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.Objects;
+
+import static com.example.client.AppBase.Date;
+import static java.lang.String.format;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     // Постоянные

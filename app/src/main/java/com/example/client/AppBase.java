@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -91,15 +92,7 @@ class AppBase {
         double percents;
         Date[] period;
         byte capitalization;
-        // Доп. поля TODO
         double result;
-
-        Request(double deposit, double percents, Date[] period, byte capitalization){
-            this.deposit = deposit;
-            this.percents = percents;
-            this.period = period;
-            this.capitalization = capitalization;
-        }
 
         Request(double deposit, double percents, Date[] period, byte capitalization, double result){
             this.deposit = deposit;
@@ -130,7 +123,8 @@ class AppBase {
             this.day = day;
         }
 
-        @NonNull
+
+        @NonNull @SuppressLint("DefaultLocale")
         public String toString(){
             return String.format("%d.%d.%d.", year, month, day);
         }
