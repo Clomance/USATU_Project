@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -8,6 +9,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Vector;
+
+import static com.example.client.AppBase.APP_SETTINGS_FILE_LOGIN;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_PASSWORD;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
 
 // Задачи для выполнения сервером
 enum Task{
@@ -142,6 +147,10 @@ class ServerTasks{
                     StartActivity startActivity = (StartActivity) AppBase.currentActivity.get();
                     switch (result){
                         case Ok:
+                            SharedPreferences.Editor editor = AppBase.app_settings.edit();
+                            editor.putString(APP_SETTINGS_FILE_LOGIN, AppBase.login);
+                            editor.putString(APP_SETTINGS_FILE_PASSWORD, AppBase.password);
+                            editor.apply();
                             AppBase.authorized = true;
                             startActivity.startMainActivity();
                             break;

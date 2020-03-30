@@ -1,9 +1,12 @@
 package com.example.client;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,12 @@ import androidx.core.app.ActivityCompat;
 
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
+
+import static com.example.client.AppBase.APP_SETTINGS_FILE;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_LOGIN;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_PASSWORD;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_PORT;
 
 public class StartActivity extends AppCompatActivity{
     EditText loginView; // Поле ввода логина
@@ -30,17 +39,26 @@ public class StartActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity); // Подключение нужного интерфеса
 
-        try{                                                            //
-            AppBase.serverIp = InetAddress.getByName("192.168.0.100");  // Установка начального (default)
-        }                                                               // адреса сервера
-        catch (Exception ignored){}                                     //
+        // Загрузка локальных сохранённых данных приложения
+        AppBase.app_settings = this.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE); // Получение ссылки на файл настроек
 
-        loginView = findViewById(R.id.login);           //
-        passwordView = findViewById(R.id.password);     // Связываение
-        sign_in_button = findViewById(R.id.sign_in);    // кнопок
-        sign_up_button = findViewById(R.id.sign_up);    // с
-        guest_button = findViewById(R.id.guest);        // интерфейсом
-        settings_button = findViewById(R.id.settings_head);  //
+        String serverIp = AppBase.app_settings.getString(APP_SETTINGS_FILE_SERVER_IP,"192.168.0.100");
+        AppBase.serverPort = AppBase.app_settings.getInt(APP_SETTINGS_FILE_SERVER_PORT,8080);
+
+        AppBase.login = AppBase.app_settings.getString(APP_SETTINGS_FILE_LOGIN,"");
+        AppBase.password = AppBase.app_settings.getString(APP_SETTINGS_FILE_PASSWORD,"");
+
+        try{
+            AppBase.serverIp = InetAddress.getByName(serverIp);  // Установка адреса сервера
+        }
+        catch (Exception ignored){}
+
+        loginView = findViewById(R.id.login);                   //
+        passwordView = findViewById(R.id.password);             // Связываение
+        sign_in_button = findViewById(R.id.sign_in);            // кнопок
+        sign_up_button = findViewById(R.id.sign_up);            // с
+        guest_button = findViewById(R.id.guest);                // интерфейсом
+        settings_button = findViewById(R.id.settings_head);     //
 
         //Проверка разрешений
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_DENIED) { // Разрешений нет

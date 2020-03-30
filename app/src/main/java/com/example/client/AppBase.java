@@ -2,6 +2,7 @@ package com.example.client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,12 +24,17 @@ enum AppActivity{
 
 class AppBase {
     //Постоянные
+    final static String APP_SETTINGS_FILE = "APP_SETTINGS_FILE"; // Название файла с настройками
+    final static String APP_SETTINGS_FILE_SERVER_IP = "SERVER_IP"; // Ключ с сохранённым адресом сервера
+    final static String APP_SETTINGS_FILE_SERVER_PORT = "SERVER_PORT"; // Ключ с сохранённым портом сервера
+    final static String APP_SETTINGS_FILE_LOGIN = "LOGIN"; // Ключ с сохранённым логином
+    final static String APP_SETTINGS_FILE_PASSWORD = "PASSWORD"; // Ключ с сохранённым паролем
     final static int REQUEST_INTERNET_ID = 0;
 
     //Текущие
     static InetAddress serverIp; // Адрес для подключения
     static int serverPort = 8080; // Порт для подключения
-    static ServerTasks serverTasks = new ServerTasks(); // см. класс ServerTasks
+
 
     static String login = null;
     static String password = null;
@@ -40,6 +46,8 @@ class AppBase {
     //Приложение
     static WeakReference<AppCompatActivity> currentActivity;    // Текущая активность (страничка)
     static AppActivity currentPage;                             // Текущая активность (номер странички)
+    static ServerTasks serverTasks = new ServerTasks();         // см. класс ServerTasks
+    static SharedPreferences app_settings;                      // Файл с настройками приложения
 
     // Функция для навигации - сменяет страницы
     static void navigation(int id){

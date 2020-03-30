@@ -1,5 +1,7 @@
 package com.example.client;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +18,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
+
+import static com.example.client.AppBase.APP_SETTINGS_FILE;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
+import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_PORT;
 
 public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     EditText addressView; // Поле для ввода адреса сервера
@@ -64,6 +70,15 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         try{
             AppBase.serverIp = InetAddress.getByName(address);  // Конвертирование в нужный формат
             AppBase.serverPort = Integer.parseInt(port);        // и сохранение
+
+            // Сохранение адреса сервера
+            SharedPreferences.Editor editor = AppBase.app_settings.edit();
+            editor.putString(APP_SETTINGS_FILE_SERVER_IP, address);
+
+            // Сохранение порта сервера
+            editor.putInt(APP_SETTINGS_FILE_SERVER_PORT, AppBase.serverPort);
+            editor.apply();
+
             Toast.makeText(this,"Сохранено",Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
