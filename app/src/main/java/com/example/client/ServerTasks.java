@@ -2,6 +2,7 @@ package com.example.client;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.DataInputStream;
@@ -57,13 +58,16 @@ class ServerTasks{
         @Override // Действия в дополнительном потоке
         protected TaskResult doInBackground(Void... objects) {
             try{
+                Log.wtf("wtflog","0");
                 Socket socket = new Socket(AppBase.serverIp, AppBase.serverPort); // Подключение к серверу
                 socket.setSoTimeout(1000); // Время ожидания ответа от сервера
+                Log.wtf("wtflog","1");
 
                 ClientServerChannel channel = new ClientServerChannel(socket); // См. класс ниже
-
+                Log.wtf("wtflog","2");
                 switch (task){
                     case Sign_in:
+                        Log.wtf("wtflog","3");
                         channel.writeByte( 0); // Отправка номера задачи
 
                         channel.writeString(AppBase.login);     // Отправка
@@ -86,6 +90,7 @@ class ServerTasks{
                         break;
 
                     case Sign_up:
+                        Log.wtf("wtflog","3");
 
                         channel.writeByte( 1); // Отправка номера задачи
 
@@ -134,6 +139,7 @@ class ServerTasks{
             catch (IOException e){
                 return TaskResult.ConnectionError;
             }
+            Log.wtf("wtflog","4");
             return TaskResult.Ok;
         }
 
