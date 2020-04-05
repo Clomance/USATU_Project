@@ -186,8 +186,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/button5"
             android:onClick="onButtonsClick"
             android:text="5"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -282,12 +284,16 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
 
-            android:background="@color/design_default_color_secondary"
+            android:background="@drawable/procent_summ_selector_xml"
             android:clickable="true"
             android:onClick="onButtonsClick"
-            android:text="Проценты" />
+            android:text="Проценты"
+            android:textColor="#00FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>
+
+
+
 
 
