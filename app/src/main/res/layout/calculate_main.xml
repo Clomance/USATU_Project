@@ -266,7 +266,7 @@
 
         <Button
             android:id="@+id/compute_button"
-            android:layout_width="432dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/button_result_2s"
