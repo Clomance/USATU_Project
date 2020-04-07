@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoText="false"
+            android:fontFamily="@font/didact_gothic"
             android:hint="Размер вклада"
             android:textSize="24sp" />
 
@@ -28,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/didact_gothic"
             android:hint="Размер процентной ставки"
             android:textSize="24sp" />
 
@@ -36,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/didact_gothic"
             android:hint="Результат"
             android:textSize="24sp" />
     </LinearLayout>
@@ -52,6 +55,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:onClick="listPickCapitalization"
             android:text="@string/capitalization" />
@@ -62,6 +66,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/spinner_background"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:text="Доср.\nзакрытие" />
 
@@ -70,7 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/spinner_background"
+            android:background="@android:drawable/screen_background_dark_transparent"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:text="Пополн/\nизъятие" />
     </LinearLayout>
@@ -87,6 +93,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Список\nвалют"
             android:onClick="listPickCurrency">
@@ -99,6 +106,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Дата\nначала\nвклада"
             android:onClick="dataPick" />
@@ -109,6 +117,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Дата\nокончания\nвклада"
             android:onClick="dataPick" />
@@ -119,6 +128,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/design_default_color_background"
+            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Количество\nдней" />
     </LinearLayout>

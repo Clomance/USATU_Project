@@ -35,6 +35,10 @@
         <activity android:name="com.example.client.CalculateActivity" />
         <activity android:name="com.example.client.SettingsActivity" />
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>
