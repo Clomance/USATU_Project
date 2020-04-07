@@ -1,12 +1,12 @@
 <resources>
     <!-- Название приложения -->
-    <string name="app_name">Client 0.1.3</string>
+    <string name="app_name">Client 0.1.5</string>
 
     <!-- Для интерфейса -->
     <string name="menu_title">Информация об устройстве</string>
     <string name="menu_part_title">О приложении</string>
     <string name="_192_168_0_100">192.168.0.100</string>
-    <string name="name">Имя</string>
+    <string name="name">Логин</string>
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
     <string name="sign_up">Регистрация</string>
