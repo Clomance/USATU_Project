@@ -137,6 +137,7 @@
             android:background="@drawable/button7"
             android:onClick="onButtonsClick"
             android:text="7"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -147,6 +148,7 @@
             android:background="@drawable/button8"
             android:onClick="onButtonsClick"
             android:text="8"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -157,6 +159,7 @@
             android:background="@drawable/button9"
             android:onClick="onButtonsClick"
             android:text="9"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -167,6 +170,7 @@
             android:background="@drawable/button_clear"
             android:onClick="onButtonsClick"
             android:text="С"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -184,6 +188,7 @@
             android:background="@drawable/button4"
             android:onClick="onButtonsClick"
             android:text="4"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -205,6 +210,7 @@
             android:background="@drawable/button6"
             android:onClick="onButtonsClick"
             android:text="6"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -215,6 +221,7 @@
             android:background="@drawable/button_back"
             android:onClick="onButtonsClick"
             android:text="@string/arrow"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -232,6 +239,7 @@
             android:background="@drawable/button1"
             android:onClick="onButtonsClick"
             android:text="1"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -242,6 +250,7 @@
             android:background="@drawable/button2"
             android:onClick="onButtonsClick"
             android:text="2"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -252,11 +261,12 @@
             android:background="@drawable/button3"
             android:onClick="onButtonsClick"
             android:text="3"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/compute_button"
-            android:layout_width="411dp"
+            android:layout_width="432dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/button_result_2s"
@@ -264,6 +274,7 @@
             android:scaleType="centerCrop"
             android:scrollbarSize="4dp"
             android:text="="
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -281,6 +292,7 @@
             android:background="@drawable/button0"
             android:onClick="onButtonsClick"
             android:text="0"
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
@@ -291,6 +303,7 @@
             android:background="@drawable/button_dot"
             android:onClick="onButtonsClick"
             android:text="."
+            android:textColor="#00FFFFFF"
             android:textSize="18sp" />
 
         <Button
