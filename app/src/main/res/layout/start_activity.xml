@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/sign_in"
-        android:layout_width="wrap_content"
+        android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:onClick="sign_in"
@@ -44,7 +44,7 @@
 
     <Button
         android:id="@+id/guest"
-        android:layout_width="wrap_content"
+        android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="guest_button"
@@ -52,7 +52,7 @@
 
     <Button
         android:id="@+id/settings_head"
-        android:layout_width="wrap_content"
+        android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="settings_button"
