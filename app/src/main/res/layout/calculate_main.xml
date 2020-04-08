@@ -136,7 +136,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button7" />
 
         <ImageButton
@@ -146,7 +146,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button8" />
 
         <ImageButton
@@ -156,7 +156,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button9" />
 
         <ImageButton
@@ -168,7 +168,7 @@
             android:background="#00000000"
             android:cropToPadding="true"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button_clear" />
     </LinearLayout>
 
@@ -185,7 +185,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button4" />
 
         <ImageButton
@@ -195,7 +195,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button5" />
 
         <ImageButton
@@ -205,7 +205,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             app:srcCompat="@drawable/button6" />
 
         <ImageButton
@@ -217,9 +217,9 @@
             android:background="#00000000"
             android:cropToPadding="true"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button_back"
-            android:text="@string/arrow"/>
+            android:text="@string/arrow" />
     </LinearLayout>
 
     <LinearLayout
@@ -235,6 +235,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
+            android:scaleType="centerInside"
             android:src="@drawable/button1" />
 
         <ImageButton
@@ -244,6 +245,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
+            android:scaleType="centerInside"
             android:src="@drawable/button2" />
 
         <ImageButton
@@ -253,6 +255,7 @@
             android:layout_weight="1"
             android:background="#00000000"
             android:onClick="onButtonsClick"
+            android:scaleType="centerInside"
             android:src="@drawable/button3" />
 
         <ImageButton
@@ -265,7 +268,7 @@
             android:cropToPadding="false"
             android:onClick="onButtonsClick"
             android:scaleType="centerInside"
-            android:src="@drawable/button_result" />
+            android:src="@drawable/button_result_2s" />
     </LinearLayout>
 
     <LinearLayout
@@ -281,6 +284,7 @@
             android:layout_weight="3"
             android:background="#00000000"
             android:onClick="onButtonsClick"
+            android:scaleType="centerInside"
             android:src="@drawable/button0" />
 
         <ImageButton
@@ -290,7 +294,7 @@
             android:layout_weight="3"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/button_dot" />
 
         <ImageButton
@@ -300,7 +304,7 @@
             android:layout_weight="2"
             android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             android:src="@drawable/procent_select" />
     </LinearLayout>
 
