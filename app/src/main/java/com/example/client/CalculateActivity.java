@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -328,28 +329,53 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     // Действия при нажатии кнопок
     public void onButtonsClick(View button){
         int id = button.getId();
-        Button clickedButton = (Button) button;
+        ImageButton clickedButton = (ImageButton) button;
         button.setClickable(false); // Включение/выключение кнопок (для кнопки расчёта, чтобы случайно запустить оправку данных ещё раз)
+        String buttonText;
 
         switch (id) {
             case R.id.button0: // Ввод цифр и точки
+                buttonText="0";
+                writeToTextView(buttonText);
+                break;
             case R.id.button1:
+                buttonText="1";
+                writeToTextView(buttonText);
+                break;
             case R.id.button2:
+                buttonText="2";
+                writeToTextView(buttonText);
+                break;
             case R.id.button3:
+                buttonText="3";
+                writeToTextView(buttonText);
+                break;
             case R.id.button4:
+                buttonText="4";
+                writeToTextView(buttonText);
+                break;
             case R.id.button5:
+                buttonText="5";
+                writeToTextView(buttonText);
+                break;
             case R.id.button6:
+                buttonText="6";
+                writeToTextView(buttonText);
             case R.id.button7:
+                buttonText="7";
+                writeToTextView(buttonText);
+                break;
             case R.id.button8:
+                buttonText="8";
+                writeToTextView(buttonText);
+                break;
             case R.id.button9:
+                buttonText="9";
+                writeToTextView(buttonText);
+                break;
             case R.id.button10:
-                String buttonText =  clickedButton.getText().toString(); // Получение символа из кнопки
-
-                NumStr += buttonText;
-                String enterText = headEnterText + NumStr + endEnterText; // Форматирование
-
-                enterTextView.setText(enterText);
-
+                buttonText=".";
+                writeToTextView(buttonText);
                 break;
 
             case R.id.clear_button: // Кнопка отчиски всего поля
@@ -426,7 +452,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     else{
                         endEnterText = shortList[currency];
                     }
-                    clickedButton.setText("Проценты");
+                    clickedButton.setImageResource(R.drawable.procent_select);
                 }
                 else{
                     depositNumStr = NumStr; // Сохранение ввода во вклад
@@ -436,7 +462,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
                     headEnterText = getString(R.string.headPercents); // Получение строки из ресурсов
                     endEnterText = " %";
-                    clickedButton.setText("Вклад");
+                    clickedButton.setImageResource(R.drawable.procent_press);
                 }
                 enterPercents = !enterPercents;
                 break;
@@ -444,5 +470,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 break;
         }
         button.setClickable(true); // включение кнопки
+    }
+
+    void writeToTextView(String str){
+        NumStr += str;
+        String enterText = headEnterText + NumStr + endEnterText; // Форматирование
+        enterTextView.setText(enterText);
     }
 }

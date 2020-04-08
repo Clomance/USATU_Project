@@ -20,7 +20,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoText="false"
-            android:fontFamily="@font/didact_gothic"
             android:hint="Размер вклада"
             android:textSize="24sp" />
 
@@ -29,7 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="@font/didact_gothic"
             android:hint="Размер процентной ставки"
             android:textSize="24sp" />
 
@@ -38,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="@font/didact_gothic"
             android:hint="Результат"
             android:textSize="24sp" />
     </LinearLayout>
@@ -55,7 +52,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
-            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:onClick="listPickCapitalization"
             android:text="@string/capitalization" />
@@ -66,7 +62,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/spinner_background"
-            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:text="Доср.\nзакрытие" />
 
@@ -75,8 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/screen_background_dark_transparent"
-            android:fontFamily="@font/didact_gothic"
+            android:background="@android:drawable/spinner_background"
             android:gravity="center"
             android:text="Пополн/\nизъятие" />
     </LinearLayout>
@@ -93,7 +87,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
-            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Список\nвалют"
             android:onClick="listPickCurrency">
@@ -106,7 +99,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
-            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Дата\nначала\nвклада"
             android:onClick="dataPick" />
@@ -117,7 +109,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_dropdown_light_frame"
-            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Дата\nокончания\nвклада"
             android:onClick="dataPick" />
@@ -128,7 +119,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/design_default_color_background"
-            android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:hint="Количество\nдней" />
     </LinearLayout>
@@ -139,49 +129,47 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/button7"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button7"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="7"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button7" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button8"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="8"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button8" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button9"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button9"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="9"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button9" />
 
-        <Button
+        <ImageButton
             android:id="@+id/clear_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button_clear"
+            android:adjustViewBounds="true"
+            android:background="#00000000"
+            android:cropToPadding="true"
             android:onClick="onButtonsClick"
-            android:text="С"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button_clear" />
     </LinearLayout>
 
     <LinearLayout
@@ -190,49 +178,48 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button4"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="4"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button4" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button5"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="5"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button5" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button6"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="6"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            app:srcCompat="@drawable/button6" />
 
-        <Button
+        <ImageButton
             android:id="@+id/delete_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button_back"
+            android:adjustViewBounds="true"
+            android:background="#00000000"
+            android:cropToPadding="true"
             android:onClick="onButtonsClick"
-            android:text="@string/arrow"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button_back"
+            android:text="@string/arrow"/>
     </LinearLayout>
 
     <LinearLayout
@@ -241,51 +228,44 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button1"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="1"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:src="@drawable/button1" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button2"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="2"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:src="@drawable/button2" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button3"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="3"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:src="@drawable/button3" />
 
-        <Button
+        <ImageButton
             android:id="@+id/compute_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/button_result_2s"
+            android:adjustViewBounds="false"
+            android:background="#00000000"
+            android:cropToPadding="false"
             android:onClick="onButtonsClick"
-            android:scaleType="centerCrop"
-            android:scrollbarSize="4dp"
-            android:text="="
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="centerInside"
+            android:src="@drawable/button_result" />
     </LinearLayout>
 
     <LinearLayout
@@ -294,44 +274,36 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/button0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@drawable/button0"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="0"
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:src="@drawable/button0" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@drawable/button_dot"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="."
-            android:textColor="#00FFFFFF"
-            android:textSize="18sp" />
+            android:scaleType="center"
+            android:src="@drawable/button_dot" />
 
-        <Button
+        <ImageButton
             android:id="@+id/percents_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-
-            android:background="@drawable/procent_summ_selector_xml"
-            android:clickable="true"
+            android:background="#00000000"
             android:onClick="onButtonsClick"
-            android:text="Проценты"
-            android:textColor="#00FFFFFF" />
+            android:scaleType="center"
+            android:src="@drawable/procent_select" />
     </LinearLayout>
 
 </LinearLayout>
-
-
-
 
 
