@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:autoText="false"
             android:hint="Размер вклада"
             android:textSize="24sp" />
 
@@ -305,7 +304,7 @@
             android:background="#00000000"
             android:onClick="onButtonsClick"
             android:scaleType="centerInside"
-            android:src="@drawable/procent_select" />
+            android:src="@drawable/procent_press" />
     </LinearLayout>
 
 </LinearLayout>

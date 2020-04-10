@@ -453,7 +453,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     else{
                         endEnterText = shortList[currency];
                     }
-                    clickedButton.setImageResource(R.drawable.procent_select);
+                    clickedButton.setImageResource(R.drawable.procent_press);
                 }
                 else{
                     depositNumStr = NumStr; // Сохранение ввода во вклад
@@ -463,7 +463,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
                     headEnterText = getString(R.string.headPercents); // Получение строки из ресурсов
                     endEnterText = " %";
-                    clickedButton.setImageResource(R.drawable.procent_press);
+                    clickedButton.setImageResource(R.drawable.procent_select);
                 }
                 enterPercents = !enterPercents;
                 break;
