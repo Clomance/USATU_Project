@@ -361,6 +361,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             case R.id.button6:
                 buttonText="6";
                 writeToTextView(buttonText);
+                break;
             case R.id.button7:
                 buttonText="7";
                 writeToTextView(buttonText);
