@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -45,18 +44,17 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     // Для вывода
     TextView dateResultView; // Поле для результата расчёта периода
-    TextView depositView;
-    TextView percentsView;
+    TextField depositView;
+    TextField percentsView;
     TextView resultView;
-    TextView enterTextView; // Поле ввода (выбираемое)
+    TextField enterTextView; // Поле ввода (выбираемое)
     static boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
-
-    static String headEnterText; // Вставка перед значением в поле ввода
-    static String endEnterText; // Вставка после значения в поле ввода
 
     static String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
     static String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
-    static String NumStr = ""; // Временное поле для depositNumStr или percentsNumStr
+
+    static boolean depositComma = false;
+    static boolean percentsComma = false;
 
     @SuppressLint("DefaultLocale")
     @Override // Создание страницы
@@ -72,34 +70,27 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         dateResultView = findViewById(R.id.data_result);
 
-        depositView = findViewById(R.id.enterDeposit);
-        percentsView = findViewById(R.id.enterPercents);
+        TextView depositTextView = findViewById(R.id.enterDeposit);
+        TextView percentsTextView = findViewById(R.id.enterPercents);
+
         resultView = findViewById(R.id.resultView);
 
-        headEnterText = getString(R.string.headDeposit); // Загрузка строки из ресурсов
+        String headEnterText = getString(R.string.headDeposit); // Загрузка строки из ресурсов
+        depositView = new TextField(depositTextView, headEnterText, depositNumStr, depositComma);
+
+
+        headEnterText = getString(R.string.headPercents);
+        percentsView = new TextField(percentsTextView, headEnterText, percentsNumStr, depositComma);
+        percentsView.setTextEnd("%");
 
         enterTextView = depositView;
 
         // Вписывание в поля старых данных, если есть
-        if (currency == null) {
-            endEnterText = "";
-        }
-        else{
-            endEnterText = shortList[currency];
+        if (currency != null) {
+            depositView.setTextEnd(shortList[currency]);
             TextView currencyView = findViewById(R.id.listViewCurrency);
             String text = "Валюта\n" + listCurrency[currency];
             currencyView.setText(text);
-        }
-
-        if (!depositNumStr.isEmpty()){
-            NumStr = depositNumStr;
-            String text = headEnterText + depositNumStr + endEnterText;
-            depositView.setText(text);
-        }
-
-        if (!percentsNumStr.isEmpty()){
-            String text = getString(R.string.headPercents) + percentsNumStr + " %";
-            percentsView.setText(text);
         }
 
         if (capitalization != null){
@@ -147,13 +138,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     @Override // Закрытие страницы
     public void onDestroy(){
+        depositNumStr = depositView.getNumStr();
+        percentsNumStr = percentsView.getNumStr();
+        depositComma = depositView.hasComma();
+        percentsComma = percentsView.hasComma();
+
         AppBase.stopServerTasks();
-        if (enterPercents){
-            percentsNumStr = NumStr;
-        }
-        else{
-            depositNumStr = NumStr;
-        }
         super.onDestroy();
     }
 
@@ -263,7 +253,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     }
     // Класс диалогового списка для выбора вылюты
     public static class PickCurrency extends DialogFragment{
-        TextView depositView;
+        TextField depositView;
         TextView selectedView;
 
         @NonNull@Override // Создание диалогового окна
@@ -279,20 +269,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     currency = which;
                     // Сложные манипуляции для корректного смены и отображения валюты в поле ввода
                     if (enterPercents){
-                        if (!depositNumStr.isEmpty()){
-                            text = headEnterText + depositNumStr + shortList[currency];
-                            depositView.setText(text);
-                        }
+                        depositView.setTextEnd(shortList[currency]);
                     }
                     else{
-                        if (NumStr.isEmpty()){
-                            endEnterText = shortList[currency];
-                        }
-                        else{
-                            endEnterText = shortList[currency];
-                            text = headEnterText + NumStr + endEnterText;
-                            depositView.setText(text);
-                        }
+                        depositView.setTextEnd(shortList[currency]);
                     }
                 }
             });
@@ -331,77 +311,48 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         int id = button.getId();
         ImageButton clickedButton = (ImageButton) button;
         button.setClickable(false); // Включение/выключение кнопок (для кнопки расчёта, чтобы случайно запустить оправку данных ещё раз)
-        String buttonText;
 
         switch (id) {
             case R.id.button0: // Ввод цифр и точки
-                buttonText="0";
-                writeToTextView(buttonText);
+                enterTextView.inputText("0");
                 break;
             case R.id.button1:
-                buttonText="1";
-                writeToTextView(buttonText);
+                enterTextView.inputText("1");
                 break;
             case R.id.button2:
-                buttonText="2";
-                writeToTextView(buttonText);
+                enterTextView.inputText("2");
                 break;
             case R.id.button3:
-                buttonText="3";
-                writeToTextView(buttonText);
+                enterTextView.inputText("3");
                 break;
             case R.id.button4:
-                buttonText="4";
-                writeToTextView(buttonText);
+                enterTextView.inputText("4");
                 break;
             case R.id.button5:
-                buttonText="5";
-                writeToTextView(buttonText);
+                enterTextView.inputText("5");
                 break;
             case R.id.button6:
-                buttonText="6";
-                writeToTextView(buttonText);
+                enterTextView.inputText("6");
                 break;
             case R.id.button7:
-                buttonText="7";
-                writeToTextView(buttonText);
+                enterTextView.inputText("7");
                 break;
             case R.id.button8:
-                buttonText="8";
-                writeToTextView(buttonText);
+                enterTextView.inputText("8");
                 break;
             case R.id.button9:
-                buttonText="9";
-                writeToTextView(buttonText);
+                enterTextView.inputText("9");
                 break;
             case R.id.button10:
-                buttonText=".";
-                writeToTextView(buttonText);
+                enterTextView.inputText(".");
                 break;
 
             case R.id.clear_button: // Кнопка отчиски всего поля
-                NumStr = "";
-                resultView.setText("");
-                enterTextView.setText("");
+                enterTextView.clean();
                 break;
 
             case R.id.delete_button: // Кнопка удаления одного символа
-
-                int len = NumStr.length();
-
-                if (len < 2){                   // Удаление всего содержимого поля,
-                    NumStr = "";                // если оно пустое
-                    resultView.setText("");     // или
-                    enterTextView.setText("");  // содержит один
-                    break;                      // символ числа
-                }                               // размера вклада
-                else{
-                    NumStr = NumStr.substring(0, len - 1); // Удаление одного символа
-                }
-
-                String text = headEnterText + NumStr + endEnterText; // Форматирование
-                enterTextView.setText(text); // Вывод в поле
-
+                enterTextView.delete();
                 break;
 
             case R.id.compute_button: // Кнопка расчёта
@@ -419,16 +370,9 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                     break;
                 }
 
-                if (enterPercents){             //
-                    percentsNumStr = NumStr;    //
-                }                               // Сохранение введённых
-                else{                           // значений
-                    depositNumStr = NumStr;     //
-                }                               //
-
                 try {
-                    CalculateActivity.deposit = Double.parseDouble(depositNumStr); // Перевод в число
-                    CalculateActivity.percents = Double.parseDouble(percentsNumStr); // Перевод в число
+                    CalculateActivity.deposit = depositView.getNum(); // Перевод в число
+                    CalculateActivity.percents = percentsView.getNum(); // Перевод в число
                 }
                 catch (Exception e){
                     Toast.makeText(this, "Ошибка - не число", Toast.LENGTH_LONG).show();
@@ -441,41 +385,19 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.percents_button: // Кнопка переключения ввода
                 if (enterPercents){
-                    percentsNumStr = NumStr; // Сохранение ввода в проценты
-
-                    enterTextView = depositView;    // Переключение ввода
-                    NumStr = depositNumStr;         // во вклад
-
-                    headEnterText = getString(R.string.headDeposit); // Получение строки из ресурсов
-                    if (currency == null){
-                        endEnterText = "";
-                    }
-                    else{
-                        endEnterText = shortList[currency];
-                    }
+                    enterTextView = depositView;
                     clickedButton.setImageResource(R.drawable.procent_press);
                 }
                 else{
-                    depositNumStr = NumStr; // Сохранение ввода во вклад
-
                     enterTextView = percentsView;   // Перелючение ввода
-                    NumStr = percentsNumStr;        // в проценты
-
-                    headEnterText = getString(R.string.headPercents); // Получение строки из ресурсов
-                    endEnterText = " %";
                     clickedButton.setImageResource(R.drawable.procent_select);
                 }
                 enterPercents = !enterPercents;
+
                 break;
             default:
                 break;
         }
         button.setClickable(true); // включение кнопки
-    }
-
-    void writeToTextView(String str){
-        NumStr += str;
-        String enterText = headEnterText + NumStr + endEnterText; // Форматирование
-        enterTextView.setText(enterText);
     }
 }
