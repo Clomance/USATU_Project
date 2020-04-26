@@ -350,8 +350,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 enterTextView.inputText(".");
                 break;
 
-            case R.id.clear_button: // Кнопка отчиски всего поля
-                enterTextView.clean();
+            case R.id.clear_button: // Кнопка отчиски всех полей
+                percentsView.clean();
+                depositView.clean();
+                resultView.setText("");
                 break;
 
             case R.id.delete_button: // Кнопка удаления одного символа

@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -27,6 +28,16 @@
             android:textSize="30sp" />
 
         <TextView
+            android:id="@+id/resultView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/bahnschrift"
+            android:textColor="#222222"
+            android:textColorHint="#000000"
+            android:textSize="46sp" />
+
+        <TextView
             android:id="@+id/enterPercents"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,18 +47,8 @@
             android:includeFontPadding="true"
             android:onClick="onTextViewClick"
             android:textColor="#0F222222"
-            android:textColorHint="#888888"
+            android:textColorHint="#36000000"
             android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/resultView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/bahnschrift"
-            android:textColor="#222222"
-            android:textColorHint="#000000"
-            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout

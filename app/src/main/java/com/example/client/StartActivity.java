@@ -40,7 +40,7 @@ public class StartActivity extends AppCompatActivity{
         // Загрузка локальных сохранённых данных приложения
         AppBase.app_settings = this.getSharedPreferences(APP_SETTINGS_FILE, Context.MODE_PRIVATE); // Получение ссылки на файл настроек
 
-        String serverIp = AppBase.app_settings.getString(APP_SETTINGS_FILE_SERVER_IP,"192.168.0.100");
+        String serverIp = AppBase.app_settings.getString(APP_SETTINGS_FILE_SERVER_IP,"84.201.176.198");
         AppBase.serverPort = AppBase.app_settings.getInt(APP_SETTINGS_FILE_SERVER_PORT,8080);
 
         AppBase.login = AppBase.app_settings.getString(APP_SETTINGS_FILE_LOGIN,"");
@@ -158,5 +158,13 @@ public class StartActivity extends AppCompatActivity{
         sign_up_button.setEnabled(enabled);   // Отключение
         guest_button.setEnabled(enabled);     // кнопок
         settings_button.setEnabled(enabled);  //
+    }
+
+    byte DeadCrocounter = 0;
+    public void CrocoDieL(View Croco){
+        DeadCrocounter++;
+        if (DeadCrocounter==5){
+            
+        }
     }
 }

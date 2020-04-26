@@ -177,7 +177,7 @@ class ServerTasks{
                     CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
                     switch (result) {
                         case Ok:
-                            String text = "Результат: " + CalculateActivity.result;
+                            String text = "= " + CalculateActivity.result;
                             calculateActivity.resultView.setText(text);
                             break;
                         case ConnectionError:
