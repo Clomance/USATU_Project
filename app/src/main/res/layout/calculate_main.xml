@@ -21,9 +21,10 @@
             android:layout_weight="1"
             android:fontFamily="@font/bahnschrift"
             android:hint="Размер вклада"
+            android:onClick="onTextViewClick"
             android:textColor="#222222"
             android:textColorHint="#000000"
-            android:textSize="24sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/enterPercents"
@@ -31,11 +32,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/bahnschrift"
-            android:hint="Размер процентной ставки"
+            android:hint="Процентная ставка"
             android:includeFontPadding="true"
-            android:textColor="#222222"
-            android:textColorHint="#000000"
-            android:textSize="24sp" />
+            android:onClick="onTextViewClick"
+            android:textColor="#0F222222"
+            android:textColorHint="#888888"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/resultView"
@@ -43,7 +45,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/bahnschrift"
-            android:hint="Результат"
             android:textColor="#222222"
             android:textColorHint="#000000"
             android:textSize="24sp" />

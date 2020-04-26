@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.graphics.Color;
 import android.widget.TextView;
 
 class TextField {
@@ -15,6 +16,13 @@ class TextField {
         this.numStr = num;
         this.comma = comma;
         rewrite();
+    }
+    void setTextColor(int C){
+        textView.setTextColor(C);
+    }
+
+    void setFontSize(int FS){
+        textView.setTextSize(FS);
     }
 
     private void rewrite(){

@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewGroupCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 
@@ -387,10 +390,18 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 if (enterPercents){
                     enterTextView = depositView;
                     clickedButton.setImageResource(R.drawable.procent_press);
+                    percentsView.setTextColor(Color.argb(100,130,130,130));
+                    depositView.setTextColor(Color.rgb(0,0,0));
+                    depositView.setFontSize(30);
+                    percentsView.setFontSize(20);
                 }
                 else{
                     enterTextView = percentsView;   // Перелючение ввода
                     clickedButton.setImageResource(R.drawable.procent_select);
+                    depositView.setTextColor(Color.argb(100, 130,130,130));
+                    percentsView.setTextColor(Color.rgb(0, 0, 0  ));
+                    percentsView.setFontSize(30);
+                    depositView.setFontSize(20);
                 }
                 enterPercents = !enterPercents;
 
@@ -399,5 +410,29 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 break;
         }
         button.setClickable(true); // включение кнопки
+    }
+    public void onTextViewClick(View TV){ // Функция выделения выбранного поля ввода
+        int id=TV.getId();
+        if (R.id.enterPercents==id){
+            enterPercents = true;
+            depositView.setTextColor(Color.argb(100, 130,130,130)); // Выделение неиспользуемого поля серым цветом
+            percentsView.setTextColor(Color.rgb(0, 0, 0  )); // Выделяем используемого поля чёрным
+            percentsView.setFontSize(30);
+            depositView.setFontSize(20);
+            enterTextView = percentsView;
+            ImageButton clickedButton=findViewById(R.id.percents_button);
+            clickedButton.setImageResource(R.drawable.procent_select);
+        }
+        else{
+            enterPercents = false;
+            percentsView.setTextColor(Color.argb(100,130,130,130)); // Выделение неиспользуемого поля серым цветом
+            depositView.setTextColor(Color.rgb(0,0,0)); // Выделяем используемого поля чёрным
+            depositView.setFontSize(30);
+            percentsView.setFontSize(20);
+            enterTextView = depositView;
+            ImageButton clickedButton=findViewById(R.id.percents_button);
+            clickedButton.setImageResource(R.drawable.procent_press);
+        }
+
     }
 }
