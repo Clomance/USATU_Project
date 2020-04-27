@@ -26,9 +26,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
-        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
-        AppBase.currentPage = AppActivity.Settings;                                     // активности
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity); // Подключение нужного интерфеса
 
@@ -46,6 +43,13 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         addressView.setText(AppBase.serverIp.getHostAddress()); // Установка текущих
         portView.setText(String.valueOf(AppBase.serverPort));   // значений
+    }
+
+    @Override // Действия при старте активности
+    public void onStart(){
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Settings;                                     // активности
+        super.onStart();
     }
 
     @Override // Действия при выборе на панели навигации

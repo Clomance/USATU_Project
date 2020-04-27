@@ -20,9 +20,6 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
     
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
-        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
-        AppBase.currentPage = AppActivity.Info;                                         // активности
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_activity); // Подключение нужного интерфеса
 
@@ -61,6 +58,13 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
             loginView.setText(AppBase.login);
             passwordView.setText(AppBase.password);
         }
+    }
+
+    @Override // Действия при старте активности
+    public void onStart(){
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Info;                                         // активности
+        super.onStart();
     }
 
     @Override // Действия при выборе на панели навигации

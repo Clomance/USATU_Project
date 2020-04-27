@@ -1,6 +1,5 @@
 package com.example.client;
 
-import android.graphics.Color;
 import android.widget.TextView;
 
 class TextField {

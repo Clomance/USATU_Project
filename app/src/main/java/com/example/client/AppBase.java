@@ -32,6 +32,10 @@ class AppBase {
     final static String APP_SETTINGS_FILE_PASSWORD = "PASSWORD"; // Ключ с сохранённым паролем
     final static int REQUEST_INTERNET_ID = 0;
 
+    final static String[] listCurrency = new String[]{"Рубль","Доллар","Евро"}; // Полные валюты для выбора
+    final static String[] shortList = new String[]{" руб.", " долл.", " евро"}; // Краткие валюты для ввода
+    final static String[] listCapitalization = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"}; // Вид капитализации
+
     //Текущие
     static InetAddress serverIp; // Адрес для подключения
     static int serverPort = 8080; // Порт для подключения
@@ -92,13 +96,15 @@ class AppBase {
         double percents;
         Date[] period;
         byte capitalization;
+        byte currency;
         double result;
 
-        Request(double deposit, double percents, Date[] period, byte capitalization, double result){
+        Request(double deposit, double percents, Date[] period, byte capitalization, byte currency, double result){
             this.deposit = deposit;
             this.percents = percents;
             this.period = period;
             this.capitalization = capitalization;
+            this.currency = currency;
             this.result = result;
         }
 
@@ -107,8 +113,8 @@ class AppBase {
             return "Вклад: " + deposit
                     + "\n" + "Проценты: " + percents
                     + "\n" + "Период: " + period[0].toString() + " - " + period[1].toString()
-                    + "\n" + "Капитализация " + CalculateActivity.listCapitalization[capitalization]
-                    + "\n" + "Результат: " + result;
+                    + "\n" + "Капитализация " + listCapitalization[capitalization]
+                    + "\n" + "Результат: " + result + shortList[currency];
         }
     }
 

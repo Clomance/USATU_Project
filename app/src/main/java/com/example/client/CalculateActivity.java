@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewGroupCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 
@@ -32,17 +30,12 @@ import static com.example.client.AppBase.Date;
 import static java.lang.String.format;
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    // Постоянные
-    final static String[] listCurrency = new String[]{"Рубль","Доллар","Евро"}; // Полные валюты для выбора
-    final static String[] shortList = new String[]{" руб.", " долл.", " евро"}; // Краткие валюты для ввода
-    final static String[] listCapitalization = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"}; // Вид капитализации
-
     // Для расчёта
     static Double deposit = null; // Размер вклада
     static Double percents = null; // Размер процентной ставки
     static Date[] period = new Date[2]; // Период
     static Byte capitalization = null; // Индекс капитализации
-    static Integer currency = null; // Индекс валюты
+    static Byte currency = null; // Индекс валюты
     static Double result = null; // Расчётов
 
     // Для вывода
@@ -62,9 +55,6 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     @SuppressLint("DefaultLocale")
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
-        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
-        AppBase.currentPage = AppActivity.Calculate;                                    // активности
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculate_activity); // Подключение нужного интерфеса
 
@@ -90,15 +80,15 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         // Вписывание в поля старых данных, если есть
         if (currency != null) {
-            depositView.setTextEnd(shortList[currency]);
+            depositView.setTextEnd(AppBase.shortList[currency]);
             TextView currencyView = findViewById(R.id.listViewCurrency);
-            String text = "Валюта\n" + listCurrency[currency];
+            String text = "Валюта\n" + AppBase.listCurrency[currency];
             currencyView.setText(text);
         }
 
         if (capitalization != null){
             TextView capitalizationView = findViewById(R.id.listViewCapitalization);
-            String text = getString(R.string.capitalization) + "\n" + listCapitalization[capitalization];
+            String text = getString(R.string.capitalization) + "\n" + AppBase.listCapitalization[capitalization];
             capitalizationView.setText(text);
         }
 
@@ -139,6 +129,13 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    @Override // Действия при старте активности
+    public void onStart(){
+        AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
+        AppBase.currentPage = AppActivity.Calculate;                                    // активности
+        super.onStart();
+    }
+
     @Override // Закрытие страницы
     public void onDestroy(){
         depositNumStr = depositView.getNumStr();
@@ -160,12 +157,6 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         return true;
     }
-
-    // T T T T  И     И   М     М     У     У   Р Р Р
-    //    T     И   И И   М М М М      У  У     Р    Р
-    //    T     И  И  И   М  М  М       У       Р Р Р
-    //    T     И И   И   М     М      У        Р
-    //    T     И     И   М     М     У         Р
 
     // Вывод диалогового окна с календарём
     public void dataPick(View view){
@@ -263,19 +254,19 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
-            builder.setTitle("Валюты").setItems(listCurrency, new DialogInterface.OnClickListener() {
+            builder.setTitle("Валюты").setItems(AppBase.listCurrency, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // При выборе из списка
-                    String text = "Валюта\n" + listCurrency[which]; // Вставка валюты
+                    String text = "Валюта\n" + AppBase.listCurrency[which]; // Вставка валюты
                     selectedView.setText(text);                     // в нажатое поле
 
-                    currency = which;
+                    currency = (byte) which;
                     // Сложные манипуляции для корректного смены и отображения валюты в поле ввода
                     if (enterPercents){
-                        depositView.setTextEnd(shortList[currency]);
+                        depositView.setTextEnd(AppBase.shortList[currency]);
                     }
                     else{
-                        depositView.setTextEnd(shortList[currency]);
+                        depositView.setTextEnd(AppBase.shortList[currency]);
                     }
                 }
             });
@@ -296,11 +287,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
-            builder.setTitle(R.string.capitalization).setItems(listCapitalization, new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.capitalization).setItems(AppBase.listCapitalization, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Выбор из списка
                     capitalization = (byte) which;
-                    String text = getString(R.string.capitalization) + "\n" + listCapitalization[which];
+                    String text = getString(R.string.capitalization) + "\n" + AppBase.listCapitalization[which];
 
                     selectedView.setText(text);
                 }
@@ -367,6 +358,11 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 }
                 if (capitalization == null){
                     Toast.makeText(this, "Выбирите тип капитализации", Toast.LENGTH_LONG).show();
+                    break;
+                }
+
+                if (currency == null){
+                    Toast.makeText(this, "Выбирите валюту", Toast.LENGTH_LONG).show();
                     break;
                 }
 
