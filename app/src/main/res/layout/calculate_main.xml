@@ -27,20 +27,10 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/resultView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/bahnschrift"
-            android:textColor="#222222"
-            android:textColorHint="#000000"
-            android:textSize="44sp" />
-
-        <TextView
             android:id="@+id/BarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.4"
+            android:layout_weight="1.3"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
             android:text="Процентная ставка:"
@@ -50,12 +40,20 @@
             android:id="@+id/enterPercentsBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.4"
+            android:layout_weight="1.2"
+            android:max="2000"
+            android:progress="0" />
+
+        <TextView
+            android:id="@+id/resultView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:fontFamily="@font/bahnschrift"
-            android:includeFontPadding="true"
-            android:max="20"
-            android:progress="3"
-            android:textSize="20sp" />
+            android:textColor="#222222"
+            android:textColorHint="#000000"
+            android:textSize="44sp" />
+
     </LinearLayout>
 
     <LinearLayout

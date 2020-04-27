@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,8 +29,7 @@ import java.util.Objects;
 import static com.example.client.AppBase.Date;
 import static java.lang.String.format;
 
-public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener
-{
+public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener {
     // Для расчёта
     static Double deposit = null; // Размер вклада
     static Double percents = null; // Размер процентной ставки
@@ -49,10 +46,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     TextView BarView;
 
     static String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
-    static String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
 
     static boolean depositComma = false;
-    static boolean percentsComma = false;
 
     @SuppressLint("DefaultLocale")
     @Override // Создание страницы
@@ -66,18 +61,25 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         dateResultView = findViewById(R.id.data_result);
 
         TextView depositTextView = findViewById(R.id.enterDeposit);
-        percentsSeekBar = findViewById(R.id.enterPercentsBar);
-        BarView = findViewById(R.id.BarView);
 
         resultView = findViewById(R.id.resultView);
 
         String headEnterText = getString(R.string.headDeposit); // Загрузка строки из ресурсов
         depositView = new TextField(depositTextView, headEnterText, depositNumStr, depositComma);
 
-
-        headEnterText = getString(R.string.headPercents);
+        // Слайдер процентов
         percentsSeekBar = findViewById(R.id.enterPercentsBar);
+        BarView = findViewById(R.id.BarView);
 
+        if (percents != null){
+            double pr = percents * 100.0;
+            int progress = (int) pr;
+            percentsSeekBar.setProgress(progress);
+
+            String text = "Процентная ставка: " + percents;
+            BarView.setText(text);
+        }
+        percentsSeekBar.setOnSeekBarChangeListener(this);
 
         // Вписывание в поля старых данных, если есть
         if (currency != null) {
@@ -388,7 +390,9 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+        percents = ((double) i) / 100.0;
+        String text = "Процентная ставка: " + percents;
+        BarView.setText(text);
     }
 
     @Override
@@ -398,7 +402,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        BarView.setText(String.valueOf(seekBar.getProgress()));
+
     }
 
 }
