@@ -173,7 +173,7 @@ class ServerTasks{
                     CalculateActivity calculateActivity = (CalculateActivity) AppBase.currentActivity.get();
                     switch (result) {
                         case Ok:
-                            String text = "Результат: " + CalculateActivity.result + AppBase.shortList[CalculateActivity.currency];
+                            String text = "= " + CalculateActivity.result + AppBase.shortList[CalculateActivity.currency];
                             calculateActivity.resultView.setText(text);
                             break;
                         case ConnectionError:

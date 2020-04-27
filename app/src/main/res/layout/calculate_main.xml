@@ -27,6 +27,16 @@
             android:textSize="30sp" />
 
         <TextView
+            android:id="@+id/resultView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/bahnschrift"
+            android:textColor="#222222"
+            android:textColorHint="#000000"
+            android:textSize="44sp" />
+
+        <TextView
             android:id="@+id/BarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,19 +50,11 @@
             android:id="@+id/enterPercentsBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="1.2"
             android:max="2000"
             android:progress="0" />
-
-        <TextView
-            android:id="@+id/resultView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/bahnschrift"
-            android:textColor="#222222"
-            android:textColorHint="#000000"
-            android:textSize="44sp" />
 
     </LinearLayout>
 
