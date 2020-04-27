@@ -34,6 +34,6 @@
 
 После входа открывается страница калькулятора (главная страница).
 # Скриншоты
-![screenshot1](https://radikal.ru][img]https://c.radikal.ru/c42/2004/7e/41e2ee573394.png)
-![screenshot2](https://radikal.ru][img]https://a.radikal.ru/a03/2004/ac/e8dcea276d7b.png)
-![screenshot3](https://radikal.ru][img]https://b.radikal.ru/b34/2004/e9/deb745347c97.png)
+![screenshot1](https://c.radikal.ru/c42/2004/7e/41e2ee573394.png)
+![screenshot2](https://a.radikal.ru/a03/2004/ac/e8dcea276d7b.png)
+![screenshot3](https://b.radikal.ru/b34/2004/e9/deb745347c97.png)
