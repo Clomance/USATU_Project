@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ public class StartActivity extends AppCompatActivity{
     Button sign_in_button; // Кнока входа
     Button sign_up_button; // Кнопка регистрации
     Button guest_button; // Кнопка входа в качестве гостя
-    Button settings_button; // Кнопка настроек
+    ImageButton settings_button; // Кнопка настроек
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

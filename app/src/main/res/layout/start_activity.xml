@@ -7,77 +7,102 @@
     android:gravity="center_vertical"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        app:srcCompat="@drawable/button_croco_reboot" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/bahnschrift"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
-        android:text="CrocoDev inc." />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="10"
-        android:fontFamily="@font/bahnschrift"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:maxLength="30" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            app:srcCompat="@drawable/button_croco_reboot" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="10"
-        android:fontFamily="@font/bahnschrift"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:maxLength="30" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/bahnschrift"
+            android:gravity="center"
+            android:text="CrocoDev inc." />
 
-    <Button
-        android:id="@+id/sign_up"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/bahnschrift"
-        android:onClick="sign_up"
-        android:text="@string/sign_up" />
+        <EditText
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:fontFamily="@font/bahnschrift"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:maxLength="30" />
 
-    <Button
-        android:id="@+id/sign_in"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/bahnschrift"
-        android:onClick="sign_in"
-        android:text="@string/sign_in" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:fontFamily="@font/bahnschrift"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLength="30" />
 
-    <Button
-        android:id="@+id/guest"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/bahnschrift"
-        android:onClick="guest_button"
-        android:text="@string/guest" />
+        <Button
+            android:id="@+id/sign_up"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/bahnschrift"
+            android:onClick="sign_up"
+            android:text="@string/sign_up" />
 
-    <Button
-        android:id="@+id/settings_head"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/bahnschrift"
-        android:onClick="settings_button"
-        android:text="@string/settings" />
+        <Button
+            android:id="@+id/sign_in"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/bahnschrift"
+            android:onClick="sign_in"
+            android:text="@string/sign_in" />
+
+        <Button
+            android:id="@+id/guest"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/bahnschrift"
+            android:onClick="guest_button"
+            android:text="@string/guest" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|end"
+        android:layout_weight="6"
+        android:gravity="bottom|end"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/settings_head"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            android:onClick="settings_button"
+            android:scaleType="fitEnd"
+            android:src="@drawable/doge"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
