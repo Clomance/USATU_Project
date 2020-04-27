@@ -36,7 +36,9 @@
 # Скриншоты
 ## Стартовая страница 
 ![screenshot1](https://c.radikal.ru/c42/2004/7e/41e2ee573394.png)
+
 ## Пустой калькулятор
 ![screenshot2](https://a.radikal.ru/a03/2004/ac/e8dcea276d7b.png)
+
 ## Калькулятор с введёнными данными
 ![screenshot3](https://b.radikal.ru/b34/2004/e9/deb745347c97.png)
