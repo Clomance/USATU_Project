@@ -33,7 +33,7 @@ class AppBase {
     final static int REQUEST_INTERNET_ID = 0;
 
     final static String[] listCurrency = new String[]{"Рубль","Доллар","Евро"}; // Полные валюты для выбора
-    final static String[] shortList = new String[]{" руб.", " долл.", " евро"}; // Краткие валюты для ввода
+    final static String[] shortList = new String[]{ " ₽", " $", " €" }; // Краткие валюты для ввода
     final static String[] listCapitalization = new String[]{"Отсутствует","Ежемесячная","Ежеквартальная"}; // Вид капитализации
 
     //Текущие

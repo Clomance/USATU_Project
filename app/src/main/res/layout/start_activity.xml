@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/bahnschrift"
         android:gravity="center"
-        android:text="CrocoDev. inc" />
+        android:text="CrocoDev inc." />
 
     <EditText
         android:id="@+id/login"
@@ -45,15 +45,6 @@
         android:maxLength="30" />
 
     <Button
-        android:id="@+id/sign_in"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/bahnschrift"
-        android:onClick="sign_in"
-        android:text="@string/sign_in" />
-
-    <Button
         android:id="@+id/sign_up"
         android:layout_width="124dp"
         android:layout_height="wrap_content"
@@ -61,6 +52,15 @@
         android:fontFamily="@font/bahnschrift"
         android:onClick="sign_up"
         android:text="@string/sign_up" />
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/bahnschrift"
+        android:onClick="sign_in"
+        android:text="@string/sign_in" />
 
     <Button
         android:id="@+id/guest"

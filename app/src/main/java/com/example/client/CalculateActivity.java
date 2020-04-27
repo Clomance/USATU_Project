@@ -10,8 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -29,7 +31,8 @@ import java.util.Objects;
 import static com.example.client.AppBase.Date;
 import static java.lang.String.format;
 
-public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener
+{
     // Для расчёта
     static Double deposit = null; // Размер вклада
     static Double percents = null; // Размер процентной ставки
@@ -41,10 +44,9 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     // Для вывода
     TextView dateResultView; // Поле для результата расчёта периода
     TextField depositView;
-    TextField percentsView;
+    SeekBar percentsSeekBar;
     TextView resultView;
-    TextField enterTextView; // Поле ввода (выбираемое)
-    static boolean enterPercents = false; // Флаг ввода (Ввод процентов - true, ввода вклада - false)
+    TextView BarView;
 
     static String depositNumStr = ""; // Размер вклада в виде строки (для упрощения красивого вывода и расчёта)
     static String percentsNumStr = ""; // Размер процентной ставки в виде строки (для упрощения красивого вывода и расчёта)
@@ -64,7 +66,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         dateResultView = findViewById(R.id.data_result);
 
         TextView depositTextView = findViewById(R.id.enterDeposit);
-        TextView percentsTextView = findViewById(R.id.enterPercents);
+        percentsSeekBar = findViewById(R.id.enterPercentsBar);
+        BarView = findViewById(R.id.BarView);
 
         resultView = findViewById(R.id.resultView);
 
@@ -73,10 +76,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
 
         headEnterText = getString(R.string.headPercents);
-        percentsView = new TextField(percentsTextView, headEnterText, percentsNumStr, depositComma);
-        percentsView.setTextEnd("%");
+        percentsSeekBar = findViewById(R.id.enterPercentsBar);
 
-        enterTextView = depositView;
 
         // Вписывание в поля старых данных, если есть
         if (currency != null) {
@@ -139,9 +140,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     @Override // Закрытие страницы
     public void onDestroy(){
         depositNumStr = depositView.getNumStr();
-        percentsNumStr = percentsView.getNumStr();
+        //percentsNumStr = percentsView.getNumStr();
         depositComma = depositView.hasComma();
-        percentsComma = percentsView.hasComma();
 
         AppBase.stopServerTasks();
         super.onDestroy();
@@ -262,12 +262,10 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
                     currency = (byte) which;
                     // Сложные манипуляции для корректного смены и отображения валюты в поле ввода
-                    if (enterPercents){
+
                         depositView.setTextEnd(AppBase.shortList[currency]);
-                    }
-                    else{
-                        depositView.setTextEnd(AppBase.shortList[currency]);
-                    }
+
+
                 }
             });
             return builder.create();
@@ -308,47 +306,46 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
         switch (id) {
             case R.id.button0: // Ввод цифр и точки
-                enterTextView.inputText("0");
+                depositView.inputText("0");
                 break;
             case R.id.button1:
-                enterTextView.inputText("1");
+                depositView.inputText("1");
                 break;
             case R.id.button2:
-                enterTextView.inputText("2");
+                depositView.inputText("2");
                 break;
             case R.id.button3:
-                enterTextView.inputText("3");
+                depositView.inputText("3");
                 break;
             case R.id.button4:
-                enterTextView.inputText("4");
+                depositView.inputText("4");
                 break;
             case R.id.button5:
-                enterTextView.inputText("5");
+                depositView.inputText("5");
                 break;
             case R.id.button6:
-                enterTextView.inputText("6");
+                depositView.inputText("6");
                 break;
             case R.id.button7:
-                enterTextView.inputText("7");
+                depositView.inputText("7");
                 break;
             case R.id.button8:
-                enterTextView.inputText("8");
+                depositView.inputText("8");
                 break;
             case R.id.button9:
-                enterTextView.inputText("9");
+                depositView.inputText("9");
                 break;
             case R.id.button10:
-                enterTextView.inputText(".");
+                depositView.inputText(".");
                 break;
 
-            case R.id.clear_button: // Кнопка отчиски всех полей
-                percentsView.clean();
+            case R.id.clear_button: // Кнопка отчиски всех поле
                 depositView.clean();
                 resultView.setText("");
                 break;
 
             case R.id.delete_button: // Кнопка удаления одного символа
-                enterTextView.delete();
+                depositView.delete();
                 break;
 
             case R.id.compute_button: // Кнопка расчёта
@@ -373,7 +370,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
                 try {
                     CalculateActivity.deposit = depositView.getNum(); // Перевод в число
-                    CalculateActivity.percents = percentsView.getNum(); // Перевод в число
+                    //CalculateActivity.percents = percentsView.getNum(); // Перевод в число
                 }
                 catch (Exception e){
                     Toast.makeText(this, "Ошибка - не число", Toast.LENGTH_LONG).show();
@@ -383,54 +380,25 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
                 AppBase.serverTasks.start(Task.Calculate); // Запуск потока для отправки данных и получения расчёта
 
                 break;
-
-            case R.id.percents_button: // Кнопка переключения ввода
-                if (enterPercents){
-                    enterTextView = depositView;
-                    clickedButton.setImageResource(R.drawable.procent_press);
-                    percentsView.setTextColor(Color.argb(100,130,130,130));
-                    depositView.setTextColor(Color.rgb(0,0,0));
-                    depositView.setFontSize(30);
-                    percentsView.setFontSize(20);
-                }
-                else{
-                    enterTextView = percentsView;   // Перелючение ввода
-                    clickedButton.setImageResource(R.drawable.procent_select);
-                    depositView.setTextColor(Color.argb(100, 130,130,130));
-                    percentsView.setTextColor(Color.rgb(0, 0, 0  ));
-                    percentsView.setFontSize(30);
-                    depositView.setFontSize(20);
-                }
-                enterPercents = !enterPercents;
-
-                break;
             default:
                 break;
         }
         button.setClickable(true); // включение кнопки
     }
-    public void onTextViewClick(View TV){ // Функция выделения выбранного поля ввода
-        int id=TV.getId();
-        if (R.id.enterPercents==id){
-            enterPercents = true;
-            depositView.setTextColor(Color.argb(100, 130,130,130)); // Выделение неиспользуемого поля серым цветом
-            percentsView.setTextColor(Color.rgb(0, 0, 0  )); // Выделяем используемого поля чёрным
-            percentsView.setFontSize(30);
-            depositView.setFontSize(20);
-            enterTextView = percentsView;
-            ImageButton clickedButton=findViewById(R.id.percents_button);
-            clickedButton.setImageResource(R.drawable.procent_select);
-        }
-        else{
-            enterPercents = false;
-            percentsView.setTextColor(Color.argb(100,130,130,130)); // Выделение неиспользуемого поля серым цветом
-            depositView.setTextColor(Color.rgb(0,0,0)); // Выделяем используемого поля чёрным
-            depositView.setFontSize(30);
-            percentsView.setFontSize(20);
-            enterTextView = depositView;
-            ImageButton clickedButton=findViewById(R.id.percents_button);
-            clickedButton.setImageResource(R.drawable.procent_press);
-        }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
     }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        BarView.setText(String.valueOf(seekBar.getProgress()));
+    }
+
 }

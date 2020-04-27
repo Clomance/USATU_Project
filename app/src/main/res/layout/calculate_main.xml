@@ -22,7 +22,6 @@
             android:layout_weight="1"
             android:fontFamily="@font/bahnschrift"
             android:hint="Размер вклада"
-            android:onClick="onTextViewClick"
             android:textColor="#222222"
             android:textColorHint="#000000"
             android:textSize="30sp" />
@@ -35,19 +34,27 @@
             android:fontFamily="@font/bahnschrift"
             android:textColor="#222222"
             android:textColorHint="#000000"
-            android:textSize="46sp" />
+            android:textSize="44sp" />
 
         <TextView
-            android:id="@+id/enterPercents"
+            android:id="@+id/BarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.4"
             android:fontFamily="@font/bahnschrift"
-            android:hint="Процентная ставка"
+            android:gravity="center"
+            android:text="Процентная ставка:"
+            android:textSize="18sp" />
+
+        <SeekBar
+            android:id="@+id/enterPercentsBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:fontFamily="@font/bahnschrift"
             android:includeFontPadding="true"
-            android:onClick="onTextViewClick"
-            android:textColor="#0F222222"
-            android:textColorHint="#36000000"
+            android:max="20"
+            android:progress="3"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -287,6 +294,7 @@
             android:onClick="onButtonsClick"
             android:scaleType="centerInside"
             android:src="@drawable/button_result_2s" />
+
     </LinearLayout>
 
     <LinearLayout
