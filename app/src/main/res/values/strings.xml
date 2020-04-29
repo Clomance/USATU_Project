@@ -20,6 +20,13 @@
     <string name="arrow"><![CDATA[<]]></string>
     <string name="capitalization">Капитализация</string>
     <string name="headDeposit">Размер вклада:\u0020</string>
-    <string name="headPercents">Процентная ставка:\u0020</string>
+
+    <string name="Процентная_ставка">Процентная ставка:\u0020</string>
+    <string name="Размер_вклада">Размер вклада</string>
+    <string name="Досрочное_закрытие">Досрочное\nЗакрытие</string>
+    <string name="Изъятие_Пополнение">Изъятие\nПополнение</string>
+    <string name="Дата_начала_вклада">Дата\nначала\nвклада</string>
+    <string name="Дата_окончания_вклада">Дата\nокончания\nвклада</string>
+    <string name="Количество_дней">Количество\nдней</string>
 
 </resources>
