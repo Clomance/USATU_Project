@@ -5,20 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:focusable="false"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="41dp"
-            app:srcCompat="@drawable/button_croco_reboot" />
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="CrocoDieL"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/button_croco_reboot"
+            android:contentDescription="@string/croco" />
 
         <TextView
             android:id="@+id/textView"
@@ -27,7 +34,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
-            android:text="CrocoDev inc." />
+            android:text="@string/crocodev_inc" />
 
         <EditText
             android:id="@+id/login"
@@ -38,7 +45,8 @@
             android:fontFamily="@font/bahnschrift"
             android:hint="@string/name"
             android:inputType="textPersonName"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/password"
@@ -49,7 +57,8 @@
             android:fontFamily="@font/bahnschrift"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/sign_up"
@@ -101,7 +110,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:contentDescription="@string/doge" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

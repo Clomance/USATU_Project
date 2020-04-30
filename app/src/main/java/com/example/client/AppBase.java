@@ -1,6 +1,5 @@
 package com.example.client;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Vector;
 
 // Флаг текущей страницы (нужна только при переходе из стартового окна в настройки)
-// украдена из старого проекта:)
+// украден из старого проекта:)
 enum AppActivity{
     Start,
     Settings,
@@ -130,9 +130,9 @@ class AppBase {
         }
 
 
-        @NonNull @SuppressLint("DefaultLocale")
+        @NonNull
         public String toString(){
-            return String.format("%d.%d.%d.", year, month, day);
+            return String.format(Locale.getDefault(),"%d.%d.%d.", year, month, day);
         }
 
         Calendar toCalendar(){

@@ -28,5 +28,8 @@
     <string name="Дата_начала_вклада">Дата\nначала\nвклада</string>
     <string name="Дата_окончания_вклада">Дата\nокончания\nвклада</string>
     <string name="Количество_дней">Количество\nдней</string>
+    <string name="crocodev_inc">CrocoDev inc.</string>
+    <string name="croco">croco</string>
+    <string name="doge">doge</string>
 
 </resources>

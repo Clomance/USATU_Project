@@ -2,7 +2,6 @@ package com.example.client;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.DataInputStream;

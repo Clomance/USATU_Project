@@ -1,6 +1,5 @@
 package com.example.client;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -23,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
 
 import static com.example.client.AppBase.Date;
@@ -74,7 +74,6 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         BarView = findViewById(R.id.BarView);
     }
 
-    @SuppressLint("DefaultLocale")
     @Override // Действия при старте активности
     public void onStart(){
         AppBase.currentActivity = new WeakReference<AppCompatActivity>(this);   // Установка текущей
@@ -105,13 +104,12 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
 
         if (period[0] != null){
-            @SuppressLint("DefaultLocale")
-            String text = format("%d.%d.%d", period[0].day, period[0].month + 1, period[0].year);
+            String text = format(Locale.getDefault(),"%d.%d.%d", period[0].day, period[0].month + 1, period[0].year);
             TextView dateView1 =  findViewById(R.id.date1);
             dateView1.setText(text);
 
             if (period[1] != null){
-                text = format("%d.%d.%d", period[1].day, period[1].month + 1, period[1].year);
+                text = format(Locale.getDefault(),"%d.%d.%d", period[1].day, period[1].month + 1, period[1].year);
                 TextView dateView2 =  findViewById(R.id.date2);
                 dateView2.setText(text);
 
@@ -129,8 +127,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
         else{
             if (period[1] != null){
-                @SuppressLint("DefaultLocale")
-                String text = format("%d.%d.%d", period[1].day, period[1].month + 1, period[1].year);
+                String text = format(Locale.getDefault(),"%d.%d.%d", period[1].day, period[1].month + 1, period[1].year);
                 TextView dateView2 =  findViewById(R.id.date2);
                 dateView2.setText(text);
             }
@@ -200,9 +197,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         @Override // Действия при установке даты
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-            @SuppressLint("DefaultLocale") // Атрибут, чтобы не ругался на формат
-            String text = format("%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
-            selectedView.setText(text);                                      // в нужное поле
+            String text = format(Locale.getDefault(),"%d.%d.%d", dayOfMonth, month + 1, year);   // Вывод даты
+            selectedView.setText(text);                                                                         // в нужное поле
 
             if (selectedView.getId() == R.id.date1){                            //
                 period[0] = new Date(year, (byte) month, (byte) dayOfMonth);    // Сохранение
@@ -425,7 +421,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
-    @Override
+    @Override // При сдвиге кружочка слайдера
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         percents = ((double) i) / 100.0;
         String text = "Процентная ставка: " + percents;

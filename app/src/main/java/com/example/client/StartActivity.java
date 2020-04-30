@@ -161,11 +161,10 @@ public class StartActivity extends AppCompatActivity{
         settings_button.setEnabled(enabled);  //
     }
 
-    byte DeadCrocounter = 0;
+    byte DeathCrocounter = 0;
+    String[] warnings = {"Не нажимай", "Не стоит", "Хватит", "Нажмёшь ещё раз и тебе несдобровать"};
     public void CrocoDieL(View Croco){
-        DeadCrocounter++;
-        if (DeadCrocounter==5){
-            
-        }
+        Toast.makeText(this,warnings[DeathCrocounter],Toast.LENGTH_LONG).show();
+        DeathCrocounter++;
     }
 }
