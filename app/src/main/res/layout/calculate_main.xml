@@ -281,6 +281,46 @@
             android:src="@drawable/button3" />
 
         <ImageButton
+            android:id="@+id/button10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:onClick="onButtonsClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/button_dot" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Space
+            android:id="@+id/zaglyshka1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/button0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:onClick="onButtonsClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/button0" />
+
+        <Space
+            android:id="@+id/zaglushka2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
             android:id="@+id/compute_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -292,43 +332,6 @@
             android:scaleType="centerInside"
             android:src="@drawable/button_result_2s" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/button0"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="#00000000"
-            android:onClick="onButtonsClick"
-            android:scaleType="centerInside"
-            android:src="@drawable/button0" />
-
-        <ImageButton
-            android:id="@+id/button10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="#00000000"
-            android:onClick="onButtonsClick"
-            android:scaleType="centerInside"
-            android:src="@drawable/button_dot" />
-
-        <ImageButton
-            android:id="@+id/percents_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="#00000000"
-            android:onClick="onButtonsClick"
-            android:scaleType="centerInside"
-            android:src="@drawable/procent_press" />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,28 +1,28 @@
 package com.example.client;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
+        import android.Manifest;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.pm.PackageManager;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ImageButton;
+        import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.core.app.ActivityCompat;
 
-import java.lang.ref.WeakReference;
-import java.net.InetAddress;
+        import java.lang.ref.WeakReference;
+        import java.net.InetAddress;
 
-import static com.example.client.AppBase.APP_SETTINGS_FILE;
-import static com.example.client.AppBase.APP_SETTINGS_FILE_LOGIN;
-import static com.example.client.AppBase.APP_SETTINGS_FILE_PASSWORD;
-import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
-import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_PORT;
+        import static com.example.client.AppBase.APP_SETTINGS_FILE;
+        import static com.example.client.AppBase.APP_SETTINGS_FILE_LOGIN;
+        import static com.example.client.AppBase.APP_SETTINGS_FILE_PASSWORD;
+        import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_IP;
+        import static com.example.client.AppBase.APP_SETTINGS_FILE_SERVER_PORT;
 
 public class StartActivity extends AppCompatActivity{
     EditText loginView; // Поле ввода логина
@@ -68,8 +68,8 @@ public class StartActivity extends AppCompatActivity{
 
             // Запрос о предоставлении (для  API >= 23)
             //if (Build.VERSION.SDK_INT >= 23) {
-                String[] permissions = new String[]{Manifest.permission.INTERNET};
-                ActivityCompat.requestPermissions(this, permissions, AppBase.REQUEST_INTERNET_ID);
+            String[] permissions = new String[]{Manifest.permission.INTERNET};
+            ActivityCompat.requestPermissions(this, permissions, AppBase.REQUEST_INTERNET_ID);
             //}
 
         }
