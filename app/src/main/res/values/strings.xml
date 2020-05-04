@@ -31,5 +31,10 @@
     <string name="crocodev_inc">CrocoDev inc.</string>
     <string name="croco">croco</string>
     <string name="doge">doge</string>
+    <string name="Логин">Логин</string>
+    <string name="Пароль">Пароль</string>
+    <string name="История_запросов">История запросов</string>
+    <string name="Адрес_сервера">Адрес сервера</string>
+    <string name="Порт_сервера">Порт сервера</string>
 
 </resources>

@@ -18,10 +18,9 @@
         tools:context=".InfoActivity">
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Логин"
+            android:text="@string/Логин"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="24sp" />
 
@@ -30,14 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Логин"
+            android:hint="@string/Логин"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Пароль"
+            android:text="@string/Пароль"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="24sp" />
 
@@ -46,14 +44,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Пароль"
+            android:hint="@string/Пароль"
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="История запросов"
+            android:text="@string/История_запросов"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/design_default_color_on_secondary"
             android:textSize="24sp" />

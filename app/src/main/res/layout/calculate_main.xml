@@ -76,7 +76,6 @@
             android:text="@string/capitalization" />
 
         <CheckBox
-            android:id="@+id/checkBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -84,7 +83,6 @@
             android:text="@string/Досрочное_закрытие" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -299,7 +297,6 @@
         android:orientation="horizontal">
 
         <Space
-            android:id="@+id/zaglyshka1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
@@ -315,7 +312,6 @@
             android:src="@drawable/button0" />
 
         <Space
-            android:id="@+id/zaglushka2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />

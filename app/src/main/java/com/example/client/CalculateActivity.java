@@ -361,6 +361,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.clear_button: // Кнопка отчиски всех поле
                 depositView.setText("");
+                comma = false;
                 numStr = "";
                 resultView.setText("");
                 break;
