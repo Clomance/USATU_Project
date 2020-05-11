@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="693dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:focusable="false"
         android:gravity="center"
@@ -21,11 +20,11 @@
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:clickable="true"
-            android:contentDescription="@string/croco"
             android:focusable="true"
             android:onClick="CrocoDieL"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/button_croco_reboot" />
+            app:srcCompat="@drawable/button_croco_reboot"
+            android:contentDescription="@string/croco" />
 
         <TextView
             android:layout_width="match_parent"
@@ -43,9 +42,9 @@
             android:ems="10"
             android:fontFamily="@font/bahnschrift"
             android:hint="@string/name"
-            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/password"
@@ -55,9 +54,9 @@
             android:ems="10"
             android:fontFamily="@font/bahnschrift"
             android:hint="@string/password"
-            android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/sign_up"
@@ -85,28 +84,33 @@
             android:fontFamily="@font/bahnschrift"
             android:onClick="guest_button"
             android:text="@string/guest" />
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom|end"
-        android:layout_weight="20"
+        android:layout_weight="10"
         android:gravity="bottom|end"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/settings_head"
-            android:layout_width="49dp"
-            android:layout_height="58dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/doge"
             android:onClick="settings_button"
             android:scaleType="fitEnd"
             android:src="@drawable/button_settings"
-            tools:layout_editor_absoluteX="355dp"
-            tools:layout_editor_absoluteY="2dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
