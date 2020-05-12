@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -31,7 +32,7 @@ import static java.lang.String.format;
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener {
     // Для расчёта
     static Double deposit = null; // Размер вклада
-    static Double percents = null; // Размер процентной ставки
+    static double percents = 0.0; // Размер процентной ставки
     static Date[] period = new Date[2]; // Период
     static Byte capitalization = null; // Индекс капитализации
     static Byte currency = null; // Индекс валюты
@@ -80,14 +81,13 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         AppBase.currentPage = AppActivity.Calculate;                                    // активности
         super.onStart();
 
-        if (percents != null){
-            double pr = percents * 100.0;
-            int progress = (int) pr;
-            percentsSeekBar.setProgress(progress);
+        // Установка процентной ставка
+        double pr = percents * 100.0;
+        int progress = (int) pr;
+        percentsSeekBar.setProgress(progress);
+        String percents_text = "Процентная ставка: " + percents;
+        BarView.setText(percents_text);
 
-            String text = "Процентная ставка: " + percents;
-            BarView.setText(text);
-        }
         percentsSeekBar.setOnSeekBarChangeListener(this);
 
         // Вписывание в поля старых данных, если есть

@@ -129,7 +129,6 @@ class AppBase {
             this.day = day;
         }
 
-
         @NonNull
         public String toString(){
             return String.format(Locale.getDefault(),"%d.%d.%d.", year, month, day);
