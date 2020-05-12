@@ -409,6 +409,7 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
 
                 if (numStr.isEmpty()){
                     Toast.makeText(this, "Введите размер вклада", Toast.LENGTH_LONG).show();
+                    break;
                 }
                 else{
                     CalculateActivity.deposit = Double.parseDouble(numStr); // Перевод депозита в число
