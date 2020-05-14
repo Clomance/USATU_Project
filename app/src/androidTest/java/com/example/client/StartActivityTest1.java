@@ -68,10 +68,10 @@ public class StartActivityTest1 {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("192.168.0.103"));
+        appCompatEditText2.perform(replaceText("84.201.154.171"));
 
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.address), withText("192.168.0.103"),
+                allOf(withId(R.id.address),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.settings_drawer_layout),

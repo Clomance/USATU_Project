@@ -40,7 +40,7 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class StartActivityTest2 {
 
-    private String serverAddress = "192.168.0.103";
+    private String serverAddress = "84.201.154.171";
 
     @Rule
     public ActivityTestRule<StartActivity> mActivityTestRule = new ActivityTestRule<>(StartActivity.class);
