@@ -187,8 +187,8 @@ public class StartActivityTest3 {
                 .inAdapterView(allOf(withId(R.id.select_dialog_listview),
                         childAtPosition(
                                 withId(R.id.contentPanel),
-                                1)))
-                .atPosition(1);
+                                0)))
+                .atPosition(0);
         appCompatTextView2.perform(click());
 
         ViewInteraction appCompatTextView3 = onView(
@@ -205,7 +205,7 @@ public class StartActivityTest3 {
                 .inAdapterView(allOf(withId(R.id.select_dialog_listview),
                         childAtPosition(
                                 withId(R.id.contentPanel),
-                                1)))
+                                0)))
                 .atPosition(1);
         appCompatTextView4.perform(click());
 
@@ -217,45 +217,7 @@ public class StartActivityTest3 {
 
 
 
-        ViewInteraction appCompatTextView5 = onView(
-                allOf(withId(R.id.date1),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                1),
-                        isDisplayed()));
-        appCompatTextView5.perform(click());
 
-        ViewInteraction appCompatButton5 = onView(
-                allOf(withId(android.R.id.button1), withText("Установить"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatButton5.perform(click());
-
-        ViewInteraction appCompatTextView6 = onView(
-                allOf(withId(R.id.date2),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                2),
-                        isDisplayed()));
-        appCompatTextView6.perform(click());
-
-        ViewInteraction appCompatButton6 = onView(
-                allOf(withId(android.R.id.button1), withText("Установить"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatButton6.perform(click());
 
         ViewInteraction appCompatImageButton5 = onView(
                 allOf(withId(R.id.compute_button),
