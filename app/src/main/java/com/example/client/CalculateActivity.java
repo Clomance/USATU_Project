@@ -4,9 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,6 +28,12 @@ import java.util.Objects;
 
 import static com.example.client.AppBase.Date;
 import static java.lang.String.format;
+
+enum Limits{
+    No,
+    EarlyClose,
+    Exemption,
+}
 
 public class CalculateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener {
     // Для расчёта
@@ -51,6 +57,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     static boolean comma = false;
     static Long dateResult = null;
 
+    static int maxPercents = 2000;
+    static Limits limits = Limits.No;
 
     @Override // Создание страницы
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +89,30 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         AppBase.currentPage = AppActivity.Calculate;                                    // активности
         super.onStart();
 
+
+
+
         // Установка процентной ставка
         double pr = percents * 100.0;
         int progress = (int) pr;
         percentsSeekBar.setProgress(progress);
+        percentsSeekBar.setMax(maxPercents);
+        percentsSeekBar.setOnSeekBarChangeListener(this);
+
         String percents_text = "Процентная ставка: " + percents;
         BarView.setText(percents_text);
 
-        percentsSeekBar.setOnSeekBarChangeListener(this);
+        switch (limits){
+            case No: break;
+            case EarlyClose:
+                CheckBox b1 = findViewById(R.id.earlyClose);
+                b1.setChecked(true);
+                break;
+            case Exemption:
+                CheckBox b2 = findViewById(R.id.exemption);
+                b2.setChecked(true);
+                break;
+        }
 
         // Вписывание в поля старых данных, если есть
         if (currency != null) {
@@ -421,6 +445,47 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
             default:
                 break;
         }
+    }
+
+    public void EarlyClose(View b) {
+        CheckBox button = (CheckBox) b;
+
+        if (button.isChecked()) {
+            if (limits == Limits.No) {
+                limits = Limits.EarlyClose;
+                maxPercents = 500;
+            }
+            else {
+                button.setChecked(false);
+                Toast.makeText(this,"Есть другие ограничения",Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            limits = Limits.No;
+            maxPercents = 2000;
+        }
+
+        percentsSeekBar.setMax(maxPercents);
+    }
+
+    public void exemption(View b) {
+        CheckBox button = (CheckBox) b;
+        if (button.isChecked()) {
+            if (limits == Limits.No) {
+                limits = Limits.Exemption;
+                maxPercents = 100;
+            }
+            else {
+                button.setChecked(false);
+                Toast.makeText(this,"Есть другие ограничения",Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            limits = Limits.No;
+            maxPercents = 2000;
+        }
+
+        percentsSeekBar.setMax(maxPercents);
     }
 
     @Override // При сдвиге кружочка слайдера

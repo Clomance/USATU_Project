@@ -76,17 +76,21 @@
             android:text="@string/capitalization" />
 
         <CheckBox
+            android:id="@+id/earlyClose"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#D3D3D3"
+            android:onClick="EarlyClose"
             android:text="@string/Досрочное_закрытие" />
 
         <CheckBox
+            android:id="@+id/exemption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#D3D3D3"
+            android:onClick="exemption"
             android:text="@string/Изъятие_Пополнение" />
 
     </LinearLayout>
