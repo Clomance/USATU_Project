@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -183,13 +184,24 @@ public class StartActivityTest3 {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
-        DataInteraction appCompatTextView2 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                        childAtPosition(
-                                withId(R.id.contentPanel),
-                                0)))
-                .atPosition(0);
-        appCompatTextView2.perform(click());
+        if (Build.VERSION.SDK_INT >= 23) {
+            DataInteraction appCompatTextView2 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    0)))
+                    .atPosition(0);
+            appCompatTextView2.perform(click());
+        }
+        else {
+            DataInteraction appCompatTextView4 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    1)))
+                    .atPosition(1);
+            appCompatTextView4.perform(click());
+        }
 
         ViewInteraction appCompatTextView3 = onView(
                 allOf(withId(R.id.listViewCapitalization), withText("Капитализация"),
@@ -201,23 +213,29 @@ public class StartActivityTest3 {
                         isDisplayed()));
         appCompatTextView3.perform(click());
 
-        DataInteraction appCompatTextView4 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                        childAtPosition(
-                                withId(R.id.contentPanel),
-                                0)))
-                .atPosition(1);
-        appCompatTextView4.perform(click());
+        if (Build.VERSION.SDK_INT >= 23) {
+            DataInteraction appCompatTextView4 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    0)))
+                    .atPosition(0);
+            appCompatTextView4.perform(click());
+        }
+        else{
+            DataInteraction appCompatTextView2 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    1)))
+                    .atPosition(1);
+            appCompatTextView2.perform(click());
+        }
 
         CalculateActivity.period[0] = new AppBase.Date(2020, (byte) 5, (byte) 12);
         CalculateActivity.period[1] = new AppBase.Date(2021, (byte) 5, (byte) 12);
 
         setSeekBarProgress(R.id.enterPercentsBar,504);
-
-
-
-
-
 
         ViewInteraction appCompatImageButton5 = onView(
                 allOf(withId(R.id.compute_button),

@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -47,35 +48,21 @@ public class StartActivityTest2 {
 
     @Test
     public void startActivityTest2() {
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.settings_head),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
+        ViewInteraction settingsButton = onView(allOf(withId(R.id.settings_head),
+                        childAtPosition(childAtPosition(
+                                withClassName(is("android.widget.LinearLayout")), 1),
                                 0),
                         isDisplayed()));
-        appCompatImageButton.perform(click());
+        settingsButton.perform(click());
 
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.address),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.settings_drawer_layout),
-                                        0),
+        ViewInteraction address = onView(allOf(withId(R.id.address),
+                        childAtPosition(childAtPosition(
+                                        withId(R.id.settings_drawer_layout), 0),
                                 1),
                         isDisplayed()));
-        appCompatEditText.perform(click());
+        address.perform(click());
 
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.address),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.settings_drawer_layout),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText(serverAddress));
+        address.perform(replaceText(serverAddress));
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.address),
@@ -173,7 +160,7 @@ public class StartActivityTest2 {
                         isDisplayed()));
         appCompatImageButton4.perform(click());
 
-        ViewInteraction appCompatTextView = onView(
+        ViewInteraction currency = onView(
                 allOf(withId(R.id.listViewCurrency),
                         childAtPosition(
                                 childAtPosition(
@@ -181,15 +168,26 @@ public class StartActivityTest2 {
                                         2),
                                 0),
                         isDisplayed()));
-        appCompatTextView.perform(click());
+        currency.perform(click());
 
-        DataInteraction appCompatTextView2 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                        childAtPosition(
-                                withId(R.id.contentPanel),
-                                0)))
-                .atPosition(0);
-        appCompatTextView2.perform(click());
+        if (Build.VERSION.SDK_INT >= 23) {
+            DataInteraction appCompatTextView2 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    0)))
+                    .atPosition(0);
+            appCompatTextView2.perform(click());
+        }
+        else {
+            DataInteraction appCompatTextView4 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    1)))
+                    .atPosition(1);
+            appCompatTextView4.perform(click());
+        }
 
         ViewInteraction appCompatTextView3 = onView(
                 allOf(withId(R.id.listViewCapitalization), withText("Капитализация"),
@@ -201,21 +199,29 @@ public class StartActivityTest2 {
                         isDisplayed()));
         appCompatTextView3.perform(click());
 
-        DataInteraction appCompatTextView4 = onData(anything())
-                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                        childAtPosition(
-                                withId(R.id.contentPanel),
-                                0)))
-                .atPosition(0);
-        appCompatTextView4.perform(click());
+        if (Build.VERSION.SDK_INT >= 23) {
+            DataInteraction appCompatTextView4 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    0)))
+                    .atPosition(0);
+            appCompatTextView4.perform(click());
+        }
+        else{
+            DataInteraction appCompatTextView2 = onData(anything())
+                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                            childAtPosition(
+                                    withId(R.id.contentPanel),
+                                    1)))
+                    .atPosition(1);
+            appCompatTextView2.perform(click());
+        }
 
         CalculateActivity.period[0] = new AppBase.Date(2020, (byte) 5, (byte) 12);
         CalculateActivity.period[1] = new AppBase.Date(2021, (byte) 5, (byte) 12);
 
         setSeekBarProgress(R.id.enterPercentsBar,504);
-
-
-
 
 
         ViewInteraction appCompatImageButton5 = onView(
