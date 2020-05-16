@@ -6,10 +6,8 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.SeekBar;
 
-import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -27,7 +25,6 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -40,219 +37,130 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class StartActivityTest2 {
-
     private String serverAddress = "84.201.154.171";
+    private String login = "A";
+    private String password = "A";
 
     @Rule
     public ActivityTestRule<StartActivity> mActivityTestRule = new ActivityTestRule<>(StartActivity.class);
 
     @Test
     public void startActivityTest2() {
-        ViewInteraction settingsButton = onView(allOf(withId(R.id.settings_head),
-                        childAtPosition(childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")), 1),
-                                0),
-                        isDisplayed()));
-        settingsButton.perform(click());
+        onView(allOf(withId(R.id.settings_head),
+            childAtPosition(childAtPosition(
+                withClassName(
+                    is("android.widget.LinearLayout")),
+                1), 0),
+            isDisplayed())).perform(click());
 
-        ViewInteraction address = onView(allOf(withId(R.id.address),
-                        childAtPosition(childAtPosition(
-                                        withId(R.id.settings_drawer_layout), 0),
-                                1),
-                        isDisplayed()));
-        address.perform(click());
+        onView(allOf(withId(R.id.address),
+            childAtPosition(childAtPosition(
+                withId(R.id.settings_drawer_layout),
+                0), 1),
+            isDisplayed()))
+            .perform(replaceText(serverAddress));
 
-        address.perform(replaceText(serverAddress));
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.address),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.settings_drawer_layout),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText3.perform(closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withText("Сохранить"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.settings_drawer_layout),
-                                        0),
-                                4),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+        onView(allOf(withText("Сохранить"),
+            childAtPosition(childAtPosition(
+                withId(R.id.settings_drawer_layout),
+                0), 4),
+            isDisplayed())).perform(click());
 
         pressBack();
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(160);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        onView(allOf(withId(R.id.login),
+            childAtPosition(childAtPosition(
+                withClassName(is("android.widget.LinearLayout")),
+                0), 2),
+            isDisplayed())).perform(replaceText(login));
 
-        ViewInteraction appCompatEditText10 = onView(
-                allOf(withId(R.id.password),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText10.perform(replaceText("a"));
+        onView(allOf(withId(R.id.password),
+            childAtPosition(childAtPosition(
+                withClassName(is("android.widget.LinearLayout")),
+                0), 3),
+            isDisplayed())).perform(replaceText(password));
 
-        appCompatEditText10.perform(closeSoftKeyboard());
+        onView(allOf(withId(R.id.sign_in), withText("Войти"),
+            childAtPosition(childAtPosition(
+                withClassName(is("android.widget.LinearLayout")),
+                0), 5),
+            isDisplayed())).perform(click());
 
+        onView(allOf(withId(R.id.button1),
+            childAtPosition(childAtPosition(
+                withClassName(is("android.widget.LinearLayout")),
+                5), 0),
+            isDisplayed())).perform(click());
 
-        ViewInteraction appCompatEditText11 = onView(
-                allOf(withId(R.id.login),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatEditText11.perform(replaceText("a"));
+        onView(allOf(withId(R.id.button0),
+            childAtPosition(childAtPosition(
+                    withClassName(is("android.widget.LinearLayout")),
+                    6), 1),
+            isDisplayed())).perform(click(),click());
 
-        appCompatEditText11.perform(closeSoftKeyboard());
-
-        ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.sign_in), withText("Войти"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                5),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
-
-        ViewInteraction appCompatImageButton2 = onView(
-                allOf(withId(R.id.button1),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        5),
-                                0),
-                        isDisplayed()));
-        appCompatImageButton2.perform(click());
-
-        ViewInteraction appCompatImageButton3 = onView(
-                allOf(withId(R.id.button0),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        6),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton3.perform(click());
-
-        ViewInteraction appCompatImageButton4 = onView(
-                allOf(withId(R.id.button0),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        6),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton4.perform(click());
-
-        ViewInteraction currency = onView(
-                allOf(withId(R.id.listViewCurrency),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                0),
-                        isDisplayed()));
-        currency.perform(click());
+        onView(allOf(withId(R.id.listViewCurrency),
+            childAtPosition(childAtPosition(
+                withClassName(is("android.widget.LinearLayout")),
+                2), 0),
+            isDisplayed())).perform(click());
 
         if (Build.VERSION.SDK_INT >= 23) {
-            DataInteraction appCompatTextView2 = onData(anything())
-                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                            childAtPosition(
-                                    withId(R.id.contentPanel),
-                                    0)))
-                    .atPosition(0);
-            appCompatTextView2.perform(click());
+           onData(anything())
+                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                    childAtPosition(withId(R.id.contentPanel), 0)))
+                .atPosition(0).perform(click());
         }
         else {
-            DataInteraction appCompatTextView4 = onData(anything())
-                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                            childAtPosition(
-                                    withId(R.id.contentPanel),
-                                    1)))
-                    .atPosition(1);
-            appCompatTextView4.perform(click());
+            onData(anything())
+                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                    childAtPosition(withId(R.id.contentPanel), 1)))
+                .atPosition(0).perform(click());
         }
 
-        ViewInteraction appCompatTextView3 = onView(
-                allOf(withId(R.id.listViewCapitalization), withText("Капитализация"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        1),
-                                0),
-                        isDisplayed()));
-        appCompatTextView3.perform(click());
+        onView(allOf(withId(R.id.listViewCapitalization), withText("Капитализация"),
+            childAtPosition(childAtPosition(
+                withClassName(is("android.widget.LinearLayout")),
+                1), 0),
+                isDisplayed())).perform(click());
 
         if (Build.VERSION.SDK_INT >= 23) {
-            DataInteraction appCompatTextView4 = onData(anything())
-                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                            childAtPosition(
-                                    withId(R.id.contentPanel),
-                                    0)))
-                    .atPosition(0);
-            appCompatTextView4.perform(click());
+            onData(anything())
+                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                    childAtPosition(withId(R.id.contentPanel), 0)))
+                .atPosition(0).perform(click());
         }
         else{
-            DataInteraction appCompatTextView2 = onData(anything())
-                    .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                            childAtPosition(
-                                    withId(R.id.contentPanel),
-                                    1)))
-                    .atPosition(1);
-            appCompatTextView2.perform(click());
+            onData(anything())
+                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                    childAtPosition(withId(R.id.contentPanel), 1)))
+                .atPosition(0).perform(click());
         }
 
         CalculateActivity.period[0] = new AppBase.Date(2020, (byte) 5, (byte) 12);
         CalculateActivity.period[1] = new AppBase.Date(2021, (byte) 5, (byte) 12);
 
-        setSeekBarProgress(R.id.enterPercentsBar,504);
+        onView(withId(R.id.enterPercentsBar)).perform(setProgress(504));
 
+        onView(allOf(withId(R.id.compute_button),
+                childAtPosition(childAtPosition(
+                        withClassName(is("android.widget.LinearLayout")),
+                        6), 3),
+                isDisplayed())).perform(click());
 
-        ViewInteraction appCompatImageButton5 = onView(
-                allOf(withId(R.id.compute_button),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        6),
-                                3),
-                        isDisplayed()));
-        appCompatImageButton5.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.resultView), withText("= 105.04 $"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                1),
-                        isDisplayed()));
+        onView(allOf(withId(R.id.resultView), withText("= 105.04 $"),
+            childAtPosition(childAtPosition(
+                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                0), 1),
+            isDisplayed())).perform(click());
     }
 
     private static Matcher<View> childAtPosition(final Matcher<View> parentMatcher, final int position) {
-
         return new TypeSafeMatcher<View>() {
             @Override
             public void describeTo(Description description) {
                 description.appendText("Child at position " + position + " in parent ");
                 parentMatcher.describeTo(description);
             }
-
             @Override
             public boolean matchesSafely(View view) {
                 ViewParent parent = view.getParent();
@@ -277,9 +185,5 @@ public class StartActivityTest2 {
                 return ViewMatchers.isAssignableFrom(SeekBar.class);
             }
         };
-    }
-
-    public static void setSeekBarProgress(int seekbarResourceId, int progress) {
-        onView(withId(seekbarResourceId)).perform(setProgress(progress));
     }
 }
