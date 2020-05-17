@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/day_background" />
+                app:srcCompat="@drawable/day_background1" />
 
         </RelativeLayout>
 
