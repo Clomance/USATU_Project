@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:hint="@string/Размер_вклада"
             android:textColor="#222222"
@@ -31,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:textColor="#222222"
             android:textColorHint="#000000"
@@ -41,9 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.3"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
             android:text="@string/Процентная_ставка"
+            android:textColor="@color/design_default_color_on_secondary"
             android:textSize="18sp" />
 
         <SeekBar
@@ -69,18 +73,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
             android:onClick="listPickCapitalization"
-            android:text="@string/capitalization" />
+            android:text="@string/capitalization"
+            android:textColor="@color/design_default_color_on_secondary" />
 
         <CheckBox
             android:id="@+id/earlyClose"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#D3D3D3"
+            android:background="@color/material_on_background_disabled"
             android:onClick="EarlyClose"
             android:text="@string/Досрочное_закрытие" />
 
@@ -89,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#D3D3D3"
+            android:background="@color/material_on_background_disabled"
             android:onClick="exemption"
             android:text="@string/Изъятие_Пополнение" />
 
@@ -106,11 +111,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
             android:hint="Список\nвалют"
-            android:onClick="listPickCurrency">
+            android:onClick="listPickCurrency"
+            android:textColor="@color/design_default_color_on_secondary">
 
         </TextView>
 
@@ -119,32 +125,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
             android:hint="@string/Дата_начала_вклада"
-            android:onClick="dataPick" />
+            android:onClick="dataPick"
+            android:textColor="@color/design_default_color_on_secondary" />
 
         <TextView
             android:id="@+id/date2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
             android:hint="@string/Дата_окончания_вклада"
-            android:onClick="dataPick" />
+            android:onClick="dataPick"
+            android:textColor="@color/design_default_color_on_secondary" />
 
         <TextView
             android:id="@+id/data_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/design_default_color_background"
+            android:background="@color/material_on_background_disabled"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
-            android:hint="@string/Количество_дней" />
+            android:hint="@string/Количество_дней"
+            android:textColor="@color/design_default_color_on_secondary" />
     </LinearLayout>
 
     <LinearLayout
