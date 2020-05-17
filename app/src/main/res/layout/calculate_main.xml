@@ -107,7 +107,6 @@
             android:layout_weight="1"
             android:fontFamily="@font/bahnschrift"
             android:gravity="center"
-            android:hint="Список\nвалют"
             android:onClick="listPickCurrency"
             android:textColor="@color/design_default_color_on_secondary">
 

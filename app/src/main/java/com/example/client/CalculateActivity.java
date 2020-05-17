@@ -40,8 +40,8 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
     static Double deposit = null; // Размер вклада
     static double percents = 0.0; // Размер процентной ставки
     static Date[] period = new Date[2]; // Период
-    static Byte capitalization = null; // Индекс капитализации
-    static Byte currency = null; // Индекс валюты
+    static Byte capitalization = 0; // Индекс капитализации
+    static Byte currency = 0; // Индекс валюты
     static Double result = null; // Расчётов
 
     // Для вывода
@@ -115,17 +115,17 @@ public class CalculateActivity extends AppCompatActivity implements NavigationVi
         }
 
         // Вписывание в поля старых данных, если есть
-        if (currency != null) {
-            TextView currencyView = findViewById(R.id.listViewCurrency);
-            String text = "Валюта\n" + AppBase.listCurrency[currency];
-            currencyView.setText(text);
-        }
 
-        if (capitalization != null){
+            TextView currencyView = findViewById(R.id.listViewCurrency);
+            String text1 = "Валюта\n" + AppBase.listCurrency[currency];
+            currencyView.setText(text1);
+
+
+
             TextView capitalizationView = findViewById(R.id.listViewCapitalization);
-            String text = getString(R.string.capitalization) + "\n" + AppBase.listCapitalization[capitalization];
-            capitalizationView.setText(text);
-        }
+            String text0 = getString(R.string.capitalization) + "\n" + AppBase.listCapitalization[capitalization];
+            capitalizationView.setText(text0);
+
 
         if (period[0] != null){
             String text = format(Locale.getDefault(),"%d.%d.%d", period[0].day, period[0].month + 1, period[0].year);
