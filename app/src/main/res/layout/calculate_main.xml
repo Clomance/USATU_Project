@@ -134,17 +134,31 @@
             android:onClick="dataPick"
             android:textColor="@color/design_default_color_on_secondary" />
 
-        <TextView
-            android:id="@+id/data_result"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/day_background"
-            android:fontFamily="@font/bahnschrift"
-            android:gravity="center"
-            android:hint="@string/Количество_дней"
-            android:textColor="@color/design_default_color_on_secondary"
-            android:textColorHint="@color/design_default_color_on_secondary" />
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/data_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/bahnschrift"
+                android:gravity="center"
+                android:hint="@string/Количество_дней"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:textColorHint="@color/design_default_color_on_secondary" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/day_background" />
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 
     <LinearLayout
