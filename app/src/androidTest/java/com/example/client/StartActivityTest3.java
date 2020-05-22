@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class StartActivityTest3 {
-    private String serverAddress = "84.201.154.171";
+    private String serverAddress = "84.201.156.235";
     private String login = "A";
     private String password = "A";
 
